@@ -145,7 +145,7 @@ public class DefaultTableRenderer<V> implements TableRenderer<V> {
         }
 
         // If there are no rows, base the column sizes off of the column labels
-        if(rows.size() == 0) {
+        if(rows.isEmpty()) {
             for(int columnIndex = viewLeftColumn; columnIndex < viewLeftColumn + visibleColumns; columnIndex++) {
                 int columnSize = tableHeaderRenderer.getPreferredSize(table, columnHeaders.get(columnIndex), columnIndex).getColumns();
                 int listOffset = columnIndex - viewLeftColumn;
