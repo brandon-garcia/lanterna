@@ -58,7 +58,7 @@ public class MultiLabelTest {
                 public void run() {
                     window.close();
                 }
-            }).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Center)));
+            }).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Center)));
 
             window.setComponent(contentArea);
             textGUI.addWindow(window);

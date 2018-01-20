@@ -32,7 +32,7 @@ public class TerminalTextUtilsTest {
             for(int i = 0; i < characters.length(); i++) {
                 char c = characters.charAt(i);
                 boolean expected = true;
-                boolean actual = TerminalTextUtils.isCharCJK(c);
+                boolean actual = TerminalTextUtils.INSTANCE.isCharCJK(c);
                 assertEquals("Japanese character '" + c + "' was not marked as a CJK character", expected, actual);
             }
         }
@@ -45,7 +45,7 @@ public class TerminalTextUtilsTest {
         for(int i = 0; i < HALF_WIDTH_KATAKANA.length(); i++) {
             char c = HALF_WIDTH_KATAKANA.charAt(i);
             boolean expected = false;
-            boolean actual = TerminalTextUtils.isCharCJK(c);
+            boolean actual = TerminalTextUtils.INSTANCE.isCharCJK(c);
             assertEquals("Half-width katakana character '" + c + "' was marked as a CJK character, but shouldn't be", expected, actual);
         }
     }
@@ -57,7 +57,7 @@ public class TerminalTextUtilsTest {
         for(int i = 0; i < FULL_WIDTH_ROMANJI.length(); i++) {
             char c = FULL_WIDTH_ROMANJI.charAt(i);
             boolean expected = true;
-            boolean actual = TerminalTextUtils.isCharCJK(c);
+            boolean actual = TerminalTextUtils.INSTANCE.isCharCJK(c);
             assertEquals("Full-width romanji character '" + c + "' was marked not as a CJK character", expected, actual);
         }
     }
@@ -67,7 +67,7 @@ public class TerminalTextUtilsTest {
         for(int i = 0; i < HANGUL.length(); i++) {
             char c = HANGUL.charAt(i);
             boolean expected = true;
-            boolean actual = TerminalTextUtils.isCharCJK(c);
+            boolean actual = TerminalTextUtils.INSTANCE.isCharCJK(c);
             assertEquals("Korean character '" + c + "' was not marked as a CJK character", expected, actual);
         }
     }
@@ -77,7 +77,7 @@ public class TerminalTextUtilsTest {
         for(int i = 0; i < SIMPLIFIED_CHINESE_2500_MOST_COMMON.length(); i++) {
             char c = SIMPLIFIED_CHINESE_2500_MOST_COMMON.charAt(i);
             boolean expected = true;
-            boolean actual = TerminalTextUtils.isCharCJK(c);
+            boolean actual = TerminalTextUtils.INSTANCE.isCharCJK(c);
             assertEquals("Simplified chinese character '" + c + "' was not marked as a CJK character", expected, actual);
         }
     }
@@ -88,7 +88,7 @@ public class TerminalTextUtilsTest {
         for(String characters: cjkCharacters) {
             for(int i = 0; i < characters.length(); i++) {
                 int expected = 2;
-                int actual = TerminalTextUtils.getColumnWidth(characters.substring(i, i + 1));
+                int actual = TerminalTextUtils.INSTANCE.getColumnWidth(characters.substring(i, i + 1));
                 assertEquals("CJK character '" + characters.charAt(i) + "' didn't return 2", expected, actual);
             }
         }
@@ -96,168 +96,168 @@ public class TerminalTextUtilsTest {
         for(String characters: nonCJKCharacters) {
             for(int i = 0; i < characters.length(); i++) {
                 int expected = 1;
-                int actual = TerminalTextUtils.getColumnWidth(characters.substring(i, i + 1));
+                int actual = TerminalTextUtils.INSTANCE.getColumnWidth(characters.substring(i, i + 1));
                 assertEquals("Non-CJK character '" + characters.charAt(i) + "' didn't return 1", expected, actual);
             }
         }
 
         // Some static tests
-        assertEquals(0, TerminalTextUtils.getColumnWidth(""));
-        assertEquals(9, TerminalTextUtils.getColumnWidth("123456789"));
-        assertEquals(29, TerminalTextUtils.getColumnWidth("端末（英: computer terminal）"));
+        assertEquals(0, TerminalTextUtils.INSTANCE.getColumnWidth(""));
+        assertEquals(9, TerminalTextUtils.INSTANCE.getColumnWidth("123456789"));
+        assertEquals(29, TerminalTextUtils.INSTANCE.getColumnWidth("端末（英: computer terminal）"));
     }
 
     @Test
     public void getColumnIndexGeneralTest() {
         String testString = "端末（英: computer terminal）";
-        assertEquals(0, TerminalTextUtils.getColumnIndex(testString, 0));
-        assertEquals(2, TerminalTextUtils.getColumnIndex(testString, 1));
-        assertEquals(4, TerminalTextUtils.getColumnIndex(testString, 2));
-        assertEquals(6, TerminalTextUtils.getColumnIndex(testString, 3));
-        assertEquals(8, TerminalTextUtils.getColumnIndex(testString, 4));
-        assertEquals(9, TerminalTextUtils.getColumnIndex(testString, 5));
-        assertEquals(10, TerminalTextUtils.getColumnIndex(testString, 6));
-        assertEquals(11, TerminalTextUtils.getColumnIndex(testString, 7));
-        assertEquals(12, TerminalTextUtils.getColumnIndex(testString, 8));
-        assertEquals(13, TerminalTextUtils.getColumnIndex(testString, 9));
-        assertEquals(14, TerminalTextUtils.getColumnIndex(testString, 10));
-        assertEquals(27, TerminalTextUtils.getColumnIndex(testString, 23));
-        assertEquals(29, TerminalTextUtils.getColumnIndex(testString, 24));
+        assertEquals(0, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 0));
+        assertEquals(2, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 1));
+        assertEquals(4, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 2));
+        assertEquals(6, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 3));
+        assertEquals(8, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 4));
+        assertEquals(9, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 5));
+        assertEquals(10, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 6));
+        assertEquals(11, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 7));
+        assertEquals(12, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 8));
+        assertEquals(13, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 9));
+        assertEquals(14, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 10));
+        assertEquals(27, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 23));
+        assertEquals(29, TerminalTextUtils.INSTANCE.getColumnIndex(testString, 24));
     }
 
     @Test
     public void getStringCharacterIndex() {
         String testString = "端末（英: computer terminal）";
-        assertEquals(0, TerminalTextUtils.getStringCharacterIndex(testString, 0));
-        assertEquals(0, TerminalTextUtils.getStringCharacterIndex(testString, 1));
-        assertEquals(1, TerminalTextUtils.getStringCharacterIndex(testString, 2));
-        assertEquals(1, TerminalTextUtils.getStringCharacterIndex(testString, 3));
-        assertEquals(2, TerminalTextUtils.getStringCharacterIndex(testString, 4));
-        assertEquals(2, TerminalTextUtils.getStringCharacterIndex(testString, 5));
-        assertEquals(3, TerminalTextUtils.getStringCharacterIndex(testString, 6));
-        assertEquals(3, TerminalTextUtils.getStringCharacterIndex(testString, 7));
-        assertEquals(4, TerminalTextUtils.getStringCharacterIndex(testString, 8));
-        assertEquals(5, TerminalTextUtils.getStringCharacterIndex(testString, 9));
-        assertEquals(6, TerminalTextUtils.getStringCharacterIndex(testString, 10));
-        assertEquals(23, TerminalTextUtils.getStringCharacterIndex(testString, 27));
-        assertEquals(23, TerminalTextUtils.getStringCharacterIndex(testString, 28));
-        assertEquals(24, TerminalTextUtils.getStringCharacterIndex(testString, 29));
+        assertEquals(0, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 0));
+        assertEquals(0, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 1));
+        assertEquals(1, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 2));
+        assertEquals(1, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 3));
+        assertEquals(2, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 4));
+        assertEquals(2, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 5));
+        assertEquals(3, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 6));
+        assertEquals(3, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 7));
+        assertEquals(4, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 8));
+        assertEquals(5, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 9));
+        assertEquals(6, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 10));
+        assertEquals(23, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 27));
+        assertEquals(23, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 28));
+        assertEquals(24, TerminalTextUtils.INSTANCE.getStringCharacterIndex(testString, 29));
     }
 
     @Test
     public void fitStringGeneralTest() {
         String testString = "端末（英: computer terminal）";
-        assertEquals("", TerminalTextUtils.fitString(testString, 0));
-        assertEquals(" ", TerminalTextUtils.fitString(testString, 1));
-        assertEquals("端", TerminalTextUtils.fitString(testString, 2));
-        assertEquals("端 ", TerminalTextUtils.fitString(testString, 3));
-        assertEquals("端末", TerminalTextUtils.fitString(testString, 4));
-        assertEquals("端末（英", TerminalTextUtils.fitString(testString, 8));
-        assertEquals("端末（英:", TerminalTextUtils.fitString(testString, 9));
-        assertEquals("端末（英: ", TerminalTextUtils.fitString(testString, 10));
-        assertEquals("端末（英: c", TerminalTextUtils.fitString(testString, 11));
+        assertEquals("", TerminalTextUtils.INSTANCE.fitString(testString, 0));
+        assertEquals(" ", TerminalTextUtils.INSTANCE.fitString(testString, 1));
+        assertEquals("端", TerminalTextUtils.INSTANCE.fitString(testString, 2));
+        assertEquals("端 ", TerminalTextUtils.INSTANCE.fitString(testString, 3));
+        assertEquals("端末", TerminalTextUtils.INSTANCE.fitString(testString, 4));
+        assertEquals("端末（英", TerminalTextUtils.INSTANCE.fitString(testString, 8));
+        assertEquals("端末（英:", TerminalTextUtils.INSTANCE.fitString(testString, 9));
+        assertEquals("端末（英: ", TerminalTextUtils.INSTANCE.fitString(testString, 10));
+        assertEquals("端末（英: c", TerminalTextUtils.INSTANCE.fitString(testString, 11));
 
         testString = "日本語";
-        assertEquals("日本語", TerminalTextUtils.fitString(testString, 0, 20));
-        assertEquals(" 本語", TerminalTextUtils.fitString(testString, 1, 20));
-        assertEquals("本語", TerminalTextUtils.fitString(testString, 2, 20));
-        assertEquals(" 語", TerminalTextUtils.fitString(testString, 3, 20));
-        assertEquals("語", TerminalTextUtils.fitString(testString, 4, 20));
-        assertEquals(" ", TerminalTextUtils.fitString(testString, 5, 20));
-        assertEquals("", TerminalTextUtils.fitString(testString, 6, 20));
+        assertEquals("日本語", TerminalTextUtils.INSTANCE.fitString(testString, 0, 20));
+        assertEquals(" 本語", TerminalTextUtils.INSTANCE.fitString(testString, 1, 20));
+        assertEquals("本語", TerminalTextUtils.INSTANCE.fitString(testString, 2, 20));
+        assertEquals(" 語", TerminalTextUtils.INSTANCE.fitString(testString, 3, 20));
+        assertEquals("語", TerminalTextUtils.INSTANCE.fitString(testString, 4, 20));
+        assertEquals(" ", TerminalTextUtils.INSTANCE.fitString(testString, 5, 20));
+        assertEquals("", TerminalTextUtils.INSTANCE.fitString(testString, 6, 20));
     }
 
     @Test
     public void testWordWrapping() {
         assertEquals("Incorrect word wrapping",
                 Collections.singletonList("abc abc"),
-                TerminalTextUtils.getWordWrappedText(80, "abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(80, "abc abc"));
 
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(5, "abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(5, "abc abc"));
 
         assertEquals("Incorrect word wrapping - 0 width",
                 Collections.singletonList("abc abc"),
-              TerminalTextUtils.getWordWrappedText(0, "abc abc"));
+              TerminalTextUtils.INSTANCE.getWordWrappedText(0, "abc abc"));
 
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(3, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(3, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(4, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(4, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(5, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(5, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(6, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(6, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(7, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(7, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(8, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(8, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(9, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(9, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc abc", "abc"),
-                TerminalTextUtils.getWordWrappedText(10, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(10, "abc abc abc"));
         assertEquals("Incorrect word wrapping",
                 Collections.singletonList("abc abc abc"),
-                TerminalTextUtils.getWordWrappedText(11, "abc abc abc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(11, "abc abc abc"));
 
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("abc", "def"),
-                TerminalTextUtils.getWordWrappedText(3, "abcdef"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(3, "abcdef"));
 
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("This is a rather", "long text that", "will demonstrate", "a more real-world", "example of how", "word-wrapping is", "applied on a", "single line"),
-                TerminalTextUtils.getWordWrappedText(17, "This is a rather long text that will demonstrate a more real-world example of how word-wrapping is applied on a single line"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(17, "This is a rather long text that will demonstrate a more real-world example of how word-wrapping is applied on a single line"));
 
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("This is a rather long text that", "will demonstrate how", "word-wrapping is applied on", "texts that are already", "split over multiple lines"),
-                TerminalTextUtils.getWordWrappedText(32,
+                TerminalTextUtils.INSTANCE.getWordWrappedText(32,
                         "This is a rather long text that will demonstrate how",
                         "word-wrapping is applied on texts that are already",
                         "split over multiple lines"));
 
         assertEquals("Didn't skip over all the extra spaces",
                 Arrays.asList("abc   ", "def"),
-                TerminalTextUtils.getWordWrappedText(6, "abc        def"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(6, "abc        def"));
 
         assertEquals("Incorrect word wrapping - don't add a new line for only white space",
                 Collections.singletonList("abc "),
-                TerminalTextUtils.getWordWrappedText(4, "abc       "));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(4, "abc       "));
 
         assertEquals("Incorrect word wrapping - 1 blank at begin",
               Arrays.asList(" ", "abc", "abc"),
-              TerminalTextUtils.getWordWrappedText(3, " abc abc"));
+              TerminalTextUtils.INSTANCE.getWordWrappedText(3, " abc abc"));
 
         assertEquals("Incorrect word wrapping - 2 blanks at begin",
               Arrays.asList(" ", "abc", "abc"),
-              TerminalTextUtils.getWordWrappedText(3, "  abc abc"));
+              TerminalTextUtils.INSTANCE.getWordWrappedText(3, "  abc abc"));
     }
 
     @Test
     public void testWordWrappingWithCJK() {
         assertEquals("Incorrect word wrapping",
                 Collections.singletonList("あいうえお"),
-                TerminalTextUtils.getWordWrappedText(80, "あいうえお"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(80, "あいうえお"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("あいうえ", "お"),
-                TerminalTextUtils.getWordWrappedText(8, "あいうえお"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(8, "あいうえお"));
         assertEquals("Incorrect word wrapping",
                 Arrays.asList("あいう", "えお"),
-                TerminalTextUtils.getWordWrappedText(7, "あいうえお"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(7, "あいうえお"));
         assertEquals("Incorrect word wrapping - CJK @ 1 col",
                 Arrays.asList("あ","い","う", "え","お"),
-                TerminalTextUtils.getWordWrappedText(1, "あいうえお"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(1, "あいうえお"));
         assertEquals("Incorrect word wrapping - break between CJK and latin",
                 Arrays.asList("aあ","bc"),
-                TerminalTextUtils.getWordWrappedText(3, "aあbc"));
+                TerminalTextUtils.INSTANCE.getWordWrappedText(3, "aあbc"));
     }
 
     // Add a test for traditional Chinese characters here? If someone can contribute a list! The list of simplified

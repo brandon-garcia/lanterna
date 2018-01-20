@@ -40,10 +40,10 @@ public class LinearLayoutTest extends TestBase {
         mainPanel.addComponent(labelPanel);
 
         new Separator(Direction.HORIZONTAL)
-                .setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Fill))
+                .setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Fill))
                 .addTo(mainPanel);
 
-        mainPanel.addComponent(Panels.horizontal(
+        mainPanel.addComponent(Panels.INSTANCE.horizontal(
                 new Button("Add", new Runnable() {
                     @Override
                     public void run() {

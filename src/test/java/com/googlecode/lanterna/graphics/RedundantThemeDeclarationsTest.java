@@ -28,8 +28,8 @@ import java.util.List;
 public class RedundantThemeDeclarationsTest {
     @Test
     public void noThemeDeclarationsAreRedundant() {
-        for(String theme: LanternaThemes.getRegisteredThemes()) {
-            Theme registeredTheme = LanternaThemes.getRegisteredTheme(theme);
+        for(String theme: LanternaThemes.INSTANCE.getRegisteredThemes()) {
+            Theme registeredTheme = LanternaThemes.INSTANCE.getRegisteredTheme(theme);
             List<String> redundantDeclarations = ((PropertyTheme) registeredTheme).findRedundantDeclarations();
             try {
                 Assert.assertEquals(Collections.EMPTY_LIST, redundantDeclarations);

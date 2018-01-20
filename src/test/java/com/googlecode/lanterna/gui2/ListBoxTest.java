@@ -53,12 +53,12 @@ public class ListBoxTest extends TestBase {
                 }
             });
         }
-        horizontalPanel.addComponent(checkBoxList.withBorder(Borders.singleLine("CheckBoxList")));
-        horizontalPanel.addComponent(radioBoxList.withBorder(Borders.singleLine("RadioBoxList")));
-        horizontalPanel.addComponent(actionListBox.withBorder(Borders.singleLine("ActionListBox")));
+        horizontalPanel.addComponent(checkBoxList.withBorder(Borders.INSTANCE.singleLine("CheckBoxList")));
+        horizontalPanel.addComponent(radioBoxList.withBorder(Borders.INSTANCE.singleLine("RadioBoxList")));
+        horizontalPanel.addComponent(actionListBox.withBorder(Borders.INSTANCE.singleLine("ActionListBox")));
 
         window.setComponent(
-                Panels.vertical(
+                Panels.INSTANCE.vertical(
                         horizontalPanel,
                         new Button("OK", new Runnable() {
                             @Override

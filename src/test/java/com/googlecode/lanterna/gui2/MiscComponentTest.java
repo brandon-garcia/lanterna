@@ -41,8 +41,8 @@ public class MiscComponentTest extends TestBase {
         }
 
         Panel textBoxPanel = new Panel();
-        textBoxPanel.addComponent(Panels.horizontal(new Label("Normal:   "), new TextBox(new TerminalSize(12, 1), "Text")));
-        textBoxPanel.addComponent(Panels.horizontal(new Label("Password: "), new TextBox(new TerminalSize(12, 1), "Text").setMask('*')));
+        textBoxPanel.addComponent(Panels.INSTANCE.horizontal(new Label("Normal:   "), new TextBox(new TerminalSize(12, 1), "Text")));
+        textBoxPanel.addComponent(Panels.INSTANCE.horizontal(new Label("Password: "), new TextBox(new TerminalSize(12, 1), "Text").setMask('*')));
 
         Panel buttonPanel = new Panel();
         buttonPanel.addComponent(new Button("Enable spacing", new Runnable() {
@@ -53,9 +53,9 @@ public class MiscComponentTest extends TestBase {
             }
         }));
 
-        leftPanel.addComponent(checkBoxPanel.withBorder(Borders.singleLine("CheckBoxes")));
-        leftPanel.addComponent(textBoxPanel.withBorder(Borders.singleLine("TextBoxes")));
-        leftPanel.addComponent(buttonPanel.withBorder(Borders.singleLine("Buttons")));
+        leftPanel.addComponent(checkBoxPanel.withBorder(Borders.INSTANCE.singleLine("CheckBoxes")));
+        leftPanel.addComponent(textBoxPanel.withBorder(Borders.INSTANCE.singleLine("TextBoxes")));
+        leftPanel.addComponent(buttonPanel.withBorder(Borders.INSTANCE.singleLine("Buttons")));
 
         Panel rightPanel = new Panel();
         textBoxPanel = new Panel();
@@ -63,12 +63,12 @@ public class MiscComponentTest extends TestBase {
         readOnlyTextArea.setReadOnly(true);
         readOnlyTextArea.setText(TestUtils.downloadGPL());
         textBoxPanel.addComponent(readOnlyTextArea);
-        rightPanel.addComponent(textBoxPanel.withBorder(Borders.singleLine("Read-only")));
+        rightPanel.addComponent(textBoxPanel.withBorder(Borders.INSTANCE.singleLine("Read-only")));
         final ProgressBar progressBar = new ProgressBar(0, 100, 16);
         progressBar.setRenderer(new ProgressBar.LargeProgressBarRenderer());
         progressBar.setLabelFormat("%2.0f%%");
-        rightPanel.addComponent(progressBar.withBorder(Borders.singleLine("ProgressBar")));
-        rightPanel.setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Fill));
+        rightPanel.addComponent(progressBar.withBorder(Borders.INSTANCE.singleLine("ProgressBar")));
+        rightPanel.setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Fill));
 
         final Timer timer = new Timer("ProgressBar-timer", true);
         timer.schedule(new TimerTask() {
@@ -85,17 +85,17 @@ public class MiscComponentTest extends TestBase {
 
         Panel contentArea = new Panel();
         contentArea.setLayoutManager(new LinearLayout(Direction.VERTICAL));
-        contentArea.addComponent(Panels.horizontal(leftPanel, rightPanel));
+        contentArea.addComponent(Panels.INSTANCE.horizontal(leftPanel, rightPanel));
         contentArea.addComponent(
                 new Separator(Direction.HORIZONTAL).setLayoutData(
-                        LinearLayout.createLayoutData(LinearLayout.Alignment.Fill)));
+                        LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Fill)));
         Button okButton = new Button("OK", new Runnable() {
             @Override
             public void run() {
                 window.close();
                 timer.cancel();
             }
-        }).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Center));
+        }).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Center));
         contentArea.addComponent(okButton);
         window.setComponent(contentArea);
         window.setFocusedInteractable(okButton);

@@ -138,29 +138,29 @@ public class FullScreenTextGUITest {
             graphics.enableModifiers(SGR.BOLD);
 
             graphics.putString(7, 0, "Reminds you of some BIOS, doesn't it?");
-            graphics.setCharacter(0, 1, Symbols.DOUBLE_LINE_TOP_LEFT_CORNER);
-            graphics.drawLine(1, 1, 78, 1, Symbols.DOUBLE_LINE_HORIZONTAL);
-            graphics.setCharacter(79, 1, Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER);
-            graphics.drawLine(79, 2, 79, 23, Symbols.DOUBLE_LINE_VERTICAL);
-            graphics.setCharacter(79, 24, Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
-            graphics.drawLine(1, 24, 78, 24, Symbols.DOUBLE_LINE_HORIZONTAL);
-            graphics.setCharacter(0, 24, Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
-            graphics.drawLine(0, 2, 0, 23, Symbols.DOUBLE_LINE_VERTICAL);
+            graphics.setCharacter(0, 1, Symbols.INSTANCE.getDOUBLE_LINE_TOP_LEFT_CORNER());
+            graphics.drawLine(1, 1, 78, 1, Symbols.INSTANCE.getDOUBLE_LINE_HORIZONTAL());
+            graphics.setCharacter(79, 1, Symbols.INSTANCE.getDOUBLE_LINE_TOP_RIGHT_CORNER());
+            graphics.drawLine(79, 2, 79, 23, Symbols.INSTANCE.getDOUBLE_LINE_VERTICAL());
+            graphics.setCharacter(79, 24, Symbols.INSTANCE.getDOUBLE_LINE_BOTTOM_RIGHT_CORNER());
+            graphics.drawLine(1, 24, 78, 24, Symbols.INSTANCE.getDOUBLE_LINE_HORIZONTAL());
+            graphics.setCharacter(0, 24, Symbols.INSTANCE.getDOUBLE_LINE_BOTTOM_LEFT_CORNER());
+            graphics.drawLine(0, 2, 0, 23, Symbols.INSTANCE.getDOUBLE_LINE_VERTICAL());
 
-            graphics.setCharacter(0, 17, Symbols.DOUBLE_LINE_T_SINGLE_RIGHT);
-            graphics.drawLine(1, 17, 78, 17, Symbols.SINGLE_LINE_HORIZONTAL);
-            graphics.setCharacter(79, 17, Symbols.DOUBLE_LINE_T_SINGLE_LEFT);
-            graphics.setCharacter(40, 17, Symbols.SINGLE_LINE_T_UP);
-            graphics.drawLine(40, 2, 40, 16, Symbols.SINGLE_LINE_VERTICAL);
-            graphics.setCharacter(40, 1, Symbols.DOUBLE_LINE_T_SINGLE_DOWN);
+            graphics.setCharacter(0, 17, Symbols.INSTANCE.getDOUBLE_LINE_T_SINGLE_RIGHT());
+            graphics.drawLine(1, 17, 78, 17, Symbols.INSTANCE.getSINGLE_LINE_HORIZONTAL());
+            graphics.setCharacter(79, 17, Symbols.INSTANCE.getDOUBLE_LINE_T_SINGLE_LEFT());
+            graphics.setCharacter(40, 17, Symbols.INSTANCE.getSINGLE_LINE_T_UP());
+            graphics.drawLine(40, 2, 40, 16, Symbols.INSTANCE.getSINGLE_LINE_VERTICAL());
+            graphics.setCharacter(40, 1, Symbols.INSTANCE.getDOUBLE_LINE_T_SINGLE_DOWN());
 
-            graphics.setCharacter(0, 20, Symbols.DOUBLE_LINE_T_SINGLE_RIGHT);
-            graphics.drawLine(1, 20, 78, 20, Symbols.SINGLE_LINE_HORIZONTAL);
-            graphics.setCharacter(79, 20, Symbols.DOUBLE_LINE_T_SINGLE_LEFT);
+            graphics.setCharacter(0, 20, Symbols.INSTANCE.getDOUBLE_LINE_T_SINGLE_RIGHT());
+            graphics.drawLine(1, 20, 78, 20, Symbols.INSTANCE.getSINGLE_LINE_HORIZONTAL());
+            graphics.setCharacter(79, 20, Symbols.INSTANCE.getDOUBLE_LINE_T_SINGLE_LEFT());
             
             graphics.putString(2, 18, "Esc : Quit");
-            graphics.putString(42, 18, Symbols.ARROW_UP + " " + Symbols.ARROW_DOWN + " " + Symbols.ARROW_RIGHT + " " + 
-                    Symbols.ARROW_LEFT + "   : Select Item");
+            graphics.putString(42, 18, Symbols.INSTANCE.getARROW_UP() + " " + Symbols.INSTANCE.getARROW_DOWN() + " " + Symbols.INSTANCE.getARROW_RIGHT() + " " +
+					Symbols.INSTANCE.getARROW_LEFT() + "   : Select Item");
             graphics.putString(2, 19, "F10 : Save & Exit Setup");
             return image;
         }
@@ -180,7 +180,7 @@ public class FullScreenTextGUITest {
                     graphics.setBackgroundColor(TextColor.ANSI.BLACK).fill(' ');
                     
                     //Draw the background image
-                    graphics.drawImage(TerminalPosition.TOP_LEFT_CORNER, background);
+                    graphics.drawImage(TerminalPosition.Companion.getTOP_LEFT_CORNER(), background);
                     
                     //Then draw all the child components
                     panelRenderer.drawComponent(graphics, BIOS.this);
@@ -211,7 +211,7 @@ public class FullScreenTextGUITest {
 
                     @Override
                     public TerminalSize getPreferredSize(Button component) {
-                        return new TerminalSize(TerminalTextUtils.getColumnWidth(getLabel()), 1);
+                        return new TerminalSize(TerminalTextUtils.INSTANCE.getColumnWidth(getLabel()), 1);
                     }
 
                     @Override

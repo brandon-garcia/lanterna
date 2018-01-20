@@ -75,7 +75,7 @@ public class GUIOverTelnet {
                 @Override
                 public void run() {
                     final BasicWindow messageBox = new BasicWindow("Response");
-                    messageBox.setComponent(Panels.vertical(
+                    messageBox.setComponent(Panels.INSTANCE.vertical(
                             new Label("Hello!"),
                             new Button("Close", new Runnable() {
                                 @Override
@@ -85,7 +85,7 @@ public class GUIOverTelnet {
                             })));
                     textGUI.addWindow(messageBox);
                 }
-            }).withBorder(Borders.singleLine("This is a button")));
+            }).withBorder(Borders.INSTANCE.singleLine("This is a button")));
 
 
             final TextBox textBox = new TextBox(new TerminalSize(20, 4)) {
@@ -104,7 +104,7 @@ public class GUIOverTelnet {
                 }
             };
             ALL_TEXTBOXES.add(textBox);
-            contentArea.addComponent(textBox.withBorder(Borders.singleLine("Text editor")));
+            contentArea.addComponent(textBox.withBorder(Borders.INSTANCE.singleLine("Text editor")));
             contentArea.addComponent(new AbstractInteractableComponent() {
                 String text = "Press any key";
                 @Override
@@ -122,7 +122,7 @@ public class GUIOverTelnet {
 
                         @Override
                         public TerminalPosition getCursorLocation(Component component) {
-                            return TerminalPosition.TOP_LEFT_CORNER;
+                            return TerminalPosition.Companion.getTOP_LEFT_CORNER();
                         }
                     };
                 }
@@ -143,7 +143,7 @@ public class GUIOverTelnet {
                     }
                     return Result.HANDLED;
                 }
-            }.withBorder(Borders.singleLine("Custom component")));
+            }.withBorder(Borders.INSTANCE.singleLine("Custom component")));
 
             contentArea.addComponent(new Button("Close", new Runnable() {
                 @Override

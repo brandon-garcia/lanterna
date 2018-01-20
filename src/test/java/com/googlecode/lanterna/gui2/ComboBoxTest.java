@@ -55,11 +55,11 @@ public class ComboBoxTest extends TestBase {
         comboBoxCJK.addItem("This is a string without double-width characters");
         comboBoxCJK.setPreferredSize(new TerminalSize(13, 1));
 
-        mainPanel.addComponent(Panels.horizontal(
-                comboBoxReadOnly.withBorder(Borders.singleLine("Read-only")),
-                comboBoxEditable.withBorder(Borders.singleLine("Editable")),
-                comboBoxCJK.withBorder(Borders.singleLine("CJK"))));
-        mainPanel.addComponent(new EmptySpace(TerminalSize.ONE));
+        mainPanel.addComponent(Panels.INSTANCE.horizontal(
+                comboBoxReadOnly.withBorder(Borders.INSTANCE.singleLine("Read-only")),
+                comboBoxEditable.withBorder(Borders.INSTANCE.singleLine("Editable")),
+                comboBoxCJK.withBorder(Borders.INSTANCE.singleLine("CJK"))));
+        mainPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
 
         final TextBox textBoxNewItem = new TextBox(new TerminalSize(20, 1));
         Button buttonAddItem = new Button("Add", new Runnable() {
@@ -81,7 +81,7 @@ public class ComboBoxTest extends TestBase {
                     comboBoxReadOnly.setSelectedIndex(Integer.parseInt(textBoxSetSelectedIndex.getText()));
                 }
                 catch (Exception e) {
-                    MessageDialog.showMessageDialog(textGUI, e.getClass().getName(), e.getMessage(), MessageDialogButton.OK);
+                    MessageDialog.Companion.showMessageDialog(textGUI, e.getClass().getName(), e.getMessage(), MessageDialogButton.OK);
                 }
             }
         });
@@ -94,21 +94,21 @@ public class ComboBoxTest extends TestBase {
                     comboBoxReadOnly.setSelectedItem(textBoxSetSelectedItem.getText());
                 }
                 catch (Exception e) {
-                    MessageDialog.showMessageDialog(textGUI, e.getClass().getName(), e.getMessage(), MessageDialogButton.OK);
+                    MessageDialog.Companion.showMessageDialog(textGUI, e.getClass().getName(), e.getMessage(), MessageDialogButton.OK);
                 }
             }
         });
         mainPanel.addComponent(
-                Panels.vertical(
-                        Panels.horizontal(textBoxNewItem, buttonAddItem),
-                        Panels.horizontal(textBoxSetSelectedIndex, buttonSetSelectedIndex),
-                        Panels.horizontal(textBoxSetSelectedItem, buttonSetSelectedItem))
-                    .withBorder(Borders.singleLineBevel("Modify Content")));
+                Panels.INSTANCE.vertical(
+                        Panels.INSTANCE.horizontal(textBoxNewItem, buttonAddItem),
+                        Panels.INSTANCE.horizontal(textBoxSetSelectedIndex, buttonSetSelectedIndex),
+                        Panels.INSTANCE.horizontal(textBoxSetSelectedItem, buttonSetSelectedItem))
+                    .withBorder(Borders.INSTANCE.singleLineBevel("Modify Content")));
 
-        mainPanel.addComponent(new EmptySpace(TerminalSize.ONE));
-        mainPanel.addComponent(comboBoxTimeZones.withBorder(Borders.singleLine("Large ComboBox")));
-        mainPanel.addComponent(new EmptySpace(TerminalSize.ONE));
-        mainPanel.addComponent(new Separator(Direction.HORIZONTAL).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Fill)));
+        mainPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
+        mainPanel.addComponent(comboBoxTimeZones.withBorder(Borders.INSTANCE.singleLine("Large ComboBox")));
+        mainPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
+        mainPanel.addComponent(new Separator(Direction.HORIZONTAL).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Fill)));
         mainPanel.addComponent(new Button("OK", new Runnable() {
             @Override
             public void run() {

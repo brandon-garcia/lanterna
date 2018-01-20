@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.*;
 
 public class DefaultVirtualTerminalTest {
-    private static final TextCharacter DEFAULT_CHARACTER = TextCharacter.DEFAULT_CHARACTER;
+    private static final TextCharacter DEFAULT_CHARACTER = TextCharacter.Companion.getDEFAULT_CHARACTER();
     private final DefaultVirtualTerminal virtualTerminal;
 
     public DefaultVirtualTerminalTest() {
@@ -40,7 +40,7 @@ public class DefaultVirtualTerminalTest {
 
     @Test
     public void initialTerminalStateIsAsExpected() {
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         TerminalSize terminalSize = virtualTerminal.getTerminalSize();
         assertEquals(new TerminalSize(80, 24), terminalSize);
 
@@ -84,13 +84,13 @@ public class DefaultVirtualTerminalTest {
 
     @Test
     public void singleLineWriteAndReadBackWorks() {
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         virtualTerminal.putCharacter(new TextCharacter('H'));
         virtualTerminal.putCharacter(new TextCharacter('E'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
         virtualTerminal.putCharacter(new TextCharacter('O'));
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER.withColumn(5), virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER().withColumn(5), virtualTerminal.getCursorPosition());
         assertEquals('H', virtualTerminal.getCharacter(new TerminalPosition(0, 0)).getCharacter());
         assertEquals('E', virtualTerminal.getCharacter(new TerminalPosition(1, 0)).getCharacter());
         assertEquals('L', virtualTerminal.getCharacter(new TerminalPosition(2, 0)).getCharacter());
@@ -113,7 +113,7 @@ public class DefaultVirtualTerminalTest {
     @Test
     public void clearAllMarksEverythingAsDirtyAndEverythingInTheTerminalIsReplacedWithDefaultCharacter() {
         virtualTerminal.setTerminalSize(new TerminalSize(10, 5));
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         virtualTerminal.putCharacter(new TextCharacter('H'));
         virtualTerminal.putCharacter(new TextCharacter('E'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
@@ -124,18 +124,18 @@ public class DefaultVirtualTerminalTest {
         assertTrue(virtualTerminal.isWholeBufferDirtyThenReset());
         assertEquals(Collections.emptySet(), virtualTerminal.getAndResetDirtyCells());
 
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(0, 0)));
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(1, 0)));
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(2, 0)));
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(3, 0)));
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(4, 0)));
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(0, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(1, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(2, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(3, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(4, 0)));
     }
 
     @Test
     public void replacingAllContentTriggersWholeTerminalIsDirty() {
         virtualTerminal.setTerminalSize(new TerminalSize(5, 3));
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         virtualTerminal.putCharacter(new TextCharacter('H'));
         virtualTerminal.putCharacter(new TextCharacter('E'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
@@ -158,14 +158,14 @@ public class DefaultVirtualTerminalTest {
     @Test
     public void tooLongLinesWrap() {
         virtualTerminal.setTerminalSize(new TerminalSize(5, 5));
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         virtualTerminal.putCharacter(new TextCharacter('H'));
         virtualTerminal.putCharacter(new TextCharacter('E'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
         virtualTerminal.putCharacter(new TextCharacter('L'));
         virtualTerminal.putCharacter(new TextCharacter('O'));
         virtualTerminal.putCharacter(new TextCharacter('!'));
-        assertEquals(TerminalPosition.OFFSET_1x1, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getOFFSET_1x1(), virtualTerminal.getCursorPosition());
 
         // Expected layout:
         // |HELLO|
@@ -176,7 +176,7 @@ public class DefaultVirtualTerminalTest {
     @Test
     public void makeSureDoubleWidthCharactersWrapProperly() {
         virtualTerminal.setTerminalSize(new TerminalSize(9, 5));
-        assertEquals(TerminalPosition.TOP_LEFT_CORNER, virtualTerminal.getCursorPosition());
+        assertEquals(TerminalPosition.Companion.getTOP_LEFT_CORNER(), virtualTerminal.getCursorPosition());
         virtualTerminal.putCharacter(new TextCharacter('こ'));
         virtualTerminal.putCharacter(new TextCharacter('ん'));
         virtualTerminal.putCharacter(new TextCharacter('に'));
@@ -191,7 +191,7 @@ public class DefaultVirtualTerminalTest {
         // where the cursor is one column after the '!' (2 + 1 = 3rd column)
 
         // Make sure there's a default padding character at 8x0
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(8, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(8, 0)));
     }
 
     @Test
@@ -209,12 +209,12 @@ public class DefaultVirtualTerminalTest {
         virtualTerminal.putCharacter(new TextCharacter('Y'));
 
         assertEquals('Y', virtualTerminal.getCharacter(new TerminalPosition(0, 0)).getCharacter());
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(1, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(1, 0)));
 
         virtualTerminal.setCursorPosition(new TerminalPosition(3, 0));
         virtualTerminal.putCharacter(new TextCharacter('V'));
 
-        assertEquals(TextCharacter.DEFAULT_CHARACTER, virtualTerminal.getCharacter(new TerminalPosition(2, 0)));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER(), virtualTerminal.getCharacter(new TerminalPosition(2, 0)));
         assertEquals('V', virtualTerminal.getCharacter(new TerminalPosition(3, 0)).getCharacter());
     }
 
@@ -403,11 +403,11 @@ public class DefaultVirtualTerminalTest {
         virtualTerminal.resetColorAndSGR();
         virtualTerminal.putCharacter('E');
 
-        assertEquals(TextCharacter.DEFAULT_CHARACTER.withCharacter('A'), virtualTerminal.getCharacter(0, 0));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER().withCharacter('A'), virtualTerminal.getCharacter(0, 0));
         assertEquals(new TextCharacter('B', TextColor.ANSI.WHITE, TextColor.ANSI.BLUE), virtualTerminal.getCharacter(1, 0));
         assertEquals(new TextCharacter('C', TextColor.ANSI.WHITE, TextColor.ANSI.BLUE, SGR.BOLD, SGR.UNDERLINE), virtualTerminal.getCharacter(2, 0));
         assertEquals(new TextCharacter('D', TextColor.ANSI.WHITE, TextColor.ANSI.BLUE, SGR.UNDERLINE), virtualTerminal.getCharacter(3, 0));
-        assertEquals(TextCharacter.DEFAULT_CHARACTER.withCharacter('E'), virtualTerminal.getCharacter(4, 0));
+        assertEquals(TextCharacter.Companion.getDEFAULT_CHARACTER().withCharacter('E'), virtualTerminal.getCharacter(4, 0));
     }
 
     @Test
@@ -559,7 +559,7 @@ public class DefaultVirtualTerminalTest {
         int column = 0;
         for(char c: expectedLineContent.toCharArray()) {
             assertEquals(DEFAULT_CHARACTER.withCharacter(c), virtualTerminal.getCharacter(column++, rowNumber));
-            if(TerminalTextUtils.isCharDoubleWidth(c)) {
+            if(TerminalTextUtils.INSTANCE.isCharDoubleWidth(c)) {
                 column++;
             }
         }
@@ -572,7 +572,7 @@ public class DefaultVirtualTerminalTest {
         int column = 0;
         for(char c: expectedBufferLineContent.toCharArray()) {
             assertEquals(DEFAULT_CHARACTER.withCharacter(c), virtualTerminal.getBufferCharacter(new TerminalPosition(column++, rowNumber)));
-            if(TerminalTextUtils.isCharDoubleWidth(c)) {
+            if(TerminalTextUtils.INSTANCE.isCharDoubleWidth(c)) {
                 column++;
             }
         }
@@ -585,7 +585,7 @@ public class DefaultVirtualTerminalTest {
         int column = 0;
         for(char c: expectedLineContent.toCharArray()) {
             assertEquals(DEFAULT_CHARACTER.withCharacter(c), line.getCharacterAt(column++));
-            if(TerminalTextUtils.isCharDoubleWidth(c)) {
+            if(TerminalTextUtils.INSTANCE.isCharDoubleWidth(c)) {
                 column++;
             }
         }

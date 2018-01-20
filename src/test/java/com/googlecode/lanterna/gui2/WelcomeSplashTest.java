@@ -42,7 +42,7 @@ public class WelcomeSplashTest extends TestBase {
                 return new ComponentRenderer<EmptySpace>() {
                     @Override
                     public TerminalSize getPreferredSize(EmptySpace component) {
-                        return TerminalSize.ONE;
+                        return TerminalSize.Companion.getONE();
                     }
 
                     @Override

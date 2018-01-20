@@ -93,7 +93,7 @@ public class DynamicGridLayoutTest extends TestBase {
         mainPanel.addComponent(
                 new Separator(Direction.HORIZONTAL)
                 .setLayoutData(
-                        LinearLayout.createLayoutData(LinearLayout.Alignment.Fill)));
+                        LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Fill)));
         mainPanel.addComponent(controlPanel);
 
         window.setComponent(mainPanel);
@@ -106,7 +106,7 @@ public class DynamicGridLayoutTest extends TestBase {
     }
 
     private void onAddComponent(WindowBasedTextGUI textGUI, Panel gridPanel) {
-        SelectableComponentType componentType = ListSelectDialog.showDialog(
+        SelectableComponentType componentType = ListSelectDialog.Companion.showDialog(
                 textGUI,
                 "Add Component",
                 "Select component to add",
@@ -133,7 +133,7 @@ public class DynamicGridLayoutTest extends TestBase {
                 break;
 
             case Label:
-                String text = TextInputDialog.showDialog(textGUI, "Add " + componentType, "Enter the text of the new Label", "Label");
+                String text = TextInputDialog.Companion.showDialog(textGUI, "Add " + componentType, "Enter the text of the new Label", "Label");
                 component = new Label(text);
                 break;
         }
@@ -143,7 +143,7 @@ public class DynamicGridLayoutTest extends TestBase {
 
     private void onModifyComponent(WindowBasedTextGUI textGUI, Panel panel) {
         Component[] components = panel.getChildren().toArray(new Component[panel.getChildCount()]);
-        Component component = ListSelectDialog.showDialog(textGUI, "Modify Component", "Select component to modify", 10, components);
+        Component component = ListSelectDialog.Companion.showDialog(textGUI, "Modify Component", "Select component to modify", 10, components);
         if(component == null) {
             return;
         }
@@ -153,11 +153,11 @@ public class DynamicGridLayoutTest extends TestBase {
     }
 
     private void onResetGrid(WindowBasedTextGUI textGUI, Panel gridPanel) {
-        BigInteger columns = TextInputDialog.showNumberDialog(textGUI, "Reset Grid", "Reset grid to how many columns?", "4");
+        BigInteger columns = TextInputDialog.Companion.showNumberDialog(textGUI, "Reset Grid", "Reset grid to how many columns?", "4");
         if(columns == null) {
             return;
         }
-        BigInteger prepopulate = TextInputDialog.showNumberDialog(
+        BigInteger prepopulate = TextInputDialog.Companion.showNumberDialog(
                 textGUI,
                 "Reset Grid",
                 "Pre-populate grid with how many dummy components?",
@@ -233,11 +233,11 @@ public class DynamicGridLayoutTest extends TestBase {
             contentPane.addComponent(textBoxBottomMargin);
 
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPane.addComponent(
-                    new Separator(Direction.HORIZONTAL).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new Separator(Direction.HORIZONTAL).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             Button okButton = new Button("OK", new Runnable() {
                 @Override
@@ -259,8 +259,8 @@ public class DynamicGridLayoutTest extends TestBase {
             });
 
             contentPane.addComponent(
-                    Panels.horizontal(okButton, cancelButton)
-                            .setLayoutData(GridLayout.createHorizontallyEndAlignedLayoutData(2)));
+                    Panels.INSTANCE.horizontal(okButton, cancelButton)
+                            .setLayoutData(GridLayout.Companion.createHorizontallyEndAlignedLayoutData(2)));
             setComponent(contentPane);
         }
 
@@ -284,11 +284,11 @@ public class DynamicGridLayoutTest extends TestBase {
             radioBoxesHorizontalAlignment.addItem(GridLayout.Alignment.CENTER);
             radioBoxesHorizontalAlignment.addItem(GridLayout.Alignment.END);
             radioBoxesHorizontalAlignment.addItem(GridLayout.Alignment.FILL);
-            radioBoxesHorizontalAlignment.setCheckedItem(gridLayoutData.horizontalAlignment);
+            radioBoxesHorizontalAlignment.setCheckedItem(gridLayoutData.getHorizontalAlignment());
             contentPane.addComponent(radioBoxesHorizontalAlignment);
 
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             contentPane.addComponent(new Label("Vertical alignment:"));
             final RadioBoxList<GridLayout.Alignment> radioBoxesVerticalAlignment = new RadioBoxList<GridLayout.Alignment>();
@@ -296,49 +296,49 @@ public class DynamicGridLayoutTest extends TestBase {
             radioBoxesVerticalAlignment.addItem(GridLayout.Alignment.CENTER);
             radioBoxesVerticalAlignment.addItem(GridLayout.Alignment.END);
             radioBoxesVerticalAlignment.addItem(GridLayout.Alignment.FILL);
-            radioBoxesVerticalAlignment.setCheckedItem(gridLayoutData.verticalAlignment);
+            radioBoxesVerticalAlignment.setCheckedItem(gridLayoutData.getVerticalAlignment());
             contentPane.addComponent(radioBoxesVerticalAlignment);
 
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             contentPane.addComponent(new Label("Grab extra horizontal space:"));
             final CheckBox checkBoxGrabExtraHorizontalSpace = new CheckBox("");
-            checkBoxGrabExtraHorizontalSpace.setChecked(gridLayoutData.grabExtraHorizontalSpace);
+            checkBoxGrabExtraHorizontalSpace.setChecked(gridLayoutData.getGrabExtraHorizontalSpace());
             contentPane.addComponent(checkBoxGrabExtraHorizontalSpace);
 
             contentPane.addComponent(new Label("Grab extra vertical space:"));
             final CheckBox checkBoxGrabExtraVerticalSpace = new CheckBox("");
-            checkBoxGrabExtraVerticalSpace.setChecked(gridLayoutData.grabExtraVerticalSpace);
+            checkBoxGrabExtraVerticalSpace.setChecked(gridLayoutData.getGrabExtraVerticalSpace());
             contentPane.addComponent(checkBoxGrabExtraVerticalSpace);
 
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             Pattern numberPattern = Pattern.compile("[1-9][0-9]*");
 
             contentPane.addComponent(new Label("Horizontal span:"));
-            final TextBox textBoxHorizontalSpan = new TextBox(new TerminalSize(5, 1), gridLayoutData.horizontalSpan + "");
+            final TextBox textBoxHorizontalSpan = new TextBox(new TerminalSize(5, 1), gridLayoutData.getHorizontalSpan() + "");
             textBoxHorizontalSpan.setValidationPattern(numberPattern);
             contentPane.addComponent(textBoxHorizontalSpan);
 
             contentPane.addComponent(new Label("Vertical span:"));
-            final TextBox textBoxVerticalSpan = new TextBox(new TerminalSize(5, 1), gridLayoutData.verticalSpan + "");
+            final TextBox textBoxVerticalSpan = new TextBox(new TerminalSize(5, 1), gridLayoutData.getVerticalSpan() + "");
             textBoxVerticalSpan.setValidationPattern(numberPattern);
             contentPane.addComponent(textBoxVerticalSpan);
 
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPane.addComponent(
-                    new Separator(Direction.HORIZONTAL).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new Separator(Direction.HORIZONTAL).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPane.addComponent(
-                    new EmptySpace(TerminalSize.ONE).setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+                    new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             Button okButton = new Button("OK", new Runnable() {
                 @Override
                 public void run() {
                     component.setLayoutData(
-                            GridLayout.createLayoutData(
+                            GridLayout.Companion.createLayoutData(
                                     radioBoxesHorizontalAlignment.getCheckedItem(),
                                     radioBoxesVerticalAlignment.getCheckedItem(),
                                     checkBoxGrabExtraHorizontalSpace.isChecked(),
@@ -356,8 +356,8 @@ public class DynamicGridLayoutTest extends TestBase {
             });
 
             contentPane.addComponent(
-                    Panels.horizontal(okButton, cancelButton)
-                            .setLayoutData(GridLayout.createHorizontallyEndAlignedLayoutData(2)));
+                    Panels.INSTANCE.horizontal(okButton, cancelButton)
+                            .setLayoutData(GridLayout.Companion.createHorizontallyEndAlignedLayoutData(2)));
             setComponent(contentPane);
         }
     }

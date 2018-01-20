@@ -79,8 +79,8 @@ public class TelnetTerminalTest {
                             }
                         }
 
-                        TextColor.Indexed foregroundIndex = TextColor.Indexed.fromRGB(random.nextInt(255), random.nextInt(255), random.nextInt(255));
-                        TextColor.Indexed backgroundIndex = TextColor.Indexed.fromRGB(random.nextInt(255), random.nextInt(255), random.nextInt(255));
+                        TextColor.Indexed foregroundIndex = TextColor.Indexed.Companion.fromRGB(random.nextInt(255), random.nextInt(255), random.nextInt(255));
+                        TextColor.Indexed backgroundIndex = TextColor.Indexed.Companion.fromRGB(random.nextInt(255), random.nextInt(255), random.nextInt(255));
 
                         terminal.setForegroundColor(foregroundIndex);
                         terminal.setBackgroundColor(backgroundIndex);

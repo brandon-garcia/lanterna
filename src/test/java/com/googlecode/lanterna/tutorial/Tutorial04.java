@@ -83,7 +83,7 @@ public class Tutorial04 {
             is using, otherwise it will be ignored.
              */
             Label title = new Label("This is a label that spans two columns");
-            title.setLayoutData(GridLayout.createLayoutData(
+            title.setLayoutData(GridLayout.Companion.createLayoutData(
                     GridLayout.Alignment.BEGINNING, // Horizontal alignment in the grid cell if the cell is larger than the component's preferred size
                     GridLayout.Alignment.BEGINNING, // Vertical alignment in the grid cell if the cell is larger than the component's preferred size
                     true,       // Give the component extra horizontal space if available
@@ -129,7 +129,7 @@ public class Tutorial04 {
             contentPanel.addComponent(
                     new ComboBox<String>("Item #1", "Item #2", "Item #3", "Item #4")
                             .setReadOnly(false)
-                            .setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+                            .setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(1)));
 
             /*
             Some user interactions, like buttons, work by registering callback methods. In this example here, we're
@@ -139,7 +139,7 @@ public class Tutorial04 {
             contentPanel.addComponent(new Button("Button", new Runnable() {
                 @Override
                 public void run() {
-                    MessageDialog.showMessageDialog(textGUI, "MessageBox", "This is a message box", MessageDialogButton.OK);
+                    MessageDialog.Companion.showMessageDialog(textGUI, "MessageBox", "This is a message box", MessageDialogButton.OK);
                 }
             }).setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER)));
 
@@ -149,11 +149,11 @@ public class Tutorial04 {
             contentPanel.addComponent(
                     new EmptySpace()
                             .setLayoutData(
-                                    GridLayout.createHorizontallyFilledLayoutData(2)));
+                                    GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPanel.addComponent(
                     new Separator(Direction.HORIZONTAL)
                             .setLayoutData(
-                                    GridLayout.createHorizontallyFilledLayoutData(2)));
+                                    GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
             contentPanel.addComponent(
                     new Button("Close", new Runnable() {
                         @Override
@@ -161,7 +161,7 @@ public class Tutorial04 {
                             window.close();
                         }
                     }).setLayoutData(
-                            GridLayout.createHorizontallyEndAlignedLayoutData(2)));
+                            GridLayout.Companion.createHorizontallyEndAlignedLayoutData(2)));
 
             /*
             We now have the content panel fully populated with components. A common mistake is to forget to attach it to

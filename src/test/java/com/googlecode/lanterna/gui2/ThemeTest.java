@@ -69,14 +69,14 @@ public class ThemeTest extends TestBase {
             }
         });
         mainSelectionWindow.setComponent(mainSelector);
-        mainSelectionWindow.setHints(Collections.singletonList(Window.Hint.CENTERED));
+        mainSelectionWindow.setHints(Collections.singletonList(Window.Hint.Companion.getCENTERED()));
 
         textGUI.addWindow(mainSelectionWindow);
     }
 
     private void runComponentTest(WindowBasedTextGUI textGUI) {
         final BasicWindow componentTestChooser = new BasicWindow("Component test");
-        componentTestChooser.setHints(Collections.singletonList(Window.Hint.CENTERED));
+        componentTestChooser.setHints(Collections.singletonList(Window.Hint.Companion.getCENTERED()));
 
         Panel mainPanel = new Panel();
         mainPanel.addComponent(new Label("Choose component:                     "));
@@ -164,7 +164,7 @@ public class ThemeTest extends TestBase {
                 new ThemedComponentTestDialog(textGUI, "TextBox",
                         new Panel()
                                 .addComponent(
-                                        Panels.horizontal(
+                                        Panels.INSTANCE.horizontal(
                                                 new TextBox("Single-line text box")
                                                         .setPreferredSize(new TerminalSize(15, 1)),
                                                 new TextBox("Single-line read-only")
@@ -172,25 +172,25 @@ public class ThemeTest extends TestBase {
                                                         .setReadOnly(true)))
                                 .addComponent(new EmptySpace())
                                 .addComponent(
-                                        Panels.horizontal(
+                                        Panels.INSTANCE.horizontal(
                                             new TextBox(new TerminalSize(15, 5), "Multi\nline\ntext\nbox\nHere is a very long line that doesn't fit")
                                                     .setVerticalFocusSwitching(false),
                                             new TextBox(new TerminalSize(15, 5), "Multi\nline\nread-only\ntext\nbox\n" +
                                                     "Here is a very long line that doesn't fit")
                                                     .setReadOnly(true))))
         };
-        ActionListBox listBox = new ActionListBox(new TerminalSize(15, 7)).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Center));
+        ActionListBox listBox = new ActionListBox(new TerminalSize(15, 7)).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.Center));
         for(ThemedComponentTestDialog themedComponentTestDialog: componentTestDialogs) {
             listBox.addItem(themedComponentTestDialog);
         }
         mainPanel.addComponent(listBox);
         mainPanel.addComponent(new EmptySpace());
-        mainPanel.addComponent(new Button(LocalizedString.Close.toString(), new Runnable() {
+        mainPanel.addComponent(new Button(LocalizedString.Companion.getClose().toString(), new Runnable() {
             @Override
             public void run() {
                 componentTestChooser.close();
             }
-        }).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.End)));
+        }).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.End)));
 
         componentTestChooser.setComponent(mainPanel);
         textGUI.addWindowAndWait(componentTestChooser);
@@ -216,7 +216,7 @@ public class ThemeTest extends TestBase {
             componentPanel.addComponent(component.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER)));
 
             this.embeddedComponent = component;
-            this.borderedComponent = componentPanel.withBorder(Borders.singleLine(label));
+            this.borderedComponent = componentPanel.withBorder(Borders.INSTANCE.singleLine(label));
 
             if(embeddedComponent instanceof AnimatedLabel) {
                 ((AnimatedLabel)embeddedComponent).startAnimation(917);
@@ -253,27 +253,27 @@ public class ThemeTest extends TestBase {
         @Override
         public void run() {
             final BasicWindow componentWindow = new BasicWindow();
-            componentWindow.setHints(Collections.singletonList(Window.Hint.CENTERED));
+            componentWindow.setHints(Collections.singletonList(Window.Hint.Companion.getCENTERED()));
             componentWindow.setTitle("Themed Component");
 
             Panel mainPanel = new Panel();
             mainPanel.setLayoutManager(new GridLayout(2));
-            mainPanel.addComponent(borderedComponent.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
+            mainPanel.addComponent(borderedComponent.setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2)));
 
             ActionListBox actionListBox = new ActionListBox();
-            for(final String themeName: LanternaThemes.getRegisteredThemes()) {
+            for(final String themeName: LanternaThemes.INSTANCE.getRegisteredThemes()) {
                 actionListBox.addItem(themeName, new Runnable() {
                     @Override
                     public void run() {
-                        borderedComponent.setTheme(LanternaThemes.getRegisteredTheme(themeName));
+                        borderedComponent.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themeName));
                     }
                 });
             }
             mainPanel.addComponent(actionListBox
-                    .withBorder(Borders.doubleLine("Change theme:"))
+                    .withBorder(Borders.INSTANCE.doubleLine("Change theme:"))
                     .setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER)));
 
-            Button closeButton = new Button(LocalizedString.Close.toString(), new Runnable() {
+            Button closeButton = new Button(LocalizedString.Companion.getClose().toString(), new Runnable() {
                 @Override
                 public void run() {
                     componentWindow.close();
@@ -310,16 +310,16 @@ public class ThemeTest extends TestBase {
     }
 
     private void runMultiThemeTest(final WindowBasedTextGUI textGUI) {
-        final List<String> themes = new ArrayList<String>(LanternaThemes.getRegisteredThemes());
+        final List<String> themes = new ArrayList<String>(LanternaThemes.INSTANCE.getRegisteredThemes());
         final int[] windowThemeIndex = new int[] { themes.indexOf("bigsnake"), themes.indexOf("conqueror") };
         final BasicWindow window1 = new BasicWindow("Theme: bigsnake");
-        window1.setHints(Collections.singletonList(Window.Hint.FIXED_POSITION));
-        window1.setTheme(LanternaThemes.getRegisteredTheme(themes.get(windowThemeIndex[0])));
+        window1.setHints(Collections.singletonList(Window.Hint.Companion.getFIXED_POSITION()));
+        window1.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themes.get(windowThemeIndex[0])));
         window1.setPosition(new TerminalPosition(2, 1));
 
         final BasicWindow window2 = new BasicWindow("Theme: conqueror");
-        window2.setHints(Collections.singletonList(Window.Hint.FIXED_POSITION));
-        window2.setTheme(LanternaThemes.getRegisteredTheme(themes.get(windowThemeIndex[1])));
+        window2.setHints(Collections.singletonList(Window.Hint.Companion.getFIXED_POSITION()));
+        window2.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themes.get(windowThemeIndex[1])));
         window2.setPosition(new TerminalPosition(30, 1));
 
         final Panel leftHolder = new Panel().setPreferredSize(new TerminalSize(15, 4));
@@ -349,7 +349,7 @@ public class ThemeTest extends TestBase {
                             actionListDialogBuilder.addAction(theme, new Runnable() {
                                 @Override
                                 public void run() {
-                                    exampleButton.setTheme(LanternaThemes.getRegisteredTheme(theme));
+                                    exampleButton.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(theme));
                                 }
                             });
                         }
@@ -370,7 +370,7 @@ public class ThemeTest extends TestBase {
                             windowThemeIndex[0] = 0;
                         }
                         String themeName = themes.get(windowThemeIndex[0]);
-                        window1.setTheme(LanternaThemes.getRegisteredTheme(themeName));
+                        window1.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themeName));
                         window1.setTitle("Theme: " + themeName);
                     }
                 })
@@ -388,7 +388,7 @@ public class ThemeTest extends TestBase {
                     }
                 });
         window1.setComponent(
-                Panels.vertical(
+                Panels.INSTANCE.vertical(
                     leftHolder.withBorder(Borders.singleLine()),
                     leftWindowActionBox));
         window1.addWindowListener(new WindowListenerAdapter() {
@@ -418,7 +418,7 @@ public class ThemeTest extends TestBase {
                             actionListDialogBuilder.addAction(theme, new Runnable() {
                                 @Override
                                 public void run() {
-                                    exampleButton.setTheme(LanternaThemes.getRegisteredTheme(theme));
+                                    exampleButton.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(theme));
                                 }
                             });
                         }
@@ -439,7 +439,7 @@ public class ThemeTest extends TestBase {
                             windowThemeIndex[1] = 0;
                         }
                         String themeName = themes.get(windowThemeIndex[1]);
-                        window2.setTheme(LanternaThemes.getRegisteredTheme(themeName));
+                        window2.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themeName));
                         window2.setTitle("Theme: " + themeName);
                     }
                 })
@@ -457,7 +457,7 @@ public class ThemeTest extends TestBase {
                     }
                 });
         window2.setComponent(
-                Panels.vertical(
+                Panels.INSTANCE.vertical(
                     rightHolder.withBorder(Borders.singleLine()),
                     rightWindowActionBox));
         window2.addWindowListener(new WindowListenerAdapter() {
@@ -481,7 +481,7 @@ public class ThemeTest extends TestBase {
 
     private void runCustomTheme(final WindowBasedTextGUI textGUI) {
         final BasicWindow customThemeCreator = new BasicWindow("Custom Theme");
-        customThemeCreator.setHints(Collections.singletonList(Window.Hint.CENTERED));
+        customThemeCreator.setHints(Collections.singletonList(Window.Hint.Companion.getCENTERED()));
 
         Panel mainPanel = new Panel();
         mainPanel.addComponent(new Label("Choose colors:"));
@@ -521,10 +521,10 @@ public class ThemeTest extends TestBase {
         mainPanel.addComponent(activeIsBoxCheck);
         mainPanel.addComponent(new EmptySpace());
 
-        Button okButton = new Button(LocalizedString.OK.toString(), new Runnable() {
+        Button okButton = new Button(LocalizedString.Companion.getOK().toString(), new Runnable() {
             @Override
             public void run() {
-                SimpleTheme theme = SimpleTheme.makeTheme(
+                SimpleTheme theme = SimpleTheme.Companion.makeTheme(
                         activeIsBoxCheck.isChecked(),
                         baseForeground.getSelectedItem(),
                         baseBackground.getSelectedItem(),
@@ -537,16 +537,16 @@ public class ThemeTest extends TestBase {
                 customThemeCreator.close();
             }
         });
-        Button cancelButton = new Button(LocalizedString.Cancel.toString(), new Runnable() {
+        Button cancelButton = new Button(LocalizedString.Companion.getCancel().toString(), new Runnable() {
             @Override
             public void run() {
                 customThemeCreator.close();
             }
         });
-        mainPanel.addComponent(Panels.horizontal(
+        mainPanel.addComponent(Panels.INSTANCE.horizontal(
                 okButton,
                 cancelButton
-        ).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.End)));
+        ).setLayoutData(LinearLayout.Companion.createLayoutData(LinearLayout.Alignment.End)));
 
         customThemeCreator.setComponent(mainPanel);
         okButton.takeFocus();

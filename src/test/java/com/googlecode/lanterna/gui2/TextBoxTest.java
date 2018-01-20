@@ -35,10 +35,10 @@ public class TextBoxTest extends TestBase {
         Panel leftPanel = new Panel();
         Panel rightPanel = new Panel();
 
-        leftPanel.addComponent(new TextBox().withBorder(Borders.singleLine("Default")));
-        leftPanel.addComponent(new TextBox("Some text").withBorder(Borders.singleLine("With init")));
-        leftPanel.addComponent(new TextBox(new TerminalSize(10, 1), "Here is some text that is too long to fit in the text box").withBorder(Borders.singleLine("Long text")));
-        leftPanel.addComponent(new TextBox("password").setMask('*').withBorder(Borders.singleLine("Password")));
+        leftPanel.addComponent(new TextBox().withBorder(Borders.INSTANCE.singleLine("Default")));
+        leftPanel.addComponent(new TextBox("Some text").withBorder(Borders.INSTANCE.singleLine("With init")));
+        leftPanel.addComponent(new TextBox(new TerminalSize(10, 1), "Here is some text that is too long to fit in the text box").withBorder(Borders.INSTANCE.singleLine("Long text")));
+        leftPanel.addComponent(new TextBox("password").setMask('*').withBorder(Borders.INSTANCE.singleLine("Password")));
 
         rightPanel.addComponent(new TextBox(new TerminalSize(15, 5),
                 "Well here we are again\n" +
@@ -51,12 +51,12 @@ public class TextBoxTest extends TestBase {
                 "状況を振り返ると\n" +
                 "自分のやさしさに驚くほどです").withBorder(Borders.singleLine()));
 
-        mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Single line")));
-        mainPanel.addComponent(rightPanel.withBorder(Borders.singleLine("Multiline")));
+        mainPanel.addComponent(leftPanel.withBorder(Borders.INSTANCE.singleLine("Single line")));
+        mainPanel.addComponent(rightPanel.withBorder(Borders.INSTANCE.singleLine("Multiline")));
 
         window.setComponent(
-                Panels.vertical(
-                    mainPanel.withBorder(Borders.singleLine("Main")),
+                Panels.INSTANCE.vertical(
+                    mainPanel.withBorder(Borders.INSTANCE.singleLine("Main")),
                     new Button("OK", new Runnable() {
                         @Override
                         public void run() {

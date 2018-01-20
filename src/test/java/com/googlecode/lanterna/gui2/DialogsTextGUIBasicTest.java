@@ -44,14 +44,14 @@ public class DialogsTextGUIBasicTest {
             dialogsListBox.addItem("Simple TextInputDialog", new Runnable() {
                 @Override
                 public void run() {
-                    String result = TextInputDialog.showDialog(textGUI, "TextInputDialog sample", "This is the description", "initialContent");
+                    String result = TextInputDialog.Companion.showDialog(textGUI, "TextInputDialog sample", "This is the description", "initialContent");
                     System.out.println("Result was: " + result);
                 }
             });
             dialogsListBox.addItem("Password input", new Runnable() {
                 @Override
                 public void run() {
-                    String result = TextInputDialog.showPasswordDialog(textGUI, "Test password input", "This is a password input dialog", "");
+                    String result = TextInputDialog.Companion.showPasswordDialog(textGUI, "Test password input", "This is a password input dialog", "");
                     System.out.println("Result was: " + result);
                 }
             });
@@ -84,7 +84,7 @@ public class DialogsTextGUIBasicTest {
                     File result = new FileDialogBuilder()
                             .setTitle("Open File")
                             .setDescription("Choose a file:")
-                            .setActionLabel(LocalizedString.Open.toString())
+                            .setActionLabel(LocalizedString.Companion.getOpen().toString())
                             .build()
                             .showDialog(textGUI);
                     System.out.println("Result was: " + result);
@@ -96,7 +96,7 @@ public class DialogsTextGUIBasicTest {
                     File result = new FileDialogBuilder()
                             .setTitle("Save File")
                             .setDescription("Choose a file:")
-                            .setActionLabel(LocalizedString.Save.toString())
+                            .setActionLabel(LocalizedString.Companion.getSave().toString())
                             .build()
                             .showDialog(textGUI);
                     System.out.println("Result was: " + result);
@@ -111,19 +111,19 @@ public class DialogsTextGUIBasicTest {
                             .addAction("First Item", new Runnable() {
                                 @Override
                                 public void run() {
-                                    MessageDialog.showMessageDialog(textGUI, "Action List Dialog", "You chose First Item", MessageDialogButton.OK);
+                                    MessageDialog.Companion.showMessageDialog(textGUI, "Action List Dialog", "You chose First Item", MessageDialogButton.OK);
                                 }
                             })
                             .addAction("Second Item", new Runnable() {
                                 @Override
                                 public void run() {
-                                    MessageDialog.showMessageDialog(textGUI, "Action List Dialog", "You chose Second Item", MessageDialogButton.OK);
+                                    MessageDialog.Companion.showMessageDialog(textGUI, "Action List Dialog", "You chose Second Item", MessageDialogButton.OK);
                                 }
                             })
                             .addAction("Third Item", new Runnable() {
                                 @Override
                                 public void run() {
-                                    MessageDialog.showMessageDialog(textGUI, "Action List Dialog", "You chose Third Item", MessageDialogButton.OK);
+                                    MessageDialog.Companion.showMessageDialog(textGUI, "Action List Dialog", "You chose Third Item", MessageDialogButton.OK);
                                 }
                             })
                             .build()
@@ -132,7 +132,7 @@ public class DialogsTextGUIBasicTest {
             });
 
             mainPanel.addComponent(dialogsListBox);
-            mainPanel.addComponent(new EmptySpace(TerminalSize.ONE));
+            mainPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
             mainPanel.addComponent(new Button("Exit", new Runnable() {
                 @Override
                 public void run() {

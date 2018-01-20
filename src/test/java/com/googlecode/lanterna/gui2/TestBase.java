@@ -35,7 +35,7 @@ public abstract class TestBase {
         MultiWindowTextGUI textGUI = createTextGUI(screen);
         String theme = extractTheme(args);
         if(theme != null) {
-            textGUI.setTheme(LanternaThemes.getRegisteredTheme(theme));
+            textGUI.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(theme));
         }
         textGUI.setBlockingIO(false);
         textGUI.setEOFWhenNoWindows(true);

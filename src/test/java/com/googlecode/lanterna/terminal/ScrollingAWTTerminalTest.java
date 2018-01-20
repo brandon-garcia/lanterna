@@ -43,9 +43,9 @@ public class ScrollingAWTTerminalTest extends javax.swing.JFrame {
     public ScrollingAWTTerminalTest() {
         initComponents();
         scrollingAwtTerminal = new ScrollingAWTTerminal(
-                TerminalEmulatorDeviceConfiguration.getDefault().withLineBufferScrollbackSize(150),
-                SwingTerminalFontConfiguration.getDefault(),
-                TerminalEmulatorColorConfiguration.getDefault());
+                TerminalEmulatorDeviceConfiguration.Companion.getDefault().withLineBufferScrollbackSize(150),
+                SwingTerminalFontConfiguration.Companion.getDefault(),
+                TerminalEmulatorColorConfiguration.Companion.getDefault());
         panelTerminalContainer.add(scrollingAwtTerminal, BorderLayout.CENTER);
         pack();
     }

@@ -49,7 +49,7 @@ public class Issue155 {
 
     private static Panel createUi(WindowBasedTextGUI gui, final BasicWindow window, final int counter) {
         final int nextCounter = counter + 3;
-        return Panels.vertical(
+        return Panels.INSTANCE.vertical(
                 new Button("Open Dialog (and crush stuff)", openDialog(gui, window, nextCounter)),
                 new CheckBoxList<String>() {{
                     for (int i = counter; i < nextCounter; ++i) {

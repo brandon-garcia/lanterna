@@ -48,7 +48,7 @@ public class MultiWindowManagerTest extends TestBase {
                 onNewWindow(textGUI);
             }
         }));
-        contentArea.addComponent(new EmptySpace(TerminalSize.ONE));
+        contentArea.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
         contentArea.addComponent(new Button("Close", new Runnable() {
             @Override
             public void run() {
@@ -80,12 +80,12 @@ public class MultiWindowManagerTest extends TestBase {
 
     private void onNewWindow(WindowBasedTextGUI textGUI) {
         DynamicWindow window = new DynamicWindow();
-        List<String> availableThemes = new ArrayList<String>(LanternaThemes.getRegisteredThemes());
+        List<String> availableThemes = new ArrayList<String>(LanternaThemes.INSTANCE.getRegisteredThemes());
         String themeName = availableThemes.get(nextTheme++);
         if(nextTheme == availableThemes.size()) {
             nextTheme = 0;
         }
-        window.setTheme(LanternaThemes.getRegisteredTheme(themeName));
+        window.setTheme(LanternaThemes.INSTANCE.getRegisteredTheme(themeName));
         textGUI.addWindow(window);
     }
 
@@ -125,16 +125,16 @@ public class MultiWindowManagerTest extends TestBase {
             Panel contentArea = new Panel();
             contentArea.setLayoutManager(new GridLayout(1));
             contentArea.addComponent(statsTableContainer);
-            contentArea.addComponent(new EmptySpace(TerminalSize.ONE));
+            contentArea.addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
             contentArea.addComponent(
                     new Label(
                             "Move window with ALT+Arrow\n" +
                             "Resize window with CTRL+Arrow\n" +
                             " (need to disabled managed mode to resize)"));
-            contentArea.addComponent(new EmptySpace(TerminalSize.ONE).setLayoutData(
+            contentArea.addComponent(new EmptySpace(TerminalSize.Companion.getONE()).setLayoutData(
                     GridLayout.createLayoutData(GridLayout.Alignment.FILL, GridLayout.Alignment.FILL, true, true)));
             contentArea.addComponent(
-                    Panels.horizontal(
+                    Panels.INSTANCE.horizontal(
                             new Button("Toggle managed", new Runnable() {
                                 @Override
                                 public void run() {
@@ -157,7 +157,7 @@ public class MultiWindowManagerTest extends TestBase {
                 setHints(Collections.<Hint> emptyList());
             }
             else {
-                setHints(Collections.singletonList(Hint.FIXED_SIZE));
+                setHints(Collections.singletonList(Hint.Companion.getFIXED_SIZE()));
             }
             labelUnlockWindow.setText(Boolean.toString(isManaged));
         }
@@ -216,7 +216,7 @@ public class MultiWindowManagerTest extends TestBase {
             return new ComponentRenderer<EmptySpace>() {
                 @Override
                 public TerminalSize getPreferredSize(EmptySpace component) {
-                    return TerminalSize.ONE;
+                    return TerminalSize.Companion.getONE();
                 }
 
                 @Override

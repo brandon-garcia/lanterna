@@ -33,41 +33,41 @@ public class PanelTest extends TestBase {
         mainPanel.setLayoutManager(new LinearLayout(Direction.HORIZONTAL));
 
         Panel leftPanel = new Panel();
-        mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Left")));
+        mainPanel.addComponent(leftPanel.withBorder(Borders.INSTANCE.singleLine("Left")));
 
         Panel panel = new Panel();
         panel.addComponent(new Button("Panel 1 Button"));
         leftPanel.addComponent(panel.withBorder(Borders.singleLine()));
         panel = new Panel();
         panel.addComponent(new Button("Panel 2 Button"));
-        leftPanel.addComponent(panel.withBorder(Borders.singleLine("Title")));
+        leftPanel.addComponent(panel.withBorder(Borders.INSTANCE.singleLine("Title")));
         panel = new Panel();
         panel.addComponent(new Button("Panel 3 Button"));
         leftPanel.addComponent(panel.withBorder(Borders.doubleLine()));
         panel = new Panel();
         panel.addComponent(new Button("Panel 4 Button"));
-        leftPanel.addComponent(panel.withBorder(Borders.doubleLine("Title")));
+        leftPanel.addComponent(panel.withBorder(Borders.INSTANCE.doubleLine("Title")));
 
         Panel rightPanel = new Panel();
-        mainPanel.addComponent(rightPanel.withBorder(Borders.singleLine("Right")));
+        mainPanel.addComponent(rightPanel.withBorder(Borders.INSTANCE.singleLine("Right")));
 
         panel = new Panel();
         panel.addComponent(new Button("Panel 1 Button"));
-        panel.addComponent(new Panel().withBorder(Borders.singleLine("A")));
-        panel.addComponent(new Panel().withBorder(Borders.singleLine("Some Text")));
-        rightPanel.addComponent(panel.withBorder(Borders.singleLine("B")));
+        panel.addComponent(new Panel().withBorder(Borders.INSTANCE.singleLine("A")));
+        panel.addComponent(new Panel().withBorder(Borders.INSTANCE.singleLine("Some Text")));
+        rightPanel.addComponent(panel.withBorder(Borders.INSTANCE.singleLine("B")));
         panel = new Panel();
         panel.addComponent(new Button("Panel 2 Button"));
-        rightPanel.addComponent(panel.withBorder(Borders.singleLine("Title")));
+        rightPanel.addComponent(panel.withBorder(Borders.INSTANCE.singleLine("Title")));
         panel = new Panel();
         panel.addComponent(new Button("Panel 3 Button"));
         rightPanel.addComponent(panel.withBorder(Borders.doubleLine()));
         panel = new Panel();
         panel.addComponent(new Button("Panel 4 Button"));
-        rightPanel.addComponent(panel.withBorder(Borders.doubleLine("Title")));
+        rightPanel.addComponent(panel.withBorder(Borders.INSTANCE.doubleLine("Title")));
 
-        window.setComponent(Panels.vertical(
-                mainPanel.withBorder(Borders.singleLine("Main")),
+        window.setComponent(Panels.INSTANCE.vertical(
+                mainPanel.withBorder(Borders.INSTANCE.singleLine("Main")),
                 new Button("OK", new Runnable() {
                     @Override
                     public void run() {

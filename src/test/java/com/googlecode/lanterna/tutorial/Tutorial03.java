@@ -163,21 +163,21 @@ public class Tutorial03 {
                 textGraphics.drawLine(
                         labelBoxTopLeft.withRelativeColumn(1),
                         labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns() - 2),
-                        Symbols.DOUBLE_LINE_HORIZONTAL);
+						Symbols.INSTANCE.getDOUBLE_LINE_HORIZONTAL());
                 textGraphics.drawLine(
                         labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(1),
                         labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(labelBoxSize.getColumns() - 2),
-                        Symbols.DOUBLE_LINE_HORIZONTAL);
+						Symbols.INSTANCE.getDOUBLE_LINE_HORIZONTAL());
 
                 /*
                 Manually do the edges and (since it's only one) the vertical lines, first on the left then on the right
                  */
-                textGraphics.setCharacter(labelBoxTopLeft, Symbols.DOUBLE_LINE_TOP_LEFT_CORNER);
-                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
-                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
-                textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER);
-                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
-                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
+                textGraphics.setCharacter(labelBoxTopLeft, Symbols.INSTANCE.getDOUBLE_LINE_TOP_LEFT_CORNER());
+                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(1), Symbols.INSTANCE.getDOUBLE_LINE_VERTICAL());
+                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(2), Symbols.INSTANCE.getDOUBLE_LINE_BOTTOM_LEFT_CORNER());
+                textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.INSTANCE.getDOUBLE_LINE_TOP_RIGHT_CORNER());
+                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(1), Symbols.INSTANCE.getDOUBLE_LINE_VERTICAL());
+                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2), Symbols.INSTANCE.getDOUBLE_LINE_BOTTOM_RIGHT_CORNER());
 
                 /*
                 Finally put the text inside the box

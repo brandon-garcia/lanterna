@@ -41,17 +41,17 @@ public class Issue190 {
 
         ActionListBox channels = new ActionListBox();
         channels.setLayoutData(BorderLayout.Location.LEFT);
-        panel.addComponent(channels.withBorder(Borders.singleLine("Channels")));
+        panel.addComponent(channels.withBorder(Borders.INSTANCE.singleLine("Channels")));
 
         TextBox log = new TextBox("", TextBox.Style.MULTI_LINE);
         log.setReadOnly(true);
         log.setLayoutData(BorderLayout.Location.CENTER);
-        panel.addComponent(log.withBorder(Borders.singleLine("Log")));
+        panel.addComponent(log.withBorder(Borders.INSTANCE.singleLine("Log")));
 
         Panel options = new Panel();
         options.setLayoutData(BorderLayout.Location.BOTTOM);
 
-        options.withBorder(Borders.singleLine("Send Message"));
+        options.withBorder(Borders.INSTANCE.singleLine("Send Message"));
 
         options.setLayoutManager(new BorderLayout());
 
@@ -68,12 +68,12 @@ public class Issue190 {
         send.setLayoutData(BorderLayout.Location.RIGHT);
         options.addComponent(send);
 
-        panel.addComponent(options.withBorder(Borders.singleLine("Send Message")));
+        panel.addComponent(options.withBorder(Borders.INSTANCE.singleLine("Send Message")));
 
         BasicWindow window = new BasicWindow();
-        window.setComponent(panel.withBorder(Borders.doubleLine("DarkOwlBot")));
+        window.setComponent(panel.withBorder(Borders.INSTANCE.doubleLine("DarkOwlBot")));
 
-        window.setHints(Arrays.asList(Window.Hint.EXPANDED, Window.Hint.FIT_TERMINAL_WINDOW));
+        window.setHints(Arrays.asList(Window.Hint.Companion.getEXPANDED(), Window.Hint.Companion.getFIT_TERMINAL_WINDOW()));
 
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
         gui.addWindowAndWait(window);

@@ -134,8 +134,8 @@ public class TableTest extends TestBase {
             }
         }));
 
-        window.setComponent(Panels.vertical(
-                table.withBorder(Borders.singleLineBevel("Table")),
+        window.setComponent(Panels.INSTANCE.vertical(
+                table.withBorder(Borders.INSTANCE.singleLineBevel("Table")),
                 buttonPanel));
         textGUI.addWindow(window);
     }

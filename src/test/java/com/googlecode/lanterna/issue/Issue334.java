@@ -26,7 +26,7 @@ public class Issue334 {
 
         // Create window to hold the panel
         final BasicWindow window = new BasicWindow();
-        window.setComponent(Panels.vertical(panel));
+        window.setComponent(Panels.INSTANCE.vertical(panel));
         window.setCloseWindowWithEscape(true);
 
         gui.addWindowAndWait(window);

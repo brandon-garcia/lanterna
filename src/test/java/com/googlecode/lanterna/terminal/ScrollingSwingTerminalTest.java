@@ -43,9 +43,9 @@ public class ScrollingSwingTerminalTest extends javax.swing.JFrame {
     public ScrollingSwingTerminalTest() {
         initComponents();
         scrollingSwingTerminal = new ScrollingSwingTerminal(
-                TerminalEmulatorDeviceConfiguration.getDefault().withLineBufferScrollbackSize(150),
-                SwingTerminalFontConfiguration.getDefault(),
-                TerminalEmulatorColorConfiguration.getDefault());
+                TerminalEmulatorDeviceConfiguration.Companion.getDefault().withLineBufferScrollbackSize(150),
+                SwingTerminalFontConfiguration.Companion.getDefault(),
+                TerminalEmulatorColorConfiguration.Companion.getDefault());
         panelTerminalContainer.add(scrollingSwingTerminal, BorderLayout.CENTER);
         pack();
     }

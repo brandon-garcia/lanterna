@@ -66,10 +66,10 @@ public class ScrollBarTest extends TestBase {
         });
 
         verticalScroll.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.FILL, false, true));
-        horizontalScroll.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2));
-        buttonRefresh.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.BEGINNING, true, true, 2, 1));
+        horizontalScroll.setLayoutData(GridLayout.Companion.createHorizontallyFilledLayoutData(2));
+        buttonRefresh.setLayoutData(GridLayout.Companion.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.BEGINNING, true, true, 2, 1));
 
-        contentPanel.addComponent(controlPanel.withBorder(Borders.singleLine("Control")));
+        contentPanel.addComponent(controlPanel.withBorder(Borders.INSTANCE.singleLine("Control")));
         contentPanel.addComponent(verticalScroll);
         contentPanel.addComponent(horizontalScroll);
 
@@ -78,12 +78,12 @@ public class ScrollBarTest extends TestBase {
         controlPanel.addComponent(new Label("Vertical view size:")).addComponent(textBoxVerticalSize);
         controlPanel.addComponent(new Label("Vertical scroll position:")).addComponent(textBoxVerticalPosition);
         controlPanel.addComponent(new Label("Vertical scroll max:")).addComponent(textBoxVerticalMax);
-        controlPanel.addComponent(new EmptySpace(TerminalSize.ONE)).addComponent(new EmptySpace(TerminalSize.ONE));
+        controlPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE())).addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
         controlPanel.addComponent(new Label("Horizontal tracker grows:")).addComponent(checkHorizontalTrackerGrow);
         controlPanel.addComponent(new Label("Horizontal view size:")).addComponent(textBoxHorizontalSize);
         controlPanel.addComponent(new Label("Horizontal scroll position:")).addComponent(textBoxHorizontalPosition);
         controlPanel.addComponent(new Label("Horizontal scroll max:")).addComponent(textBoxHorizontalMax);
-        controlPanel.addComponent(new EmptySpace(TerminalSize.ONE)).addComponent(new EmptySpace(TerminalSize.ONE));
+        controlPanel.addComponent(new EmptySpace(TerminalSize.Companion.getONE())).addComponent(new EmptySpace(TerminalSize.Companion.getONE()));
         controlPanel.addComponent(buttonRefresh);
         contentPanel.addComponent(closeButton);
 
