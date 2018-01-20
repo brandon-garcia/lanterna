@@ -27,7 +27,6 @@ import java.nio.charset.Charset;
 import com.googlecode.lanterna.Symbols;
 import com.googlecode.lanterna.TerminalTextUtils;
 import com.googlecode.lanterna.input.InputDecoder;
-import com.googlecode.lanterna.input.KeyDecodingProfile;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.ScreenInfoAction;
 import com.googlecode.lanterna.input.ScreenInfoCharacterPattern;
