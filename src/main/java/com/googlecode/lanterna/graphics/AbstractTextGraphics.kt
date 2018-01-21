@@ -30,22 +30,19 @@ import java.util.EnumSet
  * @author Martin
  */
 abstract class AbstractTextGraphics protected constructor() : TextGraphics {
-	override var foregroundColor: TextColor
-		protected set
-	override var backgroundColor: TextColor
-		protected set
-	override var tabBehaviour: TabBehaviour
-		protected set
-	override val activeModifiers: EnumSet<SGR>
-	private val shapeRenderer: ShapeRenderer
 
-	init {
-		this.activeModifiers = EnumSet.noneOf(SGR::class.java)
-		this.tabBehaviour = TabBehaviour.ALIGN_TO_COLUMN_4
-		this.foregroundColor = TextColor.ANSI.DEFAULT
-		this.backgroundColor = TextColor.ANSI.DEFAULT
-		this.shapeRenderer = DefaultShapeRenderer(DefaultShapeRenderer.Callback { column, row, character -> setCharacter(column, row, character) })
-	}
+	override var foregroundColor: TextColor = TextColor.ANSI.DEFAULT
+		protected set
+
+	override var backgroundColor: TextColor = TextColor.ANSI.DEFAULT
+		protected set
+
+	override var tabBehaviour: TabBehaviour = TabBehaviour.ALIGN_TO_COLUMN_4
+		protected set
+
+	override val activeModifiers: EnumSet<SGR> = EnumSet.noneOf(SGR::class.java)
+
+	private val shapeRenderer: ShapeRenderer = DefaultShapeRenderer(DefaultShapeRenderer.Callback { column, row, character -> setCharacter(column, row, character) })
 
 	override fun setBackgroundColor(backgroundColor: TextColor): TextGraphics {
 		this.backgroundColor = backgroundColor
@@ -83,13 +80,6 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 
 	override fun clearModifiers(): TextGraphics {
 		this.activeModifiers.clear()
-		return this
-	}
-
-	override fun setTabBehaviour(tabBehaviour: TabBehaviour?): TextGraphics {
-		if (tabBehaviour != null) {
-			this.tabBehaviour = tabBehaviour
-		}
 		return this
 	}
 
