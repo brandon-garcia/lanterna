@@ -42,7 +42,14 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 
 	override val activeModifiers: EnumSet<SGR> = EnumSet.noneOf(SGR::class.java)
 
-	private val shapeRenderer: ShapeRenderer = DefaultShapeRenderer(DefaultShapeRenderer.Callback { column, row, character -> setCharacter(column, row, character) })
+	private val shapeRenderer: ShapeRenderer =
+		DefaultShapeRenderer(
+			object: DefaultShapeRenderer.Callback {
+				override fun onPoint(column: Int, row: Int, character: TextCharacter) {
+					setCharacter(column, row, character)
+				}
+			}
+		)
 
 	override fun setBackgroundColor(backgroundColor: TextColor): TextGraphics {
 		this.backgroundColor = backgroundColor
@@ -220,7 +227,8 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 		return putString(column, row, string, EnumSet.of(extraModifier, *optionalExtraModifiers))
 	}
 
-	override fun putString(column: Int, row: Int, string: String, extraModifiers: MutableCollection<SGR>): TextGraphics {
+	override fun putString(column: Int, row: Int, string: String, extraModifiers: Collection<SGR>): TextGraphics {
+		val extraModifiers = extraModifiers.toMutableList()
 		extraModifiers.removeAll(activeModifiers)
 		enableModifiers(extraModifiers)
 		putString(column, row, string)
