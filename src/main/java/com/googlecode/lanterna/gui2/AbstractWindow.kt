@@ -44,7 +44,7 @@ abstract class AbstractWindow
 	private var lastKnownPosition: TerminalPosition? = null
 	private var contentOffset: TerminalPosition? = null
 	private var hints: Set<Window.Hint>? = null
-	override var postRenderer: WindowPostRenderer? = null
+	override final var postRenderer: WindowPostRenderer? = null
 		private set
 	private var closeWindowWithEscape: Boolean = false
 

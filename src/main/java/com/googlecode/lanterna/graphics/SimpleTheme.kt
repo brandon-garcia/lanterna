@@ -334,7 +334,7 @@ class SimpleTheme
 			selectedBackground: TextColor,
 			guiBackground: TextColor): SimpleTheme {
 
-			val activeStyle = if (activeIsBold) arrayOf(SGR.BOLD) else arrayOfNulls<SGR>(0)
+			val activeStyle = if (activeIsBold) arrayOf(SGR.BOLD) else emptyArray<SGR>()
 
 			val theme = SimpleTheme(baseForeground, baseBackground)
 			theme.defaultDefinition.setSelected(baseBackground, baseForeground, *activeStyle)

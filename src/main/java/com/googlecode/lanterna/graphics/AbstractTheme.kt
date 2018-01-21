@@ -20,13 +20,7 @@ package com.googlecode.lanterna.graphics
 
 import com.googlecode.lanterna.SGR
 import com.googlecode.lanterna.TextColor
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_ACTIVE
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_FORMAT
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_INSENSITIVE
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_NORMAL
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_PRELIGHT
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_SELECTED
-import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.instanceByClassName
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl
 import com.googlecode.lanterna.gui2.Component
 import com.googlecode.lanterna.gui2.ComponentRenderer
 import com.googlecode.lanterna.gui2.WindowDecorationRenderer

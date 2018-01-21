@@ -63,17 +63,23 @@ abstract class AbstractComponent<T : Component> : Component {
 	 */
 	private var defaultRenderer: ComponentRenderer<T>? = null
 
-	override var parent: Container? = null
+	override final var parent: Container? = null
 		private set
-	override var size: TerminalSize? = null
+
+	override final var size: TerminalSize? = null
 		private set
+
 	private var explicitPreferredSize: TerminalSize? = null   //This is keeping the value set by the user (if setPreferredSize() is used)
-	override var position: TerminalPosition? = null
+
+	override final var position: TerminalPosition? = null
 		private set
+
 	private var themeOverride: Theme? = null
-	override var layoutData: LayoutData? = null
+
+	override final var layoutData: LayoutData? = null
 		private set
-	override var isInvalid: Boolean = false
+
+	override final var isInvalid: Boolean = false
 		private set
 
 	override// First try the override

@@ -61,7 +61,7 @@ abstract class AbstractScreen
 	private var tabBehaviour: TabBehaviour? = null
 
 	//Current size of the screen
-	override var terminalSize: TerminalSize? = null
+	override final var terminalSize: TerminalSize? = null
 		private set
 
 	//Pending resize of the screen

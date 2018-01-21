@@ -35,11 +35,13 @@ abstract class AbstractInteractableComponent<T : AbstractInteractableComponent<T
  */
 protected constructor() : AbstractComponent<T>(), Interactable {
 
-	override var inputFilter: InputFilter? = null
+	override final var inputFilter: InputFilter? = null
 		private set
-	override var isFocused: Boolean = false
+
+	override final var isFocused: Boolean = false
 		private set
-	override var isEnabled: Boolean = false
+
+	override final var isEnabled: Boolean = false
 		private set
 
 	override val renderer: InteractableRenderer<T>
