@@ -79,8 +79,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			return rootNode
 		}
 		val parent = getNode(definition.superclass)
-		if (parent.childMap.containsKey(definition)) {
-			return parent.childMap[definition]
+		if (parent.childMap.containsKey(definition) && parent.childMap[definition] != null) {
+			return parent.childMap[definition]!!
 		}
 
 		val node = ThemeTreeNode(definition, parent)
@@ -88,8 +88,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 		return node
 	}
 
-	override fun getDefinition(clazz: Class<*>?): ThemeDefinition {
-		var clazz = clazz
+	override fun getDefinition(clazz: Class<*>): ThemeDefinition {
+		var clazz: Class<*>? = clazz
 		val hierarchy = LinkedList<Class<*>>()
 		while (clazz != null && clazz != Any::class.java) {
 			hierarchy.addFirst(clazz)
@@ -98,8 +98,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 
 		var node = rootNode
 		for (aClass in hierarchy) {
-			if (node.childMap.containsKey(aClass)) {
-				node = node.childMap[aClass]
+			if (node.childMap.containsKey(aClass) && node.childMap[aClass] != null) {
+				node = node.childMap[aClass]!!
 			} else {
 				break
 			}
@@ -226,14 +226,14 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 		}
 	}
 
-	private inner class StyleImpl private constructor(private val styleNode: ThemeTreeNode, private val name: String) : ThemeStyle {
+	private inner class StyleImpl constructor(private val styleNode: ThemeTreeNode?, private val name: String) : ThemeStyle {
 
 		override val foreground: TextColor
 			get() {
 				var node: ThemeTreeNode? = styleNode
 				while (node != null) {
-					if (node.foregroundMap.containsKey(name)) {
-						return node.foregroundMap[name]
+					if (node.foregroundMap.containsKey(name) && node.foregroundMap[name] != null) {
+						return node.foregroundMap[name]!!
 					}
 					node = node.parent
 				}
@@ -248,8 +248,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			get() {
 				var node: ThemeTreeNode? = styleNode
 				while (node != null) {
-					if (node.backgroundMap.containsKey(name)) {
-						return node.backgroundMap[name]
+					if (node.backgroundMap.containsKey(name) && node.backgroundMap[name] != null) {
+						return node.backgroundMap[name]!!
 					}
 					node = node.parent
 				}
@@ -277,15 +277,15 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			}
 	}
 
-	private class ThemeTreeNode private constructor(private val clazz: Class<*>, private val parent: ThemeTreeNode) {
-		private val childMap: Map<Class<*>, ThemeTreeNode>
-		private val foregroundMap: MutableMap<String, TextColor>
-		private val backgroundMap: MutableMap<String, TextColor>
-		private val sgrMap: MutableMap<String, EnumSet<SGR>>
-		private val characterMap: MutableMap<String, Char>
-		private val propertyMap: MutableMap<String, String>
-		private var cursorVisible: Boolean? = null
-		private var renderer: String? = null
+	private class ThemeTreeNode constructor(val clazz: Class<*>, val parent: ThemeTreeNode?) {
+		val childMap: MutableMap<Class<*>, ThemeTreeNode>
+		val foregroundMap: MutableMap<String, TextColor>
+		val backgroundMap: MutableMap<String, TextColor>
+		val sgrMap: MutableMap<String, EnumSet<SGR>>
+		val characterMap: MutableMap<String, Char>
+		val propertyMap: MutableMap<String, String>
+		var cursorVisible: Boolean? = null
+		var renderer: String? = null
 
 		init {
 			this.childMap = HashMap()
@@ -298,7 +298,7 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			this.renderer = null
 		}
 
-		private fun apply(style: String, value: String) {
+		fun apply(style: String, value: String) {
 			var value = value
 			value = value.trim { it <= ' ' }
 			val matcher = STYLE_FORMAT.matcher(style)
@@ -328,10 +328,10 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			}
 		}
 
-		private fun parseValue(value: String) =
+		fun parseValue(value: String) =
 			TextColor.Factory.fromString(value)
 
-		private fun parseSGR(value: String): EnumSet<SGR> {
+		fun parseSGR(value: String): EnumSet<SGR> {
 			var value = value
 			value = value.trim { it <= ' ' }
 			val sgrEntries = value.split(",".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
@@ -350,7 +350,7 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			return sgrSet
 		}
 
-		private fun getCategory(group: String?): String {
+		fun getCategory(group: String?): String {
 			if (group == null) {
 				return STYLE_NORMAL
 			}
