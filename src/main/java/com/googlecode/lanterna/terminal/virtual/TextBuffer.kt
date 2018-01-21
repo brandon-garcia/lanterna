@@ -57,9 +57,8 @@ internal class TextBuffer {
 		newLine()
 	}
 
-	fun getLinesFrom(rowNumber: Int): ListIterator<List<TextCharacter>> {
-		return lines.listIterator(rowNumber)
-	}
+	fun getLinesFrom(rowNumber: Int) =
+		lines.listIterator(rowNumber)
 
 	@Synchronized
 	fun setCharacter(lineNumber: Int, columnIndex: Int, textCharacter: TextCharacter?): Int {

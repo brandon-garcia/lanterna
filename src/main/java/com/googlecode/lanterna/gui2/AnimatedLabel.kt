@@ -51,9 +51,8 @@ class AnimatedLabel
 		ensurePreferredSize(lines)
 	}
 
-	@Synchronized override fun calculatePreferredSize(): TerminalSize {
-		return super.calculatePreferredSize().max(combinedMaximumPreferredSize!!)
-	}
+	@Synchronized override fun calculatePreferredSize() =
+		super.calculatePreferredSize().max(combinedMaximumPreferredSize!!)
 
 	/**
 	 * Adds one more frame at the end of the list of frames

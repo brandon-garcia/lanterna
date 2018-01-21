@@ -67,9 +67,8 @@ object LanternaThemes {
 	 * @param name Name of the theme to retrieve
 	 * @return [Theme] registered with the supplied name, or `null` if none
 	 */
-	fun getRegisteredTheme(name: String): Theme {
-		return REGISTERED_THEMES[name]
-	}
+	fun getRegisteredTheme(name: String) =
+		REGISTERED_THEMES[name]
 
 	/**
 	 * Registers a [Theme] with this class under a certain name so that calling

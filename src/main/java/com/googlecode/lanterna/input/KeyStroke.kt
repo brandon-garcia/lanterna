@@ -194,10 +194,9 @@ open class KeyStroke private constructor(
 			return false
 		}
 		val other = obj as KeyStroke?
-		if (this.keyType != other!!.keyType) {
-			return false
-		}
-		return if (this.character !== other.character && (this.character == null || this.character != other.character)) {
+		return if (this.keyType != other!!.keyType) {
+			false
+		} else if (this.character !== other.character && (this.character == null || this.character != other.character)) {
 			false
 		} else this.isCtrlDown == other.isCtrlDown &&
 			this.isAltDown == other.isAltDown &&

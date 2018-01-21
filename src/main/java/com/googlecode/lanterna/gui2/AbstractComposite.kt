@@ -21,6 +21,7 @@ package com.googlecode.lanterna.gui2
 import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.input.KeyStroke
 import java.util.Collections
+import javax.swing.text.StyleConstants.getComponent
 
 /**
  * This abstract implementation contains common code for the different `Composite` implementations. A
@@ -70,13 +71,11 @@ abstract class AbstractComposite<T : Container> : AbstractComponent<T>(), Compos
 		}
 	}
 
-	override fun getComponent(): Component? {
-		return component
-	}
+	override fun getComponent() =
+		component
 
-	override fun containsComponent(component: Component?): Boolean {
-		return component != null && component.hasParent(this)
-	}
+	override fun containsComponent(component: Component?) =
+		component != null && component.hasParent(this)
 
 	override fun removeComponent(component: Component): Boolean {
 		if (this.component === component) {
@@ -97,27 +96,26 @@ abstract class AbstractComposite<T : Container> : AbstractComponent<T>(), Compos
 		}
 	}
 
-	override fun nextFocus(fromThis: Interactable?): Interactable? {
+	override fun nextFocus(fromThis: Interactable?) =
 		if (fromThis == null && getComponent() is Interactable) {
-			return getComponent() as Interactable?
+			getComponent() as Interactable?
 		} else if (getComponent() is Container) {
-			return (getComponent() as Container).nextFocus(fromThis)
+			(getComponent() as Container).nextFocus(fromThis)
+		} else {
+			null
 		}
-		return null
-	}
 
-	override fun previousFocus(fromThis: Interactable?): Interactable? {
+	override fun previousFocus(fromThis: Interactable?) =
 		if (fromThis == null && getComponent() is Interactable) {
-			return getComponent() as Interactable?
+			getComponent() as Interactable?
 		} else if (getComponent() is Container) {
-			return (getComponent() as Container).previousFocus(fromThis)
+			(getComponent() as Container).previousFocus(fromThis)
+		} else {
+			null
 		}
-		return null
-	}
 
-	override fun handleInput(key: KeyStroke): Boolean {
-		return false
-	}
+	override fun handleInput(key: KeyStroke) =
+		false
 
 	override fun updateLookupMap(interactableLookupMap: InteractableLookupMap) {
 		if (getComponent() is Container) {

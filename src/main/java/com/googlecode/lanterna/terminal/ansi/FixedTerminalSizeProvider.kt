@@ -35,7 +35,6 @@ class FixedTerminalSizeProvider
  */
 (private val size: TerminalSize) : UnixTerminalSizeQuerier {
 
-	override fun queryTerminalSize(): TerminalSize {
-		return size
-	}
+	override fun queryTerminalSize() =
+		size
 }

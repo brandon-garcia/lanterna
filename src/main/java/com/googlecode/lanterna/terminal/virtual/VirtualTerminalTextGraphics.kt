@@ -43,15 +43,12 @@ internal class VirtualTerminalTextGraphics(private val virtualTerminal: DefaultV
 		return this
 	}
 
-	override fun getCharacter(position: TerminalPosition): TextCharacter {
-		return virtualTerminal.getCharacter(position)
-	}
+	override fun getCharacter(position: TerminalPosition) =
+		virtualTerminal.getCharacter(position)
 
-	override fun getCharacter(column: Int, row: Int): TextCharacter {
-		return getCharacter(TerminalPosition(column, row))
-	}
+	override fun getCharacter(column: Int, row: Int) =
+		getCharacter(TerminalPosition(column, row))
 
-	override fun getSize(): TerminalSize {
-		return virtualTerminal.terminalSize
-	}
+	override fun getSize() =
+		virtualTerminal.terminalSize
 }

@@ -63,9 +63,8 @@ protected constructor(private val bundleName: String) {
 	 * @param locale the locale.
 	 * @return the instance of the bundle.
 	 */
-	private fun getBundle(locale: Locale): ResourceBundle {
-		return ResourceBundle.getBundle(bundleName, locale, loader, UTF8Control())
-	}
+	private fun getBundle(locale: Locale) =
+		ResourceBundle.getBundle(bundleName, locale, loader, UTF8Control())
 
 	// Taken from:
 	// http://stackoverflow.com/questions/4659929/how-to-use-utf-8-in-resource-properties-with-resourcebundle

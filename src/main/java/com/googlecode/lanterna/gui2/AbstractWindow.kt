@@ -100,9 +100,8 @@ abstract class AbstractWindow
 		this.textGUI = textGUI
 	}
 
-	override fun getTextGUI(): WindowBasedTextGUI? {
-		return textGUI
-	}
+	override fun getTextGUI(): WindowBasedTextGUI? =
+		textGUI
 
 	/**
 	 * Alters the title of the window to the supplied string
@@ -113,9 +112,8 @@ abstract class AbstractWindow
 		invalidate()
 	}
 
-	override fun getTitle(): String? {
-		return title
-	}
+	override fun getTitle() =
+		title
 
 	override fun draw(graphics: TextGUIGraphics) {
 		if (graphics.size != lastKnownSize) {
@@ -134,28 +132,25 @@ abstract class AbstractWindow
 		return handled
 	}
 
-	override fun toGlobal(localPosition: TerminalPosition?): TerminalPosition? {
-		return if (localPosition == null) {
+	override fun toGlobal(localPosition: TerminalPosition?) =
+		if (localPosition == null) {
 			null
 		} else lastKnownPosition!!.withRelative(contentOffset!!.withRelative(localPosition))
-	}
 
-	override fun fromGlobal(globalPosition: TerminalPosition?): TerminalPosition? {
-		return if (globalPosition == null || lastKnownPosition == null) {
+	override fun fromGlobal(globalPosition: TerminalPosition?) =
+		if (globalPosition == null || lastKnownPosition == null) {
 			null
 		} else globalPosition.withRelative(
 			-lastKnownPosition!!.column - contentOffset!!.column,
 			-lastKnownPosition!!.row - contentOffset!!.row)
-	}
 
 	override fun setHints(hints: Collection<Window.Hint>) {
 		this.hints = HashSet(hints)
 		invalidate()
 	}
 
-	override fun getHints(): Set<Window.Hint> {
-		return Collections.unmodifiableSet<Hint>(hints!!)
-	}
+	override fun getHints(): Set<Window.Hint> =
+		Collections.unmodifiableSet<Hint>(hints!!)
 
 	override fun addWindowListener(windowListener: WindowListener) {
 		addBasePaneListener(windowListener)
@@ -203,9 +198,8 @@ abstract class AbstractWindow
 		textGUI?.waitForWindowToClose(this)
 	}
 
-	internal override fun self(): Window {
-		return this
-	}
+	internal override fun self(): Window =
+		this
 }
 /**
  * Default constructor, this creates a window with no title

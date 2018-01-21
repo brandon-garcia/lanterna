@@ -168,10 +168,9 @@ class BorderLayout : LayoutManager {
 		return map
 	}
 
-	override fun hasChanged(): Boolean {
+	override fun hasChanged() =
 		//No internal state
-		return false
-	}
+		false
 
 	companion object {
 

@@ -37,10 +37,10 @@ class DoublePrintingTextGraphics
 (private val underlyingTextGraphics: TextGraphics) : AbstractTextGraphics() {
 
 	override val size: TerminalSize
-		get() {
-			val size = underlyingTextGraphics.size
-			return size.withColumns(size.columns / 2)
-		}
+		get() =
+			underlyingTextGraphics.size.let {
+				it.withColumns(it.columns / 2)
+			}
 
 	override fun setCharacter(columnIndex: Int, rowIndex: Int, textCharacter: TextCharacter): TextGraphics {
 		var columnIndex = columnIndex
@@ -50,10 +50,6 @@ class DoublePrintingTextGraphics
 		return this
 	}
 
-	override fun getCharacter(columnIndex: Int, rowIndex: Int): TextCharacter {
-		var columnIndex = columnIndex
-		columnIndex = columnIndex * 2
-		return underlyingTextGraphics.getCharacter(columnIndex, rowIndex)
-
-	}
+	override fun getCharacter(columnIndex: Int, rowIndex: Int) =
+		underlyingTextGraphics.getCharacter(columnIndex * 2, rowIndex)
 }

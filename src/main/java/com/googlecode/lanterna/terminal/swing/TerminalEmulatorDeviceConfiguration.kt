@@ -71,8 +71,8 @@ class TerminalEmulatorDeviceConfiguration
 	 * @param blinkLengthInMilliSeconds How many milliseconds does a 'blink' last
 	 * @return A copy of the current configuration with the changed value.
 	 */
-	fun withBlinkLengthInMilliSeconds(blinkLengthInMilliSeconds: Int): TerminalEmulatorDeviceConfiguration {
-		return if (this.blinkLengthInMilliSeconds == blinkLengthInMilliSeconds) {
+	fun withBlinkLengthInMilliSeconds(blinkLengthInMilliSeconds: Int) =
+		if (this.blinkLengthInMilliSeconds == blinkLengthInMilliSeconds) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -83,15 +83,14 @@ class TerminalEmulatorDeviceConfiguration
 				this.isCursorBlinking,
 				this.isClipboardAvailable)
 		}
-	}
 
 	/**
 	 * Copies the current configuration. The new object has the given value.
 	 * @param lineBufferScrollbackSize How many lines of scrollback buffer should the terminal save?
 	 * @return  A copy of the current configuration with the changed value.
 	 */
-	fun withLineBufferScrollbackSize(lineBufferScrollbackSize: Int): TerminalEmulatorDeviceConfiguration {
-		return if (this.lineBufferScrollbackSize == lineBufferScrollbackSize) {
+	fun withLineBufferScrollbackSize(lineBufferScrollbackSize: Int) =
+		if (this.lineBufferScrollbackSize == lineBufferScrollbackSize) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -102,15 +101,14 @@ class TerminalEmulatorDeviceConfiguration
 				this.isCursorBlinking,
 				this.isClipboardAvailable)
 		}
-	}
 
 	/**
 	 * Copies the current configuration. The new object has the given value.
 	 * @param cursorStyle Style of the terminal text cursor
 	 * @return A copy of the current configuration with the changed value.
 	 */
-	fun withCursorStyle(cursorStyle: CursorStyle): TerminalEmulatorDeviceConfiguration {
-		return if (this.cursorStyle == cursorStyle) {
+	fun withCursorStyle(cursorStyle: CursorStyle) =
+		if (this.cursorStyle == cursorStyle) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -121,15 +119,14 @@ class TerminalEmulatorDeviceConfiguration
 				this.isCursorBlinking,
 				this.isClipboardAvailable)
 		}
-	}
 
 	/**
 	 * Copies the current configuration. The new object has the given value.
 	 * @param cursorColor Color of the terminal text cursor
 	 * @return A copy of the current configuration with the changed value.
 	 */
-	fun withCursorColor(cursorColor: TextColor): TerminalEmulatorDeviceConfiguration {
-		return if (this.cursorColor === cursorColor) {
+	fun withCursorColor(cursorColor: TextColor) =
+		if (this.cursorColor === cursorColor) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -140,15 +137,14 @@ class TerminalEmulatorDeviceConfiguration
 				this.isCursorBlinking,
 				this.isClipboardAvailable)
 		}
-	}
 
 	/**
 	 * Copies the current configuration. The new object has the given value.
 	 * @param cursorBlinking Should the terminal text cursor blink?
 	 * @return A copy of the current configuration with the changed value.
 	 */
-	fun withCursorBlinking(cursorBlinking: Boolean): TerminalEmulatorDeviceConfiguration {
-		return if (this.isCursorBlinking == cursorBlinking) {
+	fun withCursorBlinking(cursorBlinking: Boolean) =
+		if (this.isCursorBlinking == cursorBlinking) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -159,15 +155,14 @@ class TerminalEmulatorDeviceConfiguration
 				cursorBlinking,
 				this.isClipboardAvailable)
 		}
-	}
 
 	/**
 	 * Copies the current configuration. The new object has the given value.
 	 * @param clipboardAvailable Should the terminal support pasting text from the clipboard?
 	 * @return A copy of the current configuration with the changed value.
 	 */
-	fun withClipboardAvailable(clipboardAvailable: Boolean): TerminalEmulatorDeviceConfiguration {
-		return if (this.isClipboardAvailable == clipboardAvailable) {
+	fun withClipboardAvailable(clipboardAvailable: Boolean) =
+		if (this.isClipboardAvailable == clipboardAvailable) {
 			this
 		} else {
 			TerminalEmulatorDeviceConfiguration(
@@ -178,7 +173,6 @@ class TerminalEmulatorDeviceConfiguration
 				this.isCursorBlinking,
 				clipboardAvailable)
 		}
-	}
 
 	/**
 	 * Different cursor styles supported by SwingTerminal

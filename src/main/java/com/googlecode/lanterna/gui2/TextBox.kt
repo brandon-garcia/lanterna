@@ -23,6 +23,7 @@ import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.graphics.ThemeDefinition
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 
 import java.util.ArrayList
 import java.util.regex.Pattern
@@ -253,9 +254,8 @@ open class TextBox
 	 * Checks whether caret warp mode is enabled or not. See `setCaretWarp` for more details.
 	 * @return `true` if caret warp mode is enabled
 	 */
-	fun isCaretWarp(): Boolean {
-		return caretWarp
-	}
+	fun isCaretWarp() =
+		caretWarp
 
 	/**
 	 * Moves the text caret position horizontally to a new position in the [TextBox]. For multi-line
@@ -266,9 +266,8 @@ open class TextBox
 	 * @return Itself
 	 */
 	@Synchronized
-	fun setCaretPosition(column: Int): TextBox {
-		return setCaretPosition(caretPosition!!.row, column)
-	}
+	fun setCaretPosition(column: Int) =
+		setCaretPosition(caretPosition!!.row, column)
 
 	/**
 	 * Moves the text caret position to a new position in the [TextBox]. For single-line [TextBox]:es, the
@@ -314,9 +313,8 @@ open class TextBox
 	 * This is normally used for password input fields so the password isn't shown
 	 * @return Current text mask or `null` if there is no mask
 	 */
-	fun getMask(): Char? {
-		return mask
-	}
+	fun getMask() =
+		mask
 
 	/**
 	 * Sets the current text mask, meaning the substitute to draw instead of the text inside the `TextBox`.
@@ -338,9 +336,8 @@ open class TextBox
 	 * keyboard is prevented
 	 * @return `true` if this `TextBox` is in read-only mode
 	 */
-	fun isReadOnly(): Boolean {
-		return readOnly
-	}
+	fun isReadOnly() =
+		readOnly
 
 	/**
 	 * Sets the read-only mode of the `TextBox`, meaning text input from the user through the keyboard is
@@ -361,9 +358,8 @@ open class TextBox
 	 * TextBox:es, pressing up and down will always switch focus.
 	 * @return `true` if vertical focus switching is enabled
 	 */
-	fun isVerticalFocusSwitching(): Boolean {
-		return verticalFocusSwitching
-	}
+	fun isVerticalFocusSwitching() =
+		verticalFocusSwitching
 
 	/**
 	 * If set to `true`, the component will switch to the next available component above if the cursor is at the
@@ -384,9 +380,8 @@ open class TextBox
 	 * versa for pressing the 'right' arrow key when the cursor in at the right-most position of the current row.
 	 * @return `true` if horizontal focus switching is enabled
 	 */
-	fun isHorizontalFocusSwitching(): Boolean {
-		return horizontalFocusSwitching
-	}
+	fun isHorizontalFocusSwitching() =
+		horizontalFocusSwitching
 
 	/**
 	 * If set to `true`, the TextBox will switch focus to the next available component to the left if the cursor
@@ -409,13 +404,11 @@ open class TextBox
 	 * @throws IndexOutOfBoundsException if the row index is less than zero or too large
 	 */
 	@Synchronized
-	fun getLine(index: Int): String {
-		return lines[index]
-	}
+	fun getLine(index: Int) =
+		lines[index]
 
-	override fun createDefaultRenderer(): TextBoxRenderer {
-		return DefaultTextBoxRenderer()
-	}
+	override fun createDefaultRenderer(): TextBoxRenderer =
+		DefaultTextBoxRenderer()
 
 	@Synchronized public override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		if (readOnly) {
@@ -563,9 +556,8 @@ open class TextBox
 		return super.handleKeyStroke(keyStroke)
 	}
 
-	private fun validated(line: String): Boolean {
-		return validationPattern == null || line.isEmpty() || validationPattern!!.matcher(line).matches()
-	}
+	private fun validated(line: String) =
+		validationPattern == null || line.isEmpty() || validationPattern!!.matcher(line).matches()
 
 	private fun handleKeyStrokeReadOnly(keyStroke: KeyStroke): Interactable.Result {
 		when (keyStroke.keyType) {
@@ -660,9 +652,8 @@ open class TextBox
 			this.unusedSpaceCharacter = unusedSpaceCharacter
 		}
 
-		override fun getViewTopLeft(): TerminalPosition? {
-			return viewTopLeft
-		}
+		override fun getViewTopLeft() =
+			viewTopLeft
 
 		override fun setViewTopLeft(position: TerminalPosition) {
 			var position = position
@@ -691,9 +682,8 @@ open class TextBox
 				.withRelativeRow(-viewTopLeft!!.row)
 		}
 
-		override fun getPreferredSize(component: TextBox): TerminalSize {
-			return TerminalSize(component.longestRow, component.lines.size)
-		}
+		override fun getPreferredSize(component: TextBox) =
+			TerminalSize(component.longestRow, component.lines.size)
 
 		/**
 		 * Controls whether scrollbars should be visible or not when a multi-line `TextBox` has more content than

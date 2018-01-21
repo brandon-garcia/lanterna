@@ -62,9 +62,8 @@ class WaitingDialog private constructor(title: String, text: String) : DialogWin
 		 * @param text Text to display on the waiting dialog
 		 * @return Created waiting dialog
 		 */
-		fun createDialog(title: String, text: String): WaitingDialog {
-			return WaitingDialog(title, text)
-		}
+		fun createDialog(title: String, text: String) =
+			WaitingDialog(title, text)
 
 		/**
 		 * Creates and displays a waiting dialog without blocking for it to finish

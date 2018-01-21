@@ -131,12 +131,10 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 		return getCharacterAt(position.column, position.row)
 	}
 
-	override fun getCharacterAt(column: Int, row: Int): TextCharacter? {
-		return if (column < 0 || row < 0 || row >= buffer.size || column >= buffer[0].size) {
+	override fun getCharacterAt(column: Int, row: Int) =
+		if (column < 0 || row < 0 || row >= buffer.size || column >= buffer[0].size) {
 			null
 		} else buffer[row][column]
-
-	}
 
 	override fun copyTo(destination: TextImage) {
 		copyTo(destination, 0, buffer.size, 0, buffer[0].size, 0, 0)
@@ -214,8 +212,8 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 		}
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return object : AbstractTextGraphics() {
+	override fun newTextGraphics(): TextGraphics =
+		object : AbstractTextGraphics() {
 
 			override val size: TerminalSize
 				get() = size
@@ -225,11 +223,9 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 				return this
 			}
 
-			override fun getCharacter(column: Int, row: Int): TextCharacter? {
-				return this@BasicTextImage.getCharacterAt(column, row)
-			}
+			override fun getCharacter(column: Int, row: Int) =
+				this@BasicTextImage.getCharacterAt(column, row)
 		}
-	}
 
 	private fun newBlankLine(): Array<TextCharacter> {
 		val line = arrayOfNulls<TextCharacter>(size.columns)

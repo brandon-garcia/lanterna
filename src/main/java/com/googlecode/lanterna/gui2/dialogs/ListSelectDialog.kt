@@ -112,9 +112,8 @@ class ListSelectDialog<T> internal constructor(
 		 * @param <T> Type of items in the dialog
 		 * @return The selected item or `null` if cancelled
 		</T> */
-		fun <T> showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, vararg items: T): T? {
-			return showDialog<T>(textGUI, title, description, null, *items)
-		}
+		fun <T> showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, vararg items: T): T? =
+			showDialog<T>(textGUI, title, description, null, *items)
 
 		/**
 		 * Shortcut for quickly creating a new dialog
@@ -145,14 +144,13 @@ class ListSelectDialog<T> internal constructor(
 		 * @param <T> Type of items in the dialog
 		 * @return The selected item or `null` if cancelled
 		</T> */
-		fun <T> showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, listBoxSize: TerminalSize?, vararg items: T): T? {
-			val listSelectDialog = ListSelectDialogBuilder<T>()
+		fun <T> showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, listBoxSize: TerminalSize?, vararg items: T): T? =
+			ListSelectDialogBuilder<T>()
 				.setTitle(title)
 				.setDescription(description)
 				.setListBoxSize(listBoxSize)
 				.addListItems(*items)
 				.build()
-			return listSelectDialog.showDialog(textGUI)
-		}
+				.showDialog(textGUI)
 	}
 }

@@ -92,7 +92,7 @@ open class DefaultTerminalFactory
 	}
 
 	@Throws(IOException::class)
-	override fun createTerminal(): Terminal {
+	override fun createTerminal(): Terminal =
 		// 3 different reasons for tty-based terminal:
 		//   "explicit preference", "no alternative",
 		//       ("because we can" - unless "rather not")
@@ -100,9 +100,8 @@ open class DefaultTerminalFactory
 			System.console() != null && !preferTerminalEmulator) {
 			// if tty but have no tty, but do have a port, then go telnet:
 			if (telnetPort > 0 && System.console() == null) {
-				return createTelnetTerminal()
-			}
-			return if (isOperatingSystemWindows) {
+				createTelnetTerminal()
+			} else if (isOperatingSystemWindows) {
 				createWindowsTerminal()
 			} else {
 				createUnixTerminal(outputStream, inputStream, charset)
@@ -111,13 +110,12 @@ open class DefaultTerminalFactory
 			// while Lanterna's TerminalEmulator lacks mouse support:
 			// if user wanted mouse AND set a telnetPort, and didn't
 			//   explicitly ask for a graphical Terminal, then go telnet:
-			return if (!preferTerminalEmulator && mouseCaptureMode != null && telnetPort > 0) {
+			if (!preferTerminalEmulator && mouseCaptureMode != null && telnetPort > 0) {
 				createTelnetTerminal()
 			} else {
 				createTerminalEmulator()
 			}
 		}
-	}
 
 	/**
 	 * Creates a new terminal emulator window which will be either Swing-based or AWT-based depending on what is
@@ -138,25 +136,23 @@ open class DefaultTerminalFactory
 		return window as Terminal
 	}
 
-	fun createAWTTerminal(): AWTTerminalFrame {
-		return AWTTerminalFrame(
+	fun createAWTTerminal() =
+		AWTTerminalFrame(
 			title,
 			initialTerminalSize,
 			deviceConfiguration,
 			fontConfiguration,
 			colorConfiguration,
 			*autoCloseTriggers.toTypedArray<TerminalEmulatorAutoCloseTrigger>())
-	}
 
-	fun createSwingTerminal(): SwingTerminalFrame {
-		return SwingTerminalFrame(
+	fun createSwingTerminal() =
+		SwingTerminalFrame(
 			title,
 			initialTerminalSize,
 			deviceConfiguration,
 			if (fontConfiguration is SwingTerminalFontConfiguration) fontConfiguration as SwingTerminalFontConfiguration? else null,
 			colorConfiguration,
 			*autoCloseTriggers.toTypedArray<TerminalEmulatorAutoCloseTrigger>())
-	}
 
 	/**
 	 * Creates a new TelnetTerminal

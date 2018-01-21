@@ -184,9 +184,8 @@ class SwingTerminalFrame private constructor(title: String?, private val swingTe
 		return keyStroke
 	}
 
-	override fun readInput(): KeyStroke {
-		return swingTerminal.readInput()
-	}
+	override fun readInput() =
+		swingTerminal.readInput()
 
 	override fun enterPrivateMode() {
 		swingTerminal.enterPrivateMode()
@@ -215,9 +214,8 @@ class SwingTerminalFrame private constructor(title: String?, private val swingTe
 		swingTerminal.putCharacter(c)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return swingTerminal.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		swingTerminal.newTextGraphics()
 
 	override fun enableSGR(sgr: SGR) {
 		swingTerminal.enableSGR(sgr)
@@ -239,9 +237,8 @@ class SwingTerminalFrame private constructor(title: String?, private val swingTe
 		swingTerminal.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return swingTerminal.enquireTerminal(timeout, timeoutUnit)
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		swingTerminal.enquireTerminal(timeout, timeoutUnit)
 
 	override fun bell() {
 		swingTerminal.bell()

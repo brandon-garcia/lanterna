@@ -131,9 +131,8 @@ class TableModel<V>
 	 * @return Row from the table as a list of the cell data
 	 */
 	@Synchronized
-	fun getRow(index: Int): List<V> {
-		return ArrayList(rows[index])
-	}
+	fun getRow(index: Int): List<V> =
+		ArrayList(rows[index])
 
 	/**
 	 * Adds a new row to the table model at the end
@@ -194,9 +193,8 @@ class TableModel<V>
 	 * @return Label of the column selected
 	 */
 	@Synchronized
-	fun getColumnLabel(index: Int): String {
-		return columns[index]
-	}
+	fun getColumnLabel(index: Int) =
+		columns[index]
 
 	/**
 	 * Updates the label of a column header
@@ -219,9 +217,8 @@ class TableModel<V>
 	 * @return Itself
 	 */
 	@Synchronized
-	fun addColumn(label: String, newColumnValues: Array<V>): TableModel<V> {
-		return insertColumn(columnCount, label, newColumnValues)
-	}
+	fun addColumn(label: String, newColumnValues: Array<V>): TableModel<V> =
+		insertColumn(columnCount, label, newColumnValues)
 
 	/**
 	 * Adds a new column into the table model at a specified index. You can optionally supply values for the existing

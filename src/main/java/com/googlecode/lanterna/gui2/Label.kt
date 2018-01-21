@@ -95,9 +95,8 @@ open class Label
 	 * @param text Text to split
 	 * @return Array of strings that forms the lines of the original string
 	 */
-	protected fun splitIntoMultipleLines(text: String): Array<String> {
-		return text.replace("\r", "").split("\n".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-	}
+	protected fun splitIntoMultipleLines(text: String) =
+		text.replace("\r", "").split("\n".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
 
 	/**
 	 * Returns the area, in terminal columns and rows, required to fully draw the lines passed in.
@@ -148,9 +147,8 @@ open class Label
 	 * @return Foreground color used when drawing the label, or `null` if the color is read from the current
 	 * theme.
 	 */
-	fun getForegroundColor(): TextColor? {
-		return foregroundColor
-	}
+	fun getForegroundColor() =
+		foregroundColor
 
 	/**
 	 * Overrides the current theme's background color and use the one specified. If called with `null`, the
@@ -171,9 +169,8 @@ open class Label
 	 * @return Background color used when drawing the label, or `null` if the color is read from the current
 	 * theme.
 	 */
-	fun getBackgroundColor(): TextColor? {
-		return backgroundColor
-	}
+	fun getBackgroundColor() =
+		backgroundColor
 
 	/**
 	 * Adds an additional SGR style to use when drawing the label, in case it wasn't enabled by the theme
@@ -230,15 +227,13 @@ open class Label
 	 * wrapping should be used if the assigned area is smaller than the requested size, or a positive
 	 * integer setting the requested maximum width at what point word wrapping will begin
 	 */
-	fun getLabelWidth(): Int? {
-		return labelWidth
-	}
+	fun getLabelWidth() =
+		labelWidth
 
 	override fun createDefaultRenderer(): ComponentRenderer<Label> {
 		return object : ComponentRenderer<Label> {
-			override fun getPreferredSize(Label: Label): TerminalSize? {
-				return labelSize
-			}
+			override fun getPreferredSize(Label: Label) =
+				labelSize
 
 			override fun drawComponent(graphics: TextGUIGraphics, component: Label) {
 				val themeDefinition = component.themeDefinition

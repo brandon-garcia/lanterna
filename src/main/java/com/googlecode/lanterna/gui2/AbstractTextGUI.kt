@@ -93,9 +93,8 @@ protected constructor(textGUIThreadFactory: TextGUIThreadFactory, private val sc
 	 * @throws IOException In case of an I/O error while reading input
 	 */
 	@Throws(IOException::class)
-	protected open fun readKeyStroke(): KeyStroke {
-		return if (isBlockingIO) screen.readInput() else pollInput()
-	}
+	protected open fun readKeyStroke() =
+		if (isBlockingIO) screen.readInput() else pollInput()
 
 	/**
 	 * Polls the underlying input queue for user input, returning either a `KeyStroke` or `null`
@@ -103,9 +102,8 @@ protected constructor(textGUIThreadFactory: TextGUIThreadFactory, private val sc
 	 * @throws IOException In case of an I/O error while reading input
 	 */
 	@Throws(IOException::class)
-	protected fun pollInput(): KeyStroke {
-		return screen.pollInput()
-	}
+	protected fun pollInput() =
+		screen.pollInput()
 
 	@Synchronized
 	@Throws(IOException::class)

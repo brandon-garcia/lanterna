@@ -24,29 +24,26 @@ package com.googlecode.lanterna.input
  * @author Martin, Andreas
  */
 class NormalCharacterPattern : CharacterPattern {
-	override fun match(seq: List<Char>): CharacterPattern.Matching? {
+	override fun match(seq: List<Char>) =
 		if (seq.size != 1) {
-			return null // nope
-		}
-		val ch = seq[0]
-		if (isPrintableChar(ch)) {
-			val ks = KeyStroke(ch, false, false)
-			return CharacterPattern.Matching(ks)
+			null // nope
+		} else if (isPrintableChar(seq[0])) {
+			CharacterPattern.Matching(KeyStroke(seq[0], false, false))
 		} else {
-			return null // nope
+			null // nope
 		}
-	}
 
 	/**
 	 * From http://stackoverflow.com/questions/220547/printable-char-in-java
 	 * @param c character to test
 	 * @return True if this is a 'normal', printable character, false otherwise
 	 */
-	private fun isPrintableChar(c: Char): Boolean {
+	private fun isPrintableChar(c: Char) =
 		if (Character.isISOControl(c)) {
-			return false
+			false
+		} else {
+			Character.UnicodeBlock.of(c).let {
+				it != null && it !== Character.UnicodeBlock.SPECIALS
+			}
 		}
-		val block = Character.UnicodeBlock.of(c)
-		return block != null && block !== Character.UnicodeBlock.SPECIALS
-	}
 }

@@ -66,21 +66,19 @@ open class PropertyTheme
 		}
 	}
 
-	private fun getDefinition(propertyName: String): String {
-		return if (!propertyName.contains(".")) {
+	private fun getDefinition(propertyName: String) =
+		if (!propertyName.contains(".")) {
 			""
 		} else {
 			propertyName.substring(0, propertyName.lastIndexOf("."))
 		}
-	}
 
-	private fun getStyle(propertyName: String): String {
-		return if (!propertyName.contains(".")) {
+	private fun getStyle(propertyName: String) =
+		if (!propertyName.contains(".")) {
 			propertyName
 		} else {
 			propertyName.substring(propertyName.lastIndexOf(".") + 1)
 		}
-	}
 }
 /**
  * Creates a new `PropertyTheme` that is initialized by the properties passed in. If the properties refer to

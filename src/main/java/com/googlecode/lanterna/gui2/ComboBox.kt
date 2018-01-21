@@ -29,6 +29,7 @@ import com.googlecode.lanterna.TerminalTextUtils
 import com.googlecode.lanterna.graphics.Theme
 import com.googlecode.lanterna.graphics.ThemeDefinition
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 
 /**
  * This is a simple combo box implementation that allows the user to select one out of multiple items through a
@@ -292,9 +293,8 @@ class ComboBox<V>
 	 * @throws IndexOutOfBoundsException if the index is out of range
 	 */
 	@Synchronized
-	fun getItem(index: Int): V {
-		return items[index]
-	}
+	fun getItem(index: Int): V =
+		items[index]
 
 	/**
 	 * Sets the combo box to either read-only or writable. In read-only mode, the user cannot type in any text in the
@@ -317,9 +317,8 @@ class ComboBox<V>
 	 * Returns `true` if this combo box is in read-only mode
 	 * @return `true` if this combo box is in read-only mode, `false` otherwise
 	 */
-	fun isReadOnly(): Boolean {
-		return readOnly
-	}
+	fun isReadOnly(): Boolean =
+		readOnly
 
 	/**
 	 * Programmatically selects one item in the combo box, which causes the displayed text to change to match the label
@@ -358,9 +357,8 @@ class ComboBox<V>
 	 * Returns the index of the currently selected item or -1 for no selection
 	 * @return Index of the currently selected item
 	 */
-	fun getSelectedIndex(): Int {
-		return selectedIndex
-	}
+	fun getSelectedIndex() =
+		selectedIndex
 
 	/**
 	 * Adds a new listener to the `ComboBox` that will be called on certain user actions
@@ -399,17 +397,15 @@ class ComboBox<V>
 		}
 	}
 
-	override fun createDefaultRenderer(): InteractableRenderer<ComboBox<V>> {
-		return DefaultComboBoxRenderer()
-	}
+	override fun createDefaultRenderer(): InteractableRenderer<ComboBox<V>> =
+		DefaultComboBoxRenderer()
 
-	@Synchronized public override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
-		return if (isReadOnly()) {
+	@Synchronized public override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result =
+		if (isReadOnly()) {
 			handleReadOnlyCBKeyStroke(keyStroke)
 		} else {
 			handleEditableCBKeyStroke(keyStroke)
 		}
-	}
 
 	private fun handleReadOnlyCBKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		when (keyStroke.keyType) {

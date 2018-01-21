@@ -95,9 +95,8 @@ class RadioBoxList<V>
 		this.checkedIndex = -1
 	}
 
-	override fun createDefaultListItemRenderer(): AbstractListBox.ListItemRenderer<V, RadioBoxList<V>> {
-		return RadioBoxListItemRenderer()
-	}
+	override fun createDefaultListItemRenderer(): AbstractListBox.ListItemRenderer<V, RadioBoxList<V>> =
+		RadioBoxListItemRenderer()
 
 	@Synchronized override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		if (keyStroke.keyType === KeyType.Enter || keyStroke.keyType === KeyType.Character && keyStroke.character == ' ') {
@@ -130,13 +129,10 @@ class RadioBoxList<V>
 	 * `false` otherwise. Returns null if the supplied object is not an item in the list box.
 	 */
 	@Synchronized
-	fun isChecked(`object`: V?): Boolean? {
-		if (`object` == null)
-			return null
-
-		return if (indexOf(`object`) == -1) null else checkedIndex == indexOf(`object`)
-
-	}
+	fun isChecked(`object`: V?) =
+		if (`object` == null) null
+		else if (indexOf(`object`) == -1) null
+		else checkedIndex == indexOf(`object`)
 
 	/**
 	 * This method will see if an item, addressed by index, is the currently selected item in this
@@ -146,12 +142,10 @@ class RadioBoxList<V>
 	 * `false` otherwise. Returns false if the index is out of range.
 	 */
 	@Synchronized
-	fun isChecked(index: Int): Boolean {
-		return if (index < 0 || index >= itemCount) {
+	fun isChecked(index: Int) =
+		if (index < 0 || index >= itemCount) {
 			false
 		} else checkedIndex == index
-
-	}
 
 	/**
 	 * Un-checks the currently checked item (if any) and leaves the radio check box in a state where no item is checked.
@@ -201,9 +195,8 @@ class RadioBoxList<V>
 	 * @param <V> Type of items in the [RadioBoxList]
 	</V> */
 	class RadioBoxListItemRenderer<V> : AbstractListBox.ListItemRenderer<V, RadioBoxList<V>>() {
-		override fun getHotSpotPositionOnLine(selectedIndex: Int): Int {
-			return 1
-		}
+		override fun getHotSpotPositionOnLine(selectedIndex: Int) =
+			1
 
 		override fun getLabel(listBox: RadioBoxList<V>, index: Int, item: V?): String {
 			var check = " "

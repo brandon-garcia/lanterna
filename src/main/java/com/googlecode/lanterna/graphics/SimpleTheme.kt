@@ -55,9 +55,8 @@ class SimpleTheme
 		this.windowDecorationRenderer = null
 	}
 
-	@Synchronized override fun getDefinition(clazz: Class<*>): Definition {
-		return overrideDefinitions[clazz] ?: return defaultDefinition
-	}
+	@Synchronized override fun getDefinition(clazz: Class<*>): Definition =
+		overrideDefinitions[clazz] ?: defaultDefinition
 
 	/**
 	 * Adds an override for a particular class, or overwrites a previously defined override.
@@ -130,11 +129,10 @@ class SimpleTheme
 			this.isCursorVisible = true
 		}
 
-		@Synchronized override fun getPreLight(): ThemeStyle {
-			return if (preLight == null) {
+		@Synchronized override fun getPreLight(): ThemeStyle =
+			if (preLight == null) {
 				normal
 			} else preLight
-		}
 
 		/**
 		 * Sets the theme definition style "prelight"
@@ -149,11 +147,10 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getSelected(): ThemeStyle {
-			return if (selected == null) {
+		@Synchronized override fun getSelected(): ThemeStyle =
+			if (selected == null) {
 				normal
 			} else selected
-		}
 
 		/**
 		 * Sets the theme definition style "selected"
@@ -168,11 +165,10 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getActive(): ThemeStyle {
-			return if (active == null) {
+		@Synchronized override fun getActive(): ThemeStyle =
+			if (active == null) {
 				normal
 			} else active
-		}
 
 		/**
 		 * Sets the theme definition style "active"
@@ -187,11 +183,10 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getInsensitive(): ThemeStyle {
-			return if (insensitive == null) {
+		@Synchronized override fun getInsensitive(): ThemeStyle =
+			if (insensitive == null) {
 				normal
 			} else insensitive
-		}
 
 		/**
 		 * Sets the theme definition style "insensitive"
@@ -206,13 +201,11 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getCustom(name: String): ThemeStyle {
-			return customStyles[name]
-		}
+		@Synchronized override fun getCustom(name: String) =
+			customStyles[name]
 
-		@Synchronized override fun getCustom(name: String, defaultValue: ThemeStyle): ThemeStyle {
-			return customStyles[name] ?: return defaultValue
-		}
+		@Synchronized override fun getCustom(name: String, defaultValue: ThemeStyle) =
+			customStyles[name] ?: defaultValue
 
 		/**
 		 * Adds a custom definition style to the theme using the supplied name. This will be returned using the matching
@@ -229,9 +222,8 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getBooleanProperty(name: String, defaultValue: Boolean): Boolean {
-			return java.lang.Boolean.parseBoolean(properties.getProperty(name, java.lang.Boolean.toString(defaultValue)))
-		}
+		@Synchronized override fun getBooleanProperty(name: String, defaultValue: Boolean) =
+			java.lang.Boolean.parseBoolean(properties.getProperty(name, java.lang.Boolean.toString(defaultValue)))
 
 		/**
 		 * Attaches a boolean value property to this [SimpleTheme] that will be returned if calling
@@ -259,9 +251,8 @@ class SimpleTheme
 			return this
 		}
 
-		@Synchronized override fun getCharacter(name: String, fallback: Char): Char {
-			return characterMap[name] ?: return fallback
-		}
+		@Synchronized override fun getCharacter(name: String, fallback: Char) =
+			characterMap[name] ?: fallback
 
 		/**
 		 * Stores a character value in this definition under a specific name. This is used to customize the appearance

@@ -53,9 +53,8 @@ class FileDialogBuilder : AbstractDialogBuilder<FileDialogBuilder, FileDialog>("
 		selectedFile = null
 	}
 
-	override fun buildDialog(): FileDialog {
-		return FileDialog(title, description, actionLabel, suggestedSize, isShowHiddenDirectories, selectedFile)
-	}
+	override fun buildDialog() =
+		FileDialog(title, description, actionLabel, suggestedSize, isShowHiddenDirectories, selectedFile)
 
 	/**
 	 * Defines the label to be but on the confirmation button (default: "ok"). You probably want to set this to
@@ -72,9 +71,8 @@ class FileDialogBuilder : AbstractDialogBuilder<FileDialogBuilder, FileDialog>("
 	 * Returns the label on the confirmation button
 	 * @return Label on the confirmation button
 	 */
-	fun getActionLabel(): String? {
-		return actionLabel
-	}
+	fun getActionLabel() =
+		actionLabel
 
 	/**
 	 * Sets the suggested size for the file dialog, it won't have exactly this size but roughly. Default suggested size
@@ -91,9 +89,8 @@ class FileDialogBuilder : AbstractDialogBuilder<FileDialogBuilder, FileDialog>("
 	 * Returns the suggested size for the file dialog
 	 * @return Suggested size for the file dialog
 	 */
-	fun getSuggestedSize(): TerminalSize? {
-		return suggestedSize
-	}
+	fun getSuggestedSize() =
+		suggestedSize
 
 	/**
 	 * Sets the file that is initially selected in the dialog
@@ -109,11 +106,9 @@ class FileDialogBuilder : AbstractDialogBuilder<FileDialogBuilder, FileDialog>("
 	 * Returns the file that is initially selected in the dialog
 	 * @return File that is initially selected in the dialog
 	 */
-	fun getSelectedFile(): File? {
-		return selectedFile
-	}
+	fun getSelectedFile() =
+		selectedFile
 
-	override fun self(): FileDialogBuilder {
-		return this
-	}
+	override fun self(): FileDialogBuilder =
+		this
 }

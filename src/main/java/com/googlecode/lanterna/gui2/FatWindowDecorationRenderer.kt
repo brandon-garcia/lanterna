@@ -101,8 +101,8 @@ class FatWindowDecorationRenderer : WindowDecorationRenderer {
 		}
 	}
 
-	override fun getDecoratedSize(window: Window, contentAreaSize: TerminalSize): TerminalSize {
-		return if (hasTitle(window)) {
+	override fun getDecoratedSize(window: Window, contentAreaSize: TerminalSize) =
+		if (hasTitle(window)) {
 			contentAreaSize
 				.withRelativeColumns(2)
 				.withRelativeRows(4)
@@ -113,19 +113,16 @@ class FatWindowDecorationRenderer : WindowDecorationRenderer {
 				.withRelativeRows(2)
 				.max(TerminalSize(3, 1))
 		}
-	}
 
-	override fun getOffset(window: Window): TerminalPosition {
-		return if (hasTitle(window)) {
+	override fun getOffset(window: Window) =
+		if (hasTitle(window)) {
 			OFFSET_WITH_TITLE
 		} else {
 			OFFSET_WITHOUT_TITLE
 		}
-	}
 
-	private fun hasTitle(window: Window): Boolean {
-		return !(window.title == null || window.title.trim { it <= ' ' }.isEmpty())
-	}
+	private fun hasTitle(window: Window) =
+		!(window.title == null || window.title.trim { it <= ' ' }.isEmpty())
 
 	companion object {
 

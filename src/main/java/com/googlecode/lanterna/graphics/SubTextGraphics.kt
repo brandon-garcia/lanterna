@@ -29,9 +29,8 @@ import com.googlecode.lanterna.TerminalSize
  */
 internal class SubTextGraphics(private val underlyingTextGraphics: TextGraphics, private val topLeft: TerminalPosition, override val size: TerminalSize) : AbstractTextGraphics() {
 
-	private fun project(column: Int, row: Int): TerminalPosition {
-		return topLeft.withRelative(column, row)
-	}
+	private fun project(column: Int, row: Int) =
+		topLeft.withRelative(column, row)
 
 	override fun setCharacter(columnIndex: Int, rowIndex: Int, textCharacter: TextCharacter): TextGraphics {
 		val writableArea = size
@@ -44,8 +43,8 @@ internal class SubTextGraphics(private val underlyingTextGraphics: TextGraphics,
 		return this
 	}
 
-	override fun getCharacter(column: Int, row: Int): TextCharacter {
-		val projectedPosition = project(column, row)
-		return underlyingTextGraphics.getCharacter(projectedPosition.column, projectedPosition.row)
-	}
+	override fun getCharacter(column: Int, row: Int) =
+		project(column, row).let {
+			underlyingTextGraphics.getCharacter(it.column, it.row)
+		}
 }

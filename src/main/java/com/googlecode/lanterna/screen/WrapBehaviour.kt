@@ -42,15 +42,12 @@ enum class WrapBehaviour private constructor(private val allowLineFeed: Boolean,
 	 */
 	WORD(true, true, true);
 
-	fun allowLineFeed(): Boolean {
-		return allowLineFeed
-	}
+	fun allowLineFeed() =
+		allowLineFeed
 
-	fun autoWrap(): Boolean {
-		return autoWrap
-	}
+	fun autoWrap() =
+		autoWrap
 
-	fun keepWords(): Boolean {
-		return keepWords
-	}
+	fun keepWords() =
+		keepWords
 }

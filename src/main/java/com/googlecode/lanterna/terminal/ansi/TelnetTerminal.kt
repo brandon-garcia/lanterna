@@ -19,6 +19,18 @@
 package com.googlecode.lanterna.terminal.ansi
 
 import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.*
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_DO
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_DONT
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_IAC
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_SUBNEGOTIATION
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_SUBNEGOTIATION_END
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_WILL
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.COMMAND_WONT
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.OPTION_ECHO
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.OPTION_EXTEND_ASCII
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.OPTION_LINEMODE
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.OPTION_NAWS
+import com.googlecode.lanterna.terminal.ansi.TelnetProtocol.OPTION_SUPPRESS_GO_AHEAD
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
@@ -28,6 +40,7 @@ import java.net.SocketAddress
 import java.nio.charset.Charset
 import java.util.Arrays
 import java.util.ArrayList
+import kotlin.experimental.and
 
 /**
  * This class is used by the `TelnetTerminalServer` class when a client has connected in; this class will be the
@@ -344,8 +357,7 @@ private constructor(private val socket: Socket, inputStream: TelnetClientIACFilt
 
 	companion object {
 
-		private fun convertTwoBytesToInt2(b1: Byte, b2: Byte): Int {
-			return b2 and 0xFF shl 8 or (b1 and 0xFF)
-		}
+		private fun convertTwoBytesToInt2(b1: Byte, b2: Byte) =
+			b2 and 0xFF shl 8 or (b1 and 0xFF)
 	}
 }

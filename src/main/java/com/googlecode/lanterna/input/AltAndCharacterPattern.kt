@@ -25,18 +25,16 @@ package com.googlecode.lanterna.input
  */
 class AltAndCharacterPattern : CharacterPattern {
 
-	override fun match(seq: List<Char>): CharacterPattern.Matching? {
-		val size = seq.size
-		if (size > 2 || seq[0] != KeyDecodingProfile.ESC_CODE) {
-			return null // nope
+	override fun match(seq: List<Char>) =
+		if (seq.size > 2 || seq[0] != KeyDecodingProfile.ESC_CODE) {
+			null // nope
 		}
-		if (size == 1) {
-			return CharacterPattern.Matching.NOT_YET // maybe later
+		else if (seq.size == 1) {
+			CharacterPattern.Matching.NOT_YET // maybe later
 		}
-		if (Character.isISOControl(seq[1])) {
-			return null // nope
+		else if (Character.isISOControl(seq[1])) {
+			null // nope
+		} else {
+			CharacterPattern.Matching(KeyStroke(seq[1], false, true)) // yep
 		}
-		val ks = KeyStroke(seq[1], false, true)
-		return CharacterPattern.Matching(ks) // yep
-	}
 }

@@ -41,11 +41,9 @@ internal open class ScreenTextGraphics
 		return this
 	}
 
-	override fun getCharacter(column: Int, row: Int): TextCharacter {
-		return screen.getBackCharacter(column, row)
-	}
+	override fun getCharacter(column: Int, row: Int) =
+		screen.getBackCharacter(column, row)
 
-	override fun getSize(): TerminalSize {
-		return screen.terminalSize
-	}
+	override fun getSize() =
+		screen.terminalSize
 }

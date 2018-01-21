@@ -64,8 +64,7 @@ class SameTextGUIThread private constructor(textGUI: TextGUI) : AbstractTextGUIT
 	 * you want it to use this class
 	 */
 	class Factory : TextGUIThreadFactory {
-		override fun createTextGUIThread(textGUI: TextGUI): TextGUIThread {
-			return SameTextGUIThread(textGUI)
-		}
+		override fun createTextGUIThread(textGUI: TextGUI): TextGUIThread =
+			SameTextGUIThread(textGUI)
 	}
 }

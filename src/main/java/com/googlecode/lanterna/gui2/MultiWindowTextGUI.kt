@@ -175,17 +175,14 @@ class MultiWindowTextGUI private constructor(
 			override val textGUI: TextGUI
 				get() = this@MultiWindowTextGUI
 
-			override fun toGlobal(localPosition: TerminalPosition): TerminalPosition {
-				return localPosition
-			}
+			override fun toGlobal(localPosition: TerminalPosition) =
+				localPosition
 
-			override fun fromGlobal(globalPosition: TerminalPosition): TerminalPosition {
-				return globalPosition
-			}
+			override fun fromGlobal(globalPosition: TerminalPosition) =
+				globalPosition
 
-			internal override fun self(): BasePane {
-				return this
-			}
+			internal override fun self(): BasePane =
+				this
 		}
 		this.backgroundPane.component = background
 		this.windows = LinkedList()
@@ -353,9 +350,8 @@ class MultiWindowTextGUI private constructor(
 		}
 	}
 
-	@Synchronized override fun getWindows(): Collection<Window> {
-		return Collections.unmodifiableList(ArrayList(windows))
-	}
+	@Synchronized override fun getWindows(): Collection<Window> =
+		Collections.unmodifiableList(ArrayList(windows))
 
 	@Synchronized override fun setActiveWindow(activeWindow: Window?): MultiWindowTextGUI {
 		this.activeWindow = activeWindow

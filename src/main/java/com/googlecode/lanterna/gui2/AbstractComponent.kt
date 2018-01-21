@@ -204,9 +204,8 @@ abstract class AbstractComponent<T : Component> : Component {
 	 * preferred size and isn't necessarily what it will eventually be assigned later on.
 	 * @return Size that the component renderer believes the component should be
 	 */
-	@Synchronized protected open fun calculatePreferredSize(): TerminalSize {
-		return renderer.getPreferredSize(self())
-	}
+	@Synchronized protected open fun calculatePreferredSize() =
+		renderer.getPreferredSize(self())
 
 	@Synchronized override fun setPosition(position: TerminalPosition): T {
 		this.position = position
@@ -315,11 +314,9 @@ abstract class AbstractComponent<T : Component> : Component {
 	 * avl42 for this one!
 	 * @return Itself, but as type T
 	 */
-	protected fun self(): T {
-		return this as T
-	}
+	protected fun self(): T =
+		this as T
 
-	private fun selfClass(): Class<T> {
-		return javaClass as Class<T>
-	}
+	private fun selfClass(): Class<T> =
+		javaClass as Class<T>
 }

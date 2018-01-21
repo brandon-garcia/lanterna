@@ -308,14 +308,12 @@ class TerminalScreen
 	}
 
 	@Throws(IOException::class)
-	override fun readInput(): KeyStroke {
-		return terminal.readInput()
-	}
+	override fun readInput() =
+		terminal.readInput()
 
 	@Throws(IOException::class)
-	override fun pollInput(): KeyStroke {
-		return terminal.pollInput()
-	}
+	override fun pollInput() =
+		terminal.pollInput()
 
 	@Synchronized override fun clear() {
 		super.clear()
@@ -368,8 +366,8 @@ class TerminalScreen
 	}
 
 	private class ScreenPointComparator : Comparator<TerminalPosition> {
-		override fun compare(o1: TerminalPosition, o2: TerminalPosition): Int {
-			return if (o1.row == o2.row) {
+		override fun compare(o1: TerminalPosition, o2: TerminalPosition) =
+			if (o1.row == o2.row) {
 				if (o1.column == o2.column) {
 					0
 				} else {
@@ -378,14 +376,12 @@ class TerminalScreen
 			} else {
 				o1.row.compareTo(o2.row)
 			}
-		}
 	}
 
 	private class ScrollHint(val firstLine: Int, val lastLine: Int, var distance: Int) {
 
-		fun matches(other: ScrollHint): Boolean {
-			return this.firstLine == other.firstLine && this.lastLine == other.lastLine
-		}
+		fun matches(other: ScrollHint) =
+			this.firstLine == other.firstLine && this.lastLine == other.lastLine
 
 		@Throws(IOException::class)
 		fun applyTo(scr: Scrollable?) {

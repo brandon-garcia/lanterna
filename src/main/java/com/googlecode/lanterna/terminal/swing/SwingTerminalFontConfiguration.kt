@@ -50,8 +50,7 @@ class SwingTerminalFontConfiguration
 		 * @param fontsInOrderOfPriority Fonts to use when drawing text, in order of priority
 		 * @return Font configuration built from the font list
 		 */
-		override fun newInstance(vararg fontsInOrderOfPriority: Font): SwingTerminalFontConfiguration {
-			return SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING_BUT_SYMBOLS, *fontsInOrderOfPriority)
-		}
+		override fun newInstance(vararg fontsInOrderOfPriority: Font) =
+			SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING_BUT_SYMBOLS, *fontsInOrderOfPriority)
 	}
 }

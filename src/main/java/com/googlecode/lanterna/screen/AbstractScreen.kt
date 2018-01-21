@@ -92,9 +92,8 @@ abstract class AbstractScreen
 	 * @return Position where the cursor will be located after the screen has been refreshed or `null` if the
 	 * cursor is not visible
 	 */
-	override fun getCursorPosition(): TerminalPosition? {
-		return cursorPosition
-	}
+	override fun getCursorPosition() =
+		cursorPosition
 
 	/**
 	 * Moves the current cursor position or hides it. If the cursor is hidden and given a new position, it will be
@@ -130,22 +129,20 @@ abstract class AbstractScreen
 		}
 	}
 
-	override fun getTabBehaviour(): TabBehaviour? {
-		return tabBehaviour
-	}
+	override fun getTabBehaviour() =
+		tabBehaviour
 
 	override fun setCharacter(position: TerminalPosition, screenCharacter: TextCharacter) {
 		setCharacter(position.column, position.row, screenCharacter)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return object : ScreenTextGraphics(this) {
+	override fun newTextGraphics(): TextGraphics =
+		object : ScreenTextGraphics(this) {
 			override fun drawImage(topLeft: TerminalPosition, image: TextImage, sourceImageTopLeft: TerminalPosition, sourceImageSize: TerminalSize): TextGraphics {
 				backBuffer!!.copyFrom(image, sourceImageTopLeft.row, sourceImageSize.rows, sourceImageTopLeft.column, sourceImageSize.columns, topLeft.row, topLeft.column)
 				return this
 			}
 		}
-	}
 
 	@Synchronized override fun setCharacter(column: Int, row: Int, screenCharacter: TextCharacter) {
 		var screenCharacter = screenCharacter
@@ -164,21 +161,17 @@ abstract class AbstractScreen
 		}
 	}
 
-	@Synchronized override fun getFrontCharacter(position: TerminalPosition): TextCharacter? {
-		return getFrontCharacter(position.column, position.row)
-	}
+	@Synchronized override fun getFrontCharacter(position: TerminalPosition) =
+		getFrontCharacter(position.column, position.row)
 
-	override fun getFrontCharacter(column: Int, row: Int): TextCharacter? {
-		return getCharacterFromBuffer(frontBuffer, column, row)
-	}
+	override fun getFrontCharacter(column: Int, row: Int) =
+		getCharacterFromBuffer(frontBuffer, column, row)
 
-	@Synchronized override fun getBackCharacter(position: TerminalPosition): TextCharacter? {
-		return getBackCharacter(position.column, position.row)
-	}
+	@Synchronized override fun getBackCharacter(position: TerminalPosition) =
+		getBackCharacter(position.column, position.row)
 
-	override fun getBackCharacter(column: Int, row: Int): TextCharacter? {
-		return getCharacterFromBuffer(backBuffer, column, row)
-	}
+	override fun getBackCharacter(column: Int, row: Int) =
+		getCharacterFromBuffer(backBuffer, column, row)
 
 	@Throws(IOException::class)
 	override fun refresh() {
@@ -224,9 +217,8 @@ abstract class AbstractScreen
 		return buffer!!.getCharacterAt(column, row)
 	}
 
-	override fun toString(): String {
-		return backBuffer!!.toString()
-	}
+	override fun toString() =
+		backBuffer!!.toString()
 
 	/**
 	 * Performs the scrolling on its back-buffer.

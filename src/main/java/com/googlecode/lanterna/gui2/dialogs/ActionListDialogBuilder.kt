@@ -45,19 +45,17 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 		this.actions = ArrayList()
 	}
 
-	override fun self(): ActionListDialogBuilder {
-		return this
-	}
+	override fun self(): ActionListDialogBuilder =
+		this
 
-	override fun buildDialog(): ActionListDialog {
-		return ActionListDialog(
+	override fun buildDialog() =
+		ActionListDialog(
 			title,
 			description,
 			listBoxSize,
 			canCancel,
 			closeAutomatically,
 			actions)
-	}
 
 	/**
 	 * Sets the size of the internal `ActionListBox` in columns and rows, forcing scrollbars to appear if the
@@ -75,9 +73,8 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 	 * box will attempt to take up enough size to draw all items
 	 * @return Specified size of the internal `ActionListBox` or `null` if there is no size
 	 */
-	fun getListBoxSize(): TerminalSize? {
-		return listBoxSize
-	}
+	fun getListBoxSize() =
+		listBoxSize
 
 	/**
 	 * Sets if the dialog can be cancelled or not (default: `true`)
@@ -94,9 +91,8 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 	 * Returns `true` if the dialog can be cancelled once it's opened
 	 * @return `true` if the dialog can be cancelled once it's opened
 	 */
-	fun isCanCancel(): Boolean {
-		return canCancel
-	}
+	fun isCanCancel() =
+		canCancel
 
 	/**
 	 * Adds an additional action to the `ActionListBox` that is to be displayed when the dialog is opened
@@ -104,8 +100,8 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 	 * @param action Action to perform if the user selects this item
 	 * @return Itself
 	 */
-	fun addAction(label: String, action: Runnable): ActionListDialogBuilder {
-		return addAction(object : Runnable {
+	fun addAction(label: String, action: Runnable): ActionListDialogBuilder =
+		addAction(object : Runnable {
 			override fun toString(): String {
 				return label
 			}
@@ -114,7 +110,6 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 				action.run()
 			}
 		})
-	}
 
 	/**
 	 * Adds an additional action to the `ActionListBox` that is to be displayed when the dialog is opened. The
@@ -143,9 +138,8 @@ class ActionListDialogBuilder : AbstractDialogBuilder<ActionListDialogBuilder, A
 	 * `ActionListBox` in the dialog when built
 	 * @return Copy of the internal list of actions currently inside this builder
 	 */
-	fun getActions(): List<Runnable> {
-		return ArrayList(actions)
-	}
+	fun getActions(): List<Runnable> =
+		ArrayList(actions)
 
 	/**
 	 * Sets if clicking on an action automatically closes the dialog after the action is finished (default: `true`)

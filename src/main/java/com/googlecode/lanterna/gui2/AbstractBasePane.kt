@@ -40,14 +40,12 @@ abstract class AbstractBasePane<T : BasePane> protected constructor() : BasePane
 	private var strictFocusChange: Boolean = false
 	private var enableDirectionBasedMovements: Boolean = false
 	@set:Synchronized override var theme: Theme? = null
-		@Synchronized get() {
+		@Synchronized get() =
 			if (field != null) {
-				return field
+				field
 			} else if (textGUI != null) {
-				return textGUI.theme
-			}
-			return null
-		}
+				textGUI.theme
+			} else null
 
 	override val isInvalid: Boolean
 		get() = invalid || contentHolder.isInvalid
@@ -214,9 +212,8 @@ abstract class AbstractBasePane<T : BasePane> protected constructor() : BasePane
 		return false
 	}
 
-	override fun getFocusedInteractable(): Interactable? {
-		return focusedInteractable
-	}
+	override fun getFocusedInteractable() =
+		focusedInteractable
 
 	override fun setFocusedInteractable(toFocus: Interactable?) {
 		setFocusedInteractable(toFocus,
@@ -302,12 +299,10 @@ abstract class AbstractBasePane<T : BasePane> protected constructor() : BasePane
 			}
 		}
 
-		override fun toGlobal(position: TerminalPosition): TerminalPosition? {
-			return this@AbstractBasePane.toGlobal(position)
-		}
+		override fun toGlobal(position: TerminalPosition) =
+			this@AbstractBasePane.toGlobal(position)
 
-		override fun toBasePane(position: TerminalPosition): TerminalPosition? {
-			return position
-		}
+		override fun toBasePane(position: TerminalPosition) =
+			position
 	}
 }

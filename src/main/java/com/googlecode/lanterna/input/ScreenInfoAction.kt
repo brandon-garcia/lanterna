@@ -35,7 +35,6 @@ class ScreenInfoAction
 	 */
 	val position: TerminalPosition) : KeyStroke(KeyType.CursorLocation) {
 
-	override fun toString(): String {
-		return "ScreenInfoAction{position=$position}"
-	}
+	override fun toString() =
+		"ScreenInfoAction{position=$position}"
 }

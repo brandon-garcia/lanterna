@@ -74,18 +74,16 @@ open class CheckBoxList<V>
 		this.itemStatus = ArrayList()
 	}
 
-	override fun createDefaultListItemRenderer(): AbstractListBox.ListItemRenderer<V, CheckBoxList<V>> {
-		return CheckBoxListItemRenderer()
-	}
+	override fun createDefaultListItemRenderer(): AbstractListBox.ListItemRenderer<V, CheckBoxList<V>> =
+		CheckBoxListItemRenderer()
 
 	@Synchronized override fun clearItems(): CheckBoxList<V> {
 		itemStatus.clear()
 		return super.clearItems()
 	}
 
-	override fun addItem(`object`: V?): CheckBoxList<V> {
-		return addItem(`object`, false)
-	}
+	override fun addItem(`object`: V?) =
+		addItem(`object`, false)
 
 	@Synchronized override fun removeItem(index: Int): V {
 		val item = super.removeItem(index)
@@ -113,10 +111,8 @@ open class CheckBoxList<V>
 	 * `false` depending on checked state of the item
 	 */
 	@Synchronized
-	fun isChecked(`object`: V): Boolean? {
-		return if (indexOf(`object`) == -1) null else itemStatus[indexOf(`object`)]
-
-	}
+	fun isChecked(`object`: V) =
+		if (indexOf(`object`) == -1) null else itemStatus[indexOf(`object`)]
 
 	/**
 	 * Checks if a particular item is part of the check box list and returns a boolean value depending on the toggle
@@ -126,10 +122,8 @@ open class CheckBoxList<V>
 	 * `false` depending on checked state of the item at that index
 	 */
 	@Synchronized
-	fun isChecked(index: Int): Boolean? {
-		return if (index < 0 || index >= itemStatus.size) null else itemStatus[index]
-
-	}
+	fun isChecked(index: Int) =
+		if (index < 0 || index >= itemStatus.size) null else itemStatus[index]
 
 	/**
 	 * Programmatically sets the checked state of an item in the list box
@@ -196,9 +190,8 @@ open class CheckBoxList<V>
 	 * @param <V> Type of items in the [CheckBoxList]
 	</V> */
 	class CheckBoxListItemRenderer<V> : AbstractListBox.ListItemRenderer<V, CheckBoxList<V>>() {
-		override fun getHotSpotPositionOnLine(selectedIndex: Int): Int {
-			return 1
-		}
+		override fun getHotSpotPositionOnLine(selectedIndex: Int) =
+			1
 
 		override fun getLabel(listBox: CheckBoxList<V>, index: Int, item: V?): String {
 			var check = " "

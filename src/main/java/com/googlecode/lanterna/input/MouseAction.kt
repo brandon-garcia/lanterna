@@ -57,7 +57,6 @@ class MouseAction
 	 */
 	val position: TerminalPosition) : KeyStroke(KeyType.MouseEvent, false, false) {
 
-	override fun toString(): String {
-		return "MouseAction{actionType=$actionType, button=$button, position=$position}"
-	}
+	override fun toString() =
+		"MouseAction{actionType=$actionType, button=$button, position=$position}"
 }

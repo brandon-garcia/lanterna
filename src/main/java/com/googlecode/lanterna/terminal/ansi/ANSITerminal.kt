@@ -260,9 +260,8 @@ abstract class ANSITerminal protected constructor(
 	}
 
 	@Throws(IOException::class)
-	override fun pollInput(): KeyStroke {
-		return filterMouseEvents(super.pollInput())
-	}
+	override fun pollInput() =
+		filterMouseEvents(super.pollInput())
 
 	private fun filterMouseEvents(keyStroke: KeyStroke?): KeyStroke? {
 		//Remove bad input events from terminals that are not following the xterm protocol properly

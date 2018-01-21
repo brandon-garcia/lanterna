@@ -79,7 +79,6 @@ abstract class AbstractTerminal protected constructor() : Terminal {
 	}
 
 	@Throws(IOException::class)
-	override fun newTextGraphics(): TextGraphics {
-		return TerminalTextGraphics(this)
-	}
+	override fun newTextGraphics(): TextGraphics =
+		TerminalTextGraphics(this)
 }

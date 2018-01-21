@@ -26,9 +26,8 @@ class DefaultTextGUIGraphics internal constructor(override val textGUI: TextGUI,
 		get() = backend.tabBehaviour
 
 	@Throws(IllegalArgumentException::class)
-	override fun newTextGraphics(topLeftCorner: TerminalPosition, size: TerminalSize): DefaultTextGUIGraphics {
-		return DefaultTextGUIGraphics(textGUI, backend.newTextGraphics(topLeftCorner, size))
-	}
+	override fun newTextGraphics(topLeftCorner: TerminalPosition, size: TerminalSize) =
+		DefaultTextGUIGraphics(textGUI, backend.newTextGraphics(topLeftCorner, size))
 
 	override fun applyThemeStyle(themeStyle: ThemeStyle): DefaultTextGUIGraphics {
 		setForegroundColor(themeStyle.foreground)
@@ -202,13 +201,11 @@ class DefaultTextGUIGraphics internal constructor(override val textGUI: TextGUI,
 		return this
 	}
 
-	override fun getCharacter(column: Int, row: Int): TextCharacter {
-		return backend.getCharacter(column, row)
-	}
+	override fun getCharacter(column: Int, row: Int) =
+		backend.getCharacter(column, row)
 
-	override fun getCharacter(position: TerminalPosition): TextCharacter {
-		return backend.getCharacter(position)
-	}
+	override fun getCharacter(position: TerminalPosition) =
+		backend.getCharacter(position)
 
 	override fun setStyleFrom(source: StyleSet<*>): DefaultTextGUIGraphics {
 		setBackgroundColor(source.backgroundColor)

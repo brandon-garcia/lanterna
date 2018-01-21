@@ -355,13 +355,12 @@ open class IOSafeTerminalAdapter(private val backend: Terminal, internal val exc
 		 * @param terminal Terminal to wrap
 		 * @return IOSafeTerminal wrapping the supplied terminal
 		 */
-		fun createRuntimeExceptionConvertingAdapter(terminal: Terminal): IOSafeTerminal {
-			return if (terminal is ExtendedTerminal) { // also handle Runtime-type:
+		fun createRuntimeExceptionConvertingAdapter(terminal: Terminal): IOSafeTerminal =
+			if (terminal is ExtendedTerminal) { // also handle Runtime-type:
 				createRuntimeExceptionConvertingAdapter(terminal)
 			} else {
 				IOSafeTerminalAdapter(terminal, ConvertToRuntimeException())
 			}
-		}
 
 		/**
 		 * Creates a wrapper around an ExtendedTerminal that exposes it as a IOSafeExtendedTerminal.
@@ -369,9 +368,8 @@ open class IOSafeTerminalAdapter(private val backend: Terminal, internal val exc
 		 * @param terminal Terminal to wrap
 		 * @return IOSafeTerminal wrapping the supplied terminal
 		 */
-		fun createRuntimeExceptionConvertingAdapter(terminal: ExtendedTerminal): IOSafeExtendedTerminal {
-			return IOSafeTerminalAdapter.Extended(terminal, ConvertToRuntimeException())
-		}
+		fun createRuntimeExceptionConvertingAdapter(terminal: ExtendedTerminal): IOSafeExtendedTerminal =
+			IOSafeTerminalAdapter.Extended(terminal, ConvertToRuntimeException())
 
 		/**
 		 * Creates a wrapper around a Terminal that exposes it as a IOSafeTerminal. If any IOExceptions occur, they will be
@@ -379,13 +377,12 @@ open class IOSafeTerminalAdapter(private val backend: Terminal, internal val exc
 		 * @param terminal Terminal to wrap
 		 * @return IOSafeTerminal wrapping the supplied terminal
 		 */
-		fun createDoNothingOnExceptionAdapter(terminal: Terminal): IOSafeTerminal {
-			return if (terminal is ExtendedTerminal) { // also handle Runtime-type:
+		fun createDoNothingOnExceptionAdapter(terminal: Terminal): IOSafeTerminal =
+			if (terminal is ExtendedTerminal) { // also handle Runtime-type:
 				createDoNothingOnExceptionAdapter(terminal)
 			} else {
 				IOSafeTerminalAdapter(terminal, DoNothingAndOrReturnNull())
 			}
-		}
 
 		/**
 		 * Creates a wrapper around an ExtendedTerminal that exposes it as a IOSafeExtendedTerminal.
@@ -394,8 +391,7 @@ open class IOSafeTerminalAdapter(private val backend: Terminal, internal val exc
 		 * @param terminal Terminal to wrap
 		 * @return IOSafeTerminal wrapping the supplied terminal
 		 */
-		fun createDoNothingOnExceptionAdapter(terminal: ExtendedTerminal): IOSafeExtendedTerminal {
-			return IOSafeTerminalAdapter.Extended(terminal, DoNothingAndOrReturnNull())
-		}
+		fun createDoNothingOnExceptionAdapter(terminal: ExtendedTerminal): IOSafeExtendedTerminal =
+			IOSafeTerminalAdapter.Extended(terminal, DoNothingAndOrReturnNull())
 	}
 }

@@ -23,6 +23,7 @@ import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.graphics.ThemeDefinition
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 
 import java.util.ArrayList
 
@@ -87,9 +88,8 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 		setListItemRenderer(createDefaultListItemRenderer())
 	}
 
-	override fun createDefaultRenderer(): InteractableRenderer<T> {
-		return DefaultListBoxRenderer()
-	}
+	override fun createDefaultRenderer(): InteractableRenderer<T> =
+		DefaultListBoxRenderer()
 
 	/**
 	 * Method that constructs the `ListItemRenderer` that this list box should use to draw the elements of the
@@ -97,13 +97,11 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 	 * entire list box but for each item, called one by one.
 	 * @return `ListItemRenderer` to use when drawing the items in the list
 	 */
-	protected open fun createDefaultListItemRenderer(): ListItemRenderer<V, T> {
-		return ListItemRenderer()
-	}
+	protected open fun createDefaultListItemRenderer(): ListItemRenderer<V, T> =
+		ListItemRenderer()
 
-	internal fun getListItemRenderer(): ListItemRenderer<V, T>? {
-		return listItemRenderer
-	}
+	internal fun getListItemRenderer(): ListItemRenderer<V, T>? =
+		listItemRenderer
 
 	/**
 	 * This method overrides the `ListItemRenderer` that is used to draw each element in the list box. Note that
@@ -248,9 +246,8 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 	 * @return Index of the item in the list box or -1 if the list box does not contain the item
 	 */
 	@Synchronized
-	fun indexOf(item: V): Int {
-		return items.indexOf(item)
-	}
+	fun indexOf(item: V) =
+		items.indexOf(item)
 
 	/**
 	 * Retrieves the item at the specified index in the list box
@@ -260,18 +257,16 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 	 * the list box
 	 */
 	@Synchronized
-	fun getItemAt(index: Int): V {
-		return items[index]
-	}
+	fun getItemAt(index: Int): V =
+		items[index]
 
 	/**
 	 * Returns a copy of the items in the list box as a `List`
 	 * @return Copy of all the items in this list box
 	 */
 	@Synchronized
-	fun getItems(): List<V> {
-		return ArrayList(items)
-	}
+	fun getItems(): List<V> =
+		ArrayList(items)
 
 	/**
 	 * Sets which item in the list box that is currently selected. Please note that in this context, selected simply
@@ -299,9 +294,8 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 	 * implementations such as `CheckBoxList` where individual items have a certain checked/unchecked state.
 	 * @return The index of the currently selected row in the list box, or -1 if there are no items
 	 */
-	fun getSelectedIndex(): Int {
-		return selectedIndex
-	}
+	fun getSelectedIndex() =
+		selectedIndex
 
 	/**
 	 * The default renderer for `AbstractListBox` and all its subclasses.
@@ -428,9 +422,8 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 		 * @param selectedIndex Which item is currently selected
 		 * @return Index of the character in the string we want to place the terminal cursor on, or -1 to hide it
 		 */
-		open fun getHotSpotPositionOnLine(selectedIndex: Int): Int {
-			return 0
-		}
+		open fun getHotSpotPositionOnLine(selectedIndex: Int) =
+			0
 
 		/**
 		 * Given a list box, an index of an item within that list box and what the item is, this method should return
@@ -441,9 +434,8 @@ abstract class AbstractListBox<V, T : AbstractListBox<V, T>>
 		 * @param item The item itself
 		 * @return String to draw for this item
 		 */
-		open fun getLabel(listBox: T, index: Int, item: V?): String {
-			return item?.toString() ?: "<null>"
-		}
+		open fun getLabel(listBox: T, index: Int, item: V?) =
+			item?.toString() ?: "<null>"
 
 		/**
 		 * This is the main drawing method for a single list box item, it applies the current theme to setup the colors

@@ -92,9 +92,8 @@ open class Button
 		})
 	}
 
-	override fun createDefaultRenderer(): ButtonRenderer {
-		return DefaultButtonRenderer()
-	}
+	override fun createDefaultRenderer(): ButtonRenderer =
+		DefaultButtonRenderer()
 
 	@Synchronized public override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		if (keyStroke.keyType === KeyType.Enter || keyStroke.keyType === KeyType.Character && keyStroke.character == ' ') {
@@ -128,13 +127,11 @@ open class Button
 	 * @param listener Listener to remove from this button's listener list
 	 * @return `true` if this button contained the specified listener
 	 */
-	fun removeListener(listener: Listener): Boolean {
-		return listeners.remove(listener)
-	}
+	fun removeListener(listener: Listener) =
+		listeners.remove(listener)
 
-	override fun toString(): String {
-		return "Button{" + this.label + "}"
-	}
+	override fun toString() =
+		"Button{" + this.label + "}"
 
 	/**
 	 * Helper interface that doesn't add any new methods but makes coding new button renderers a little bit more clear
@@ -146,17 +143,15 @@ open class Button
 	 * drawn on a single line, with the label inside of "&lt;" and "&gt;".
 	 */
 	class DefaultButtonRenderer : ButtonRenderer {
-		override fun getCursorLocation(button: Button): TerminalPosition? {
-			return if (button.themeDefinition.isCursorVisible) {
+		override fun getCursorLocation(button: Button) =
+			if (button.themeDefinition.isCursorVisible) {
 				TerminalPosition(1 + getLabelShift(button, button.size), 0)
 			} else {
 				null
 			}
-		}
 
-		override fun getPreferredSize(button: Button): TerminalSize {
-			return TerminalSize(Math.max(8, TerminalTextUtils.getColumnWidth(button.label!!) + 2), 1)
-		}
+		override fun getPreferredSize(button: Button) =
+			TerminalSize(Math.max(8, TerminalTextUtils.getColumnWidth(button.label!!) + 2), 1)
 
 		override fun drawComponent(graphics: TextGUIGraphics, button: Button) {
 			val themeDefinition = button.themeDefinition
@@ -206,13 +201,11 @@ open class Button
 	 * Alternative button renderer that displays buttons with just the label and minimal decoration
 	 */
 	class FlatButtonRenderer : ButtonRenderer {
-		override fun getCursorLocation(component: Button): TerminalPosition? {
-			return null
-		}
+		override fun getCursorLocation(component: Button) =
+			null
 
-		override fun getPreferredSize(component: Button): TerminalSize {
-			return TerminalSize(TerminalTextUtils.getColumnWidth(component.label!!), 1)
-		}
+		override fun getPreferredSize(component: Button) =
+			TerminalSize(TerminalTextUtils.getColumnWidth(component.label!!), 1)
 
 		override fun drawComponent(graphics: TextGUIGraphics, button: Button) {
 			val themeDefinition = button.themeDefinition
@@ -232,13 +225,11 @@ open class Button
 	}
 
 	class BorderedButtonRenderer : ButtonRenderer {
-		override fun getCursorLocation(component: Button): TerminalPosition? {
-			return null
-		}
+		override fun getCursorLocation(component: Button) =
+			null
 
-		override fun getPreferredSize(component: Button): TerminalSize {
-			return TerminalSize(TerminalTextUtils.getColumnWidth(component.label!!) + 5, 4)
-		}
+		override fun getPreferredSize(component: Button) =
+			TerminalSize(TerminalTextUtils.getColumnWidth(component.label!!) + 5, 4)
 
 		override fun drawComponent(graphics: TextGUIGraphics, button: Button) {
 			val themeDefinition = button.themeDefinition

@@ -133,8 +133,7 @@ class SeparateTextGUIThread private constructor(textGUI: TextGUI) : AbstractText
 	 * Factory class for creating SeparateTextGUIThread objects
 	 */
 	class Factory : TextGUIThreadFactory {
-		override fun createTextGUIThread(textGUI: TextGUI): TextGUIThread {
-			return SeparateTextGUIThread(textGUI)
-		}
+		override fun createTextGUIThread(textGUI: TextGUI): TextGUIThread =
+			SeparateTextGUIThread(textGUI)
 	}
 }

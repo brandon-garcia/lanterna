@@ -20,6 +20,7 @@ package com.googlecode.lanterna.gui2.table
 
 import com.googlecode.lanterna.gui2.*
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 
 /**
  * The table class is an interactable component that displays a grid of cells containing data along with a header of
@@ -97,9 +98,8 @@ class Table<V>
 	 * Returns the underlying table model
 	 * @return Underlying table model
 	 */
-	fun getTableModel(): TableModel<V>? {
-		return tableModel
-	}
+	fun getTableModel(): TableModel<V>? =
+		tableModel
 
 	/**
 	 * Updates the table with a new table model, effectively replacing the content of the table completely
@@ -122,9 +122,8 @@ class Table<V>
 	 * Returns the `TableCellRenderer` used by this table when drawing cells
 	 * @return `TableCellRenderer` used by this table when drawing cells
 	 */
-	fun getTableCellRenderer(): TableCellRenderer<V>? {
-		return tableCellRenderer
-	}
+	fun getTableCellRenderer(): TableCellRenderer<V>? =
+		tableCellRenderer
 
 	/**
 	 * Replaces the `TableCellRenderer` used by this table when drawing cells
@@ -142,9 +141,8 @@ class Table<V>
 	 * Returns the `TableHeaderRenderer` used by this table when drawing the table's header
 	 * @return `TableHeaderRenderer` used by this table when drawing the table's header
 	 */
-	fun getTableHeaderRenderer(): TableHeaderRenderer<V>? {
-		return tableHeaderRenderer
-	}
+	fun getTableHeaderRenderer(): TableHeaderRenderer<V>? =
+		tableHeaderRenderer
 
 	/**
 	 * Replaces the `TableHeaderRenderer` used by this table when drawing the table's header
@@ -174,9 +172,8 @@ class Table<V>
 	 * will be used to allow the user to scroll left and right and view all columns.
 	 * @return Number of visible columns for this table
 	 */
-	fun getVisibleColumns(): Int {
-		return visibleColumns
-	}
+	fun getVisibleColumns() =
+		visibleColumns
 
 	/**
 	 * Sets the number of rows this table will show. If there are more rows in the table model, a scrollbar will be used
@@ -194,18 +191,16 @@ class Table<V>
 	 * used to allow the user to scroll up and down and view all rows.
 	 * @return Number of rows to display at once
 	 */
-	fun getVisibleRows(): Int {
-		return visibleRows
-	}
+	fun getVisibleRows() =
+		visibleRows
 
 	/**
 	 * Returns the index of the row that is currently the first row visible. This is always 0 unless scrolling has been
 	 * enabled and either the user or the software (through `setViewTopRow(..)`) has scrolled down.
 	 * @return Index of the row that is currently the first row visible
 	 */
-	fun getViewTopRow(): Int {
-		return viewTopRow
-	}
+	fun getViewTopRow() =
+		viewTopRow
 
 	/**
 	 * Sets the view row offset for the first row to display in the table. Calling this with 0 will make the first row
@@ -226,9 +221,8 @@ class Table<V>
 	 * right.
 	 * @return Index of the column that is currently the first column visible
 	 */
-	fun getViewLeftColumn(): Int {
-		return viewLeftColumn
-	}
+	fun getViewLeftColumn() =
+		viewLeftColumn
 
 	/**
 	 * Sets the view column offset for the first column to display in the table. Calling this with 0 will make the first
@@ -247,9 +241,8 @@ class Table<V>
 	 * Returns the currently selection column index, if in cell-selection mode. Otherwise it returns -1.
 	 * @return In cell-selection mode returns the index of the selected column, otherwise -1
 	 */
-	fun getSelectedColumn(): Int {
-		return selectedColumn
-	}
+	fun getSelectedColumn() =
+		selectedColumn
 
 	/**
 	 * If in cell selection mode, updates which column is selected and ensures the selected column is visible in the
@@ -270,9 +263,8 @@ class Table<V>
 	 * Returns the index of the currently selected row
 	 * @return Index of the currently selected row
 	 */
-	fun getSelectedRow(): Int {
-		return selectedRow
-	}
+	fun getSelectedRow() =
+		selectedRow
 
 	/**
 	 * Sets the index of the selected row and ensures the selected row is visible in the view
@@ -307,9 +299,8 @@ class Table<V>
 	 * Returns `true` if this table is in cell-selection mode, otherwise `false`
 	 * @return `true` if this table is in cell-selection mode, otherwise `false`
 	 */
-	fun isCellSelection(): Boolean {
-		return cellSelection
-	}
+	fun isCellSelection() =
+		cellSelection
 
 	/**
 	 * Assigns an action to run whenever the user presses the enter key while focused on the table. If called with
@@ -330,9 +321,8 @@ class Table<V>
 	 * happen.
 	 * @return `true` if user can switch focus away from the table using arrow keys, `false` otherwise
 	 */
-	fun isEscapeByArrowKey(): Boolean {
-		return escapeByArrowKey
-	}
+	fun isEscapeByArrowKey() =
+		escapeByArrowKey
 
 	/**
 	 * Sets the flag for if this table can be navigated away from when the selected row is at one of the extremes and
@@ -348,9 +338,8 @@ class Table<V>
 		return this
 	}
 
-	override fun createDefaultRenderer(): TableRenderer<V> {
-		return DefaultTableRenderer()
-	}
+	override fun createDefaultRenderer(): TableRenderer<V> =
+		DefaultTableRenderer()
 
 	override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		when (keyStroke.keyType) {

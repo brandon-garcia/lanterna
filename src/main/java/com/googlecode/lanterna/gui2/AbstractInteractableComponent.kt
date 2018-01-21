@@ -20,6 +20,7 @@ package com.googlecode.lanterna.gui2
 
 import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 
 /**
  * Default implementation of Interactable that extends from AbstractComponent. If you want to write your own component
@@ -124,13 +125,12 @@ protected constructor() : AbstractComponent<T>(), Interactable {
 		return self()
 	}
 
-	@Synchronized override fun handleInput(keyStroke: KeyStroke): Interactable.Result {
-		return if (inputFilter == null || inputFilter!!.onInput(this, keyStroke)) {
+	@Synchronized override fun handleInput(keyStroke: KeyStroke): Interactable.Result =
+		if (inputFilter == null || inputFilter!!.onInput(this, keyStroke)) {
 			handleKeyStroke(keyStroke)
 		} else {
 			Interactable.Result.UNHANDLED
 		}
-	}
 
 	/**
 	 * This method can be overridden to handle various user input (mostly from the keyboard) when this component is in
@@ -155,8 +155,9 @@ protected constructor() : AbstractComponent<T>(), Interactable {
 					return Interactable.Result.HANDLED
 				}
 			}
+		} else {
+			return Interactable.Result.UNHANDLED
 		}
-		return Interactable.Result.UNHANDLED
 	}
 
 	@Synchronized override fun setInputFilter(inputFilter: InputFilter): T {

@@ -98,75 +98,65 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 		return this
 	}
 
-	override fun setCharacter(column: Int, row: Int, character: Char): TextGraphics {
-		return setCharacter(column, row, newTextCharacter(character))
-	}
+	override fun setCharacter(column: Int, row: Int, character: Char) =
+		setCharacter(column, row, newTextCharacter(character))
 
 	override fun setCharacter(position: TerminalPosition, textCharacter: TextCharacter): TextGraphics {
 		setCharacter(position.column, position.row, textCharacter)
 		return this
 	}
 
-	override fun setCharacter(position: TerminalPosition, character: Char): TextGraphics {
-		return setCharacter(position.column, position.row, character)
-	}
+	override fun setCharacter(position: TerminalPosition, character: Char) =
+		setCharacter(position.column, position.row, character)
 
-	override fun drawLine(fromPosition: TerminalPosition, toPoint: TerminalPosition, character: Char): TextGraphics {
-		return drawLine(fromPosition, toPoint, newTextCharacter(character))
-	}
+	override fun drawLine(fromPosition: TerminalPosition, toPoint: TerminalPosition, character: Char) =
+		drawLine(fromPosition, toPoint, newTextCharacter(character))
 
 	override fun drawLine(fromPoint: TerminalPosition, toPoint: TerminalPosition, character: TextCharacter): TextGraphics {
 		shapeRenderer.drawLine(fromPoint, toPoint, character)
 		return this
 	}
 
-	override fun drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, character: Char): TextGraphics {
-		return drawLine(fromX, fromY, toX, toY, newTextCharacter(character))
-	}
+	override fun drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, character: Char) =
+		drawLine(fromX, fromY, toX, toY, newTextCharacter(character))
 
-	override fun drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, character: TextCharacter): TextGraphics {
-		return drawLine(TerminalPosition(fromX, fromY), TerminalPosition(toX, toY), character)
-	}
+	override fun drawLine(fromX: Int, fromY: Int, toX: Int, toY: Int, character: TextCharacter) =
+		drawLine(TerminalPosition(fromX, fromY), TerminalPosition(toX, toY), character)
 
-	override fun drawTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: Char): TextGraphics {
-		return drawTriangle(p1, p2, p3, newTextCharacter(character))
-	}
+	override fun drawTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: Char) =
+		drawTriangle(p1, p2, p3, newTextCharacter(character))
 
 	override fun drawTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: TextCharacter): TextGraphics {
 		shapeRenderer.drawTriangle(p1, p2, p3, character)
 		return this
 	}
 
-	override fun fillTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: Char): TextGraphics {
-		return fillTriangle(p1, p2, p3, newTextCharacter(character))
-	}
+	override fun fillTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: Char) =
+		fillTriangle(p1, p2, p3, newTextCharacter(character))
 
 	override fun fillTriangle(p1: TerminalPosition, p2: TerminalPosition, p3: TerminalPosition, character: TextCharacter): TextGraphics {
 		shapeRenderer.fillTriangle(p1, p2, p3, character)
 		return this
 	}
 
-	override fun drawRectangle(topLeft: TerminalPosition, size: TerminalSize, character: Char): TextGraphics {
-		return drawRectangle(topLeft, size, newTextCharacter(character))
-	}
+	override fun drawRectangle(topLeft: TerminalPosition, size: TerminalSize, character: Char) =
+		drawRectangle(topLeft, size, newTextCharacter(character))
 
 	override fun drawRectangle(topLeft: TerminalPosition, size: TerminalSize, character: TextCharacter): TextGraphics {
 		shapeRenderer.drawRectangle(topLeft, size, character)
 		return this
 	}
 
-	override fun fillRectangle(topLeft: TerminalPosition, size: TerminalSize, character: Char): TextGraphics {
-		return fillRectangle(topLeft, size, newTextCharacter(character))
-	}
+	override fun fillRectangle(topLeft: TerminalPosition, size: TerminalSize, character: Char) =
+		fillRectangle(topLeft, size, newTextCharacter(character))
 
 	override fun fillRectangle(topLeft: TerminalPosition, size: TerminalSize, character: TextCharacter): TextGraphics {
 		shapeRenderer.fillRectangle(topLeft, size, character)
 		return this
 	}
 
-	override fun drawImage(topLeft: TerminalPosition, image: TextImage): TextGraphics {
-		return drawImage(topLeft, image, TerminalPosition.TOP_LEFT_CORNER, image.size)
-	}
+	override fun drawImage(topLeft: TerminalPosition, image: TextImage) =
+		drawImage(topLeft, image, TerminalPosition.TOP_LEFT_CORNER, image.size)
 
 	override fun drawImage(
 		topLeft: TerminalPosition,
@@ -280,17 +270,15 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 		return this
 	}
 
-	override fun putCSIStyledString(position: TerminalPosition, string: String): TextGraphics {
-		return putCSIStyledString(position.column, position.row, string)
-	}
+	override fun putCSIStyledString(position: TerminalPosition, string: String) =
+		putCSIStyledString(position.column, position.row, string)
 
-	override fun getCharacter(position: TerminalPosition): TextCharacter {
-		return getCharacter(position.column, position.row)
-	}
+	override fun getCharacter(position: TerminalPosition) =
+		getCharacter(position.column, position.row)
 
 	@Throws(IllegalArgumentException::class)
-	override fun newTextGraphics(topLeftCorner: TerminalPosition, size: TerminalSize): TextGraphics {
-		return if (topLeftCorner.column + size.columns <= 0 ||
+	override fun newTextGraphics(topLeftCorner: TerminalPosition, size: TerminalSize) =
+		if (topLeftCorner.column + size.columns <= 0 ||
 			topLeftCorner.column >= size.columns ||
 			topLeftCorner.row + size.rows <= 0 ||
 			topLeftCorner.row >= size.rows) {
@@ -298,11 +286,9 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 			//do anything because it is impossible to change anything anyway
 			NullTextGraphics(size)
 		} else SubTextGraphics(this, topLeftCorner, size)
-	}
 
-	private fun newTextCharacter(character: Char): TextCharacter {
-		return TextCharacter(character, foregroundColor, backgroundColor, activeModifiers)
-	}
+	private fun newTextCharacter(character: Char) =
+		TextCharacter(character, foregroundColor, backgroundColor, activeModifiers)
 
 	private fun prepareStringForPut(column: Int, string: String): String {
 		var string = string
@@ -316,15 +302,14 @@ abstract class AbstractTextGraphics protected constructor() : TextGraphics {
 		return string
 	}
 
-	private fun getOffsetToNextCharacter(character: Char): Int {
-		return if (TerminalTextUtils.isCharDoubleWidth(character)) {
+	private fun getOffsetToNextCharacter(character: Char) =
+		if (TerminalTextUtils.isCharDoubleWidth(character)) {
 			//CJK characters are twice the normal characters in width, so next character position is two columns forward
 			2
 		} else {
 			//For "normal" characters we advance to the next column
 			1
 		}
-	}
 
 	override fun setStyleFrom(source: StyleSet<*>): TextGraphics {
 		setBackgroundColor(source.backgroundColor)

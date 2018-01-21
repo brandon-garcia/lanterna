@@ -65,7 +65,6 @@ enum class MessageDialogButton private constructor(private val label: LocalizedS
 	 */
 	Continue(LocalizedString.Continue);
 
-	override fun toString(): String? {
-		return label.toString()
-	}
+	override fun toString() =
+		label.toString()
 }

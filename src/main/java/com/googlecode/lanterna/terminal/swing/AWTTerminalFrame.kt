@@ -169,9 +169,8 @@ class AWTTerminalFrame private constructor(title: String?, private val awtTermin
 		return keyStroke
 	}
 
-	override fun readInput(): KeyStroke {
-		return awtTerminal.readInput()
-	}
+	override fun readInput() =
+		awtTerminal.readInput()
 
 	override fun enterPrivateMode() {
 		awtTerminal.enterPrivateMode()
@@ -224,9 +223,8 @@ class AWTTerminalFrame private constructor(title: String?, private val awtTermin
 		awtTerminal.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return awtTerminal.enquireTerminal(timeout, timeoutUnit)
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		awtTerminal.enquireTerminal(timeout, timeoutUnit)
 
 	override fun bell() {
 		awtTerminal.bell()

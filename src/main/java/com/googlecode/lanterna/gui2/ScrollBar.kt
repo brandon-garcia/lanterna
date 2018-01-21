@@ -82,9 +82,8 @@ class ScrollBar
 	 * Returns the maximum scroll value
 	 * @return Maximum scroll value
 	 */
-	fun getScrollMaximum(): Int {
-		return maximum
-	}
+	fun getScrollMaximum() =
+		maximum
 
 
 	/**
@@ -102,9 +101,8 @@ class ScrollBar
 	 * Returns the position of the `ScrollBar`'s tracker
 	 * @return Position of the `ScrollBar`'s tracker
 	 */
-	fun getScrollPosition(): Int {
-		return position
-	}
+	fun getScrollPosition() =
+		position
 
 	/**
 	 * Sets the view size of the scrollbar, determining how big the scrollbar's tracker should be and also affecting the
@@ -132,17 +130,15 @@ class ScrollBar
 		}
 	}
 
-	override fun createDefaultRenderer(): ComponentRenderer<ScrollBar> {
-		return DefaultScrollBarRenderer()
-	}
+	override fun createDefaultRenderer(): ComponentRenderer<ScrollBar> =
+		DefaultScrollBarRenderer()
 
 	/**
 	 * Helper class for making new `ScrollBar` renderers a little bit cleaner
 	 */
 	abstract class ScrollBarRenderer : ComponentRenderer<ScrollBar> {
-		override fun getPreferredSize(component: ScrollBar): TerminalSize {
-			return TerminalSize.ONE
-		}
+		override fun getPreferredSize(component: ScrollBar) =
+			TerminalSize.ONE
 	}
 
 	/**
@@ -257,14 +253,13 @@ class ScrollBar
 			}
 		}
 
-		private fun clampRatio(value: Float): Float {
-			return if (value < 0.0f) {
+		private fun clampRatio(value: Float): Float =
+			if (value < 0.0f) {
 				0.0f
 			} else if (value > 1.0f) {
 				1.0f
 			} else {
 				value
 			}
-		}
 	}
 }

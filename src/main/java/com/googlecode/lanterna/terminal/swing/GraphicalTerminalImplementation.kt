@@ -626,11 +626,10 @@ internal abstract class GraphicalTerminalImplementation
 	// Some of these methods we need to pass to the AWT-thread, which makes the call asynchronous. Hopefully this isn't
 	// causing too much problem...
 	///////////
-	override fun pollInput(): KeyStroke {
-		return if (!enableInput) {
+	override fun pollInput() =
+		if (!enableInput) {
 			KeyStroke(KeyType.EOF)
 		} else keyQueue.poll()
-	}
 
 	override fun readInput(): KeyStroke {
 		// Synchronize on keyQueue here so only one thread is inside keyQueue.take()
@@ -691,9 +690,8 @@ internal abstract class GraphicalTerminalImplementation
 		virtualTerminal.putCharacter(c)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return virtualTerminal.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		virtualTerminal.newTextGraphics()
 
 	override fun enableSGR(sgr: SGR) {
 		virtualTerminal.enableSGR(sgr)
@@ -715,9 +713,8 @@ internal abstract class GraphicalTerminalImplementation
 		virtualTerminal.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return enquiryString.toByteArray()
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		enquiryString.toByteArray()
 
 	override fun bell() {
 		if (bellOn) {

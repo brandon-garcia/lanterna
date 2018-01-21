@@ -45,7 +45,6 @@ class AbsoluteLayout : LayoutManager {
 		//Do nothing
 	}
 
-	override fun hasChanged(): Boolean {
-		return false
-	}
+	override fun hasChanged() =
+		false
 }

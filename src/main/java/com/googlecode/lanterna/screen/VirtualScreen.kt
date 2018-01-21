@@ -102,9 +102,8 @@ class VirtualScreen
 	 * virtual screen will draw scrollbars and implement scrolling
 	 * @return Minimum size configured for this virtual screen
 	 */
-	fun getMinimumSize(): TerminalSize? {
-		return minimumSize
-	}
+	fun getMinimumSize() =
+		minimumSize
 
 	@Throws(IOException::class)
 	override fun startScreen() {
@@ -116,9 +115,8 @@ class VirtualScreen
 		realScreen.stopScreen()
 	}
 
-	override fun getFrontCharacter(position: TerminalPosition): TextCharacter? {
-		return null
-	}
+	override fun getFrontCharacter(position: TerminalPosition) =
+		null
 
 	@Synchronized override fun doResizeIfNecessary(): TerminalSize? {
 		val underlyingSize = realScreen.doResizeIfNecessary() ?: return null
@@ -187,14 +185,12 @@ class VirtualScreen
 	}
 
 	@Throws(IOException::class)
-	override fun pollInput(): KeyStroke {
-		return filter(realScreen.pollInput())
-	}
+	override fun pollInput() =
+		filter(realScreen.pollInput())
 
 	@Throws(IOException::class)
-	override fun readInput(): KeyStroke {
-		return filter(realScreen.readInput())
-	}
+	override fun readInput() =
+		filter(realScreen.readInput())
 
 	@Throws(IOException::class)
 	private fun filter(keyStroke: KeyStroke?): KeyStroke? {
@@ -288,13 +284,12 @@ class VirtualScreen
 		override val viewportOffset: TerminalPosition
 			get() = TerminalPosition.TOP_LEFT_CORNER
 
-		override fun getViewportSize(realSize: TerminalSize, virtualSize: TerminalSize?): TerminalSize {
-			return if (realSize.columns > 1 && realSize.rows > 2) {
+		override fun getViewportSize(realSize: TerminalSize, virtualSize: TerminalSize?) =
+			if (realSize.columns > 1 && realSize.rows > 2) {
 				realSize.withRelativeColumns(-1).withRelativeRows(-2)
 			} else {
 				realSize
 			}
-		}
 
 		override fun drawFrame(
 			graphics: TextGraphics,

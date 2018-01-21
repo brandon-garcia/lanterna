@@ -40,10 +40,8 @@ class ScreenBuffer private constructor(private val backend: BasicTextImage) : Te
 	 */
 	constructor(size: TerminalSize, filler: TextCharacter) : this(BasicTextImage(size, filler)) {}
 
-	override fun resize(newSize: TerminalSize, filler: TextCharacter): ScreenBuffer {
-		val resizedBackend = backend.resize(newSize, filler)
-		return ScreenBuffer(resizedBackend)
-	}
+	override fun resize(newSize: TerminalSize, filler: TextCharacter) =
+		ScreenBuffer(backend.resize(newSize, filler))
 
 	internal fun isVeryDifferent(other: ScreenBuffer, threshold: Int): Boolean {
 		if (size != other.size) {
@@ -64,17 +62,14 @@ class ScreenBuffer private constructor(private val backend: BasicTextImage) : Te
 
 	///////////////////////////////////////////////////////////////////////////////
 	//  Delegate all TextImage calls (except resize) to the backend BasicTextImage
-	override fun getSize(): TerminalSize {
-		return backend.size
-	}
+	override fun getSize() =
+		backend.size
 
-	override fun getCharacterAt(position: TerminalPosition): TextCharacter {
-		return backend.getCharacterAt(position)
-	}
+	override fun getCharacterAt(position: TerminalPosition) =
+		backend.getCharacterAt(position)
 
-	override fun getCharacterAt(column: Int, row: Int): TextCharacter? {
-		return backend.getCharacterAt(column, row)
-	}
+	override fun getCharacterAt(column: Int, row: Int) =
+		backend.getCharacterAt(column, row)
 
 	override fun setCharacterAt(position: TerminalPosition, character: TextCharacter) {
 		backend.setCharacterAt(position, character)
@@ -88,9 +83,8 @@ class ScreenBuffer private constructor(private val backend: BasicTextImage) : Te
 		backend.setAll(character)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return backend.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		backend.newTextGraphics()
 
 	override fun copyTo(destination: TextImage) {
 		var destination = destination
@@ -128,7 +122,6 @@ class ScreenBuffer private constructor(private val backend: BasicTextImage) : Te
 		backend.scrollLines(firstLine, lastLine, distance)
 	}
 
-	override fun toString(): String {
-		return backend.toString()
-	}
+	override fun toString() =
+		backend.toString()
 }

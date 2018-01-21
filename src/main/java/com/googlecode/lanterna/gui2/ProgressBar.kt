@@ -105,9 +105,8 @@ class ProgressBar
 	 * Returns the current *minimum* value for this progress bar
 	 * @return The *minimum* value of this progress bar
 	 */
-	fun getMin(): Int {
-		return min
-	}
+	fun getMin() =
+		min
 
 	/**
 	 * Updates the *minimum* value of this progress bar. If the current *maximum* and/or *value* are
@@ -134,9 +133,8 @@ class ProgressBar
 	 * Returns the current *maximum* value for this progress bar
 	 * @return The *maximum* value of this progress bar
 	 */
-	fun getMax(): Int {
-		return max
-	}
+	fun getMax() =
+		max
 
 	/**
 	 * Updates the *maximum* value of this progress bar. If the current *minimum* and/or *value* are
@@ -163,9 +161,8 @@ class ProgressBar
 	 * Returns the current *value* of this progress bar, which represents how complete the progress indication is.
 	 * @return The progress value of this progress bar
 	 */
-	fun getValue(): Int {
-		return value
-	}
+	fun getValue() =
+		value
 
 	/**
 	 * Updates the *value* of this progress bar, which will update the visual state. If the value passed in is
@@ -195,9 +192,8 @@ class ProgressBar
 	 * the label centered in the middle of the progress indication.
 	 * @return The label format template string this progress bar is currently using
 	 */
-	fun getLabelFormat(): String? {
-		return labelFormat
-	}
+	fun getLabelFormat() =
+		labelFormat
 
 	/**
 	 * Sets the label format this progress bar should use when the component is drawn. The string would be compatible
@@ -214,25 +210,22 @@ class ProgressBar
 		return this
 	}
 
-	override fun createDefaultRenderer(): ComponentRenderer<ProgressBar> {
-		return DefaultProgressBarRenderer()
-	}
+	override fun createDefaultRenderer(): ComponentRenderer<ProgressBar> =
+		DefaultProgressBarRenderer()
 
 	/**
 	 * Default implementation of the progress bar GUI component renderer. This renderer will draw the progress bar
 	 * on a single line and gradually fill up the space with a different color as the progress is increasing.
 	 */
 	class DefaultProgressBarRenderer : ComponentRenderer<ProgressBar> {
-		override fun getPreferredSize(component: ProgressBar): TerminalSize {
-			val preferredWidth = component.preferredWidth
-			return if (preferredWidth > 0) {
-				TerminalSize(preferredWidth, 1)
+		override fun getPreferredSize(component: ProgressBar) =
+			if (component.preferredWidth > 0) {
+				TerminalSize(component.preferredWidth, 1)
 			} else if (component.getLabelFormat() != null && !component.getLabelFormat()!!.trim { it <= ' ' }.isEmpty()) {
 				TerminalSize(TerminalTextUtils.getColumnWidth(String.format(component.getLabelFormat()!!, 100.0f)) + 2, 1)
 			} else {
 				TerminalSize(10, 1)
 			}
-		}
 
 		override fun drawComponent(graphics: TextGUIGraphics, component: ProgressBar) {
 			val size = graphics.size

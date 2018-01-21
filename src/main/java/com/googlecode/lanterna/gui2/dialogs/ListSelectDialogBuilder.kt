@@ -49,18 +49,16 @@ class ListSelectDialogBuilder<T> : AbstractDialogBuilder<ListSelectDialogBuilder
 		this.content = ArrayList()
 	}
 
-	override fun self(): ListSelectDialogBuilder<T> {
-		return this
-	}
+	override fun self(): ListSelectDialogBuilder<T> =
+		this
 
-	override fun buildDialog(): ListSelectDialog<T> {
-		return ListSelectDialog(
+	override fun buildDialog(): ListSelectDialog<T> =
+		ListSelectDialog(
 			title,
 			description,
 			listBoxSize,
 			canCancel,
 			content)
-	}
 
 	/**
 	 * Sets the size of the list box in the dialog, scrollbars will be used if there is not enough space to draw all
@@ -77,9 +75,8 @@ class ListSelectDialogBuilder<T> : AbstractDialogBuilder<ListSelectDialogBuilder
 	 * Size of the list box in the dialog or `null` if the dialog will ask for enough space to draw all items
 	 * @return Size of the list box in the dialog or `null` if the dialog will ask for enough space to draw all items
 	 */
-	fun getListBoxSize(): TerminalSize? {
-		return listBoxSize
-	}
+	fun getListBoxSize() =
+		listBoxSize
 
 	/**
 	 * Sets if the dialog can be cancelled or not (default: `true`)
@@ -96,9 +93,8 @@ class ListSelectDialogBuilder<T> : AbstractDialogBuilder<ListSelectDialogBuilder
 	 * Returns `true` if the dialog can be cancelled once it's opened
 	 * @return `true` if the dialog can be cancelled once it's opened
 	 */
-	fun isCanCancel(): Boolean {
-		return canCancel
-	}
+	fun isCanCancel() =
+		canCancel
 
 	/**
 	 * Adds an item to the list box at the end

@@ -18,6 +18,7 @@
  */
 package com.googlecode.lanterna.input
 
+import sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other
 import java.util.Arrays
 
 /**
@@ -48,9 +49,8 @@ class BasicCharacterPattern
 	 * Returns the characters that makes up this pattern, as an array that is a copy of the array used internally
 	 * @return Array of characters that defines this pattern
 	 */
-	fun getPattern(): CharArray {
-		return Arrays.copyOf(pattern, pattern.size)
-	}
+	fun getPattern() =
+		Arrays.copyOf(pattern, pattern.size)
 
 	override fun match(seq: List<Char>): CharacterPattern.Matching? {
 		val size = seq.size
@@ -70,18 +70,13 @@ class BasicCharacterPattern
 		}
 	}
 
-	override fun equals(obj: Any?): Boolean {
-		if (obj !is BasicCharacterPattern) {
-			return false
+	override fun equals(obj: Any?) =
+		if (obj == null || obj !is BasicCharacterPattern) {
+			false
+		} else {
+			Arrays.equals(this.pattern, obj.pattern)
 		}
 
-		val other = obj as BasicCharacterPattern?
-		return Arrays.equals(this.pattern, other!!.pattern)
-	}
-
-	override fun hashCode(): Int {
-		var hash = 3
-		hash = 53 * hash + Arrays.hashCode(this.pattern)
-		return hash
-	}
+	override fun hashCode() =
+		53 * 3 + Arrays.hashCode(this.pattern)
 }

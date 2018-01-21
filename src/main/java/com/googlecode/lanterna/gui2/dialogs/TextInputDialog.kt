@@ -113,14 +113,13 @@ class TextInputDialog internal constructor(
 		 * @param initialContent What content to place in the text box initially
 		 * @return The string the user typed into the text box, or `null` if the dialog was cancelled
 		 */
-		fun showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String): String? {
-			val textInputDialog = TextInputDialogBuilder()
+		fun showDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String): String? =
+			TextInputDialogBuilder()
 				.setTitle(title)
 				.setDescription(description)
 				.setInitialContent(initialContent)
 				.build()
-			return textInputDialog.showDialog(textGUI)
-		}
+				.showDialog(textGUI)
 
 		/**
 		 * Shortcut for quickly showing a `TextInputDialog` that only accepts numbers
@@ -130,16 +129,17 @@ class TextInputDialog internal constructor(
 		 * @param initialContent What content to place in the text box initially
 		 * @return The number the user typed into the text box, or `null` if the dialog was cancelled
 		 */
-		fun showNumberDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String): BigInteger? {
-			val textInputDialog = TextInputDialogBuilder()
+		fun showNumberDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String) =
+			TextInputDialogBuilder()
 				.setTitle(title)
 				.setDescription(description)
 				.setInitialContent(initialContent)
 				.setValidationPattern(Pattern.compile("[0-9]+"), "Not a number")
 				.build()
-			val numberString = textInputDialog.showDialog(textGUI)
-			return if (numberString != null) BigInteger(numberString) else null
-		}
+				.showDialog(textGUI)
+				.let {
+					if (it != null) BigInteger(it) else null
+				}
 
 		/**
 		 * Shortcut for quickly showing a `TextInputDialog` with password masking
@@ -149,14 +149,13 @@ class TextInputDialog internal constructor(
 		 * @param initialContent What content to place in the text box initially
 		 * @return The string the user typed into the text box, or `null` if the dialog was cancelled
 		 */
-		fun showPasswordDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String): String? {
-			val textInputDialog = TextInputDialogBuilder()
+		fun showPasswordDialog(textGUI: WindowBasedTextGUI, title: String, description: String, initialContent: String) =
+			TextInputDialogBuilder()
 				.setTitle(title)
 				.setDescription(description)
 				.setInitialContent(initialContent)
 				.setPasswordInput(true)
 				.build()
-			return textInputDialog.showDialog(textGUI)
-		}
+				.showDialog(textGUI)
 	}
 }

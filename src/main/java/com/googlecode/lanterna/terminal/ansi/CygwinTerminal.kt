@@ -85,9 +85,8 @@ constructor(
 		return exec(*commandLine.toTypedArray<String>())
 	}
 
-	private fun findSTTY(): String {
-		return STTY_LOCATION
-	}
+	private fun findSTTY() =
+		STTY_LOCATION
 
 	companion object {
 

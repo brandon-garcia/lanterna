@@ -85,9 +85,8 @@ class CheckBox
 	 * Returns the checked state of this check box
 	 * @return `true` if the check box is toggled on, otherwise `false`
 	 */
-	fun isChecked(): Boolean {
-		return checked
-	}
+	fun isChecked() =
+		checked
 
 	public override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		if (keyStroke.keyType === KeyType.Character && keyStroke.character == ' ' || keyStroke.keyType === KeyType.Enter) {
@@ -116,9 +115,8 @@ class CheckBox
 	 * Returns the label of check box
 	 * @return Label currently assigned to the check box
 	 */
-	fun getLabel(): String? {
-		return label
-	}
+	fun getLabel() =
+		label
 
 	/**
 	 * Adds a listener to this check box so that it will be notificed on certain user actions
@@ -142,9 +140,8 @@ class CheckBox
 		return this
 	}
 
-	override fun createDefaultRenderer(): CheckBoxRenderer {
-		return DefaultCheckBoxRenderer()
-	}
+	override fun createDefaultRenderer(): CheckBoxRenderer =
+		DefaultCheckBoxRenderer()
 
 	/**
 	 * Helper interface that doesn't add any new methods but makes coding new check box renderers a little bit more clear
@@ -156,13 +153,12 @@ class CheckBox
 	 * of a "[ ]" block which will contain a "X" inside it if the check box has toggle status on
 	 */
 	class DefaultCheckBoxRenderer : CheckBoxRenderer() {
-		override fun getCursorLocation(component: CheckBox): TerminalPosition? {
-			return if (component.themeDefinition.isCursorVisible) {
+		override fun getCursorLocation(component: CheckBox) =
+			if (component.themeDefinition.isCursorVisible) {
 				CURSOR_LOCATION
 			} else {
 				null
 			}
-		}
 
 		override fun getPreferredSize(component: CheckBox): TerminalSize {
 			var width = 3

@@ -142,17 +142,14 @@ open class AWTTerminalFontConfiguration protected constructor(
 		return fontPriority[0]
 	}
 
-	private fun getFontWidth(font: Font): Int {
-		return font.getStringBounds("W", fontRenderContext).width.toInt()
-	}
+	private fun getFontWidth(font: Font) =
+		font.getStringBounds("W", fontRenderContext).width.toInt()
 
-	private fun getFontHeight(font: Font): Int {
-		return font.getStringBounds("W", fontRenderContext).height.toInt()
-	}
+	private fun getFontHeight(font: Font) =
+		font.getStringBounds("W", fontRenderContext).height.toInt()
 
-	private fun isNotASymbol(character: Char): Boolean {
-		return !SYMBOLS_CACHE.contains(character)
-	}
+	private fun isNotASymbol(character: Char) =
+		!SYMBOLS_CACHE.contains(character)
 
 	companion object {
 
@@ -223,19 +220,16 @@ open class AWTTerminalFontConfiguration protected constructor(
 		 * Returns the default font to use depending on the platform
 		 * @return Default font to use, system-dependent
 		 */
-		protected fun selectDefaultFont(): Array<Font> {
-			val osName = System.getProperty("os.name", "").toLowerCase()
-			if (osName.contains("win")) {
-				val windowsFonts = defaultWindowsFonts
-				return windowsFonts.toTypedArray<Font>()
-			} else if (osName.contains("linux")) {
-				val linuxFonts = defaultLinuxFonts
-				return linuxFonts.toTypedArray<Font>()
-			} else {
-				val defaultFonts = defaultFonts
-				return defaultFonts.toTypedArray<Font>()
+		protected fun selectDefaultFont() =
+			System.getProperty("os.name", "").toLowerCase().let {
+				if (it.contains("win")) {
+					defaultWindowsFonts.toTypedArray<Font>()
+				} else if (it.contains("linux")) {
+					defaultLinuxFonts.toTypedArray<Font>()
+				} else {
+					defaultFonts.toTypedArray<Font>()
+				}
 			}
-		}
 
 		/**
 		 * This is the default font settings that will be used if you don't specify anything
@@ -269,9 +263,8 @@ open class AWTTerminalFontConfiguration protected constructor(
 		 * @param fontsInOrderOfPriority Fonts to use when drawing text, in order of priority
 		 * @return Font configuration built from the font list
 		 */
-		fun newInstance(vararg fontsInOrderOfPriority: Font): AWTTerminalFontConfiguration {
-			return AWTTerminalFontConfiguration(true, BoldMode.EVERYTHING_BUT_SYMBOLS, *fontsInOrderOfPriority)
-		}
+		fun newInstance(vararg fontsInOrderOfPriority: Font) =
+			AWTTerminalFontConfiguration(true, BoldMode.EVERYTHING_BUT_SYMBOLS, *fontsInOrderOfPriority)
 
 		private fun isFontMonospaced(font: Font): Boolean {
 			if (MONOSPACE_CHECK_OVERRIDE.contains(font.name)) {

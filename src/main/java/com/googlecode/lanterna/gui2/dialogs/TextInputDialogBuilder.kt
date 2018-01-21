@@ -44,9 +44,8 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 		this.passwordInput = false
 	}
 
-	override fun self(): TextInputDialogBuilder {
-		return this
-	}
+	override fun self(): TextInputDialogBuilder =
+		this
 
 	override fun buildDialog(): TextInputDialog {
 		var size = textBoxSize
@@ -76,9 +75,8 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 	 * Returns the initial content the dialog will have
 	 * @return Initial content the dialog will have
 	 */
-	fun getInitialContent(): String? {
-		return initialContent
-	}
+	fun getInitialContent() =
+		initialContent
 
 	/**
 	 * Sets the size of the text box the dialog will have
@@ -94,9 +92,8 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 	 * Returns the size of the text box the dialog will have
 	 * @return Size of the text box the dialog will have
 	 */
-	fun getTextBoxSize(): TerminalSize? {
-		return textBoxSize
-	}
+	fun getTextBoxSize() =
+		textBoxSize
 
 	/**
 	 * Sets the validator that will be attached to the text box in the dialog
@@ -112,9 +109,8 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 	 * Returns the validator that will be attached to the text box in the dialog
 	 * @return validator that will be attached to the text box in the dialog
 	 */
-	fun getValidator(): TextInputDialogResultValidator? {
-		return validator
-	}
+	fun getValidator(): TextInputDialogResultValidator? =
+		validator
 
 	/**
 	 * Helper method that assigned a validator to the text box the dialog will have which matches the pattern supplied
@@ -122,15 +118,14 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 	 * @param errorMessage Error message to show when the pattern doesn't match
 	 * @return Itself
 	 */
-	fun setValidationPattern(pattern: Pattern, errorMessage: String?): TextInputDialogBuilder {
-		return setValidator(TextInputDialogResultValidator { content ->
+	fun setValidationPattern(pattern: Pattern, errorMessage: String?): TextInputDialogBuilder =
+		setValidator(TextInputDialogResultValidator { content ->
 			val matcher = pattern.matcher(content)
 			if (!matcher.matches()) {
 				return@TextInputDialogResultValidator errorMessage ?: "Invalid input"
 			}
 			null
 		})
-	}
 
 	/**
 	 * Sets if the text box the dialog will have contains a password and should be masked (default: `false`)
@@ -146,7 +141,6 @@ class TextInputDialogBuilder : AbstractDialogBuilder<TextInputDialogBuilder, Tex
 	 * Returns `true` if the text box the dialog will have contains a password and should be masked
 	 * @return `true` if the text box the dialog will have contains a password and should be masked
 	 */
-	fun isPasswordInput(): Boolean {
-		return passwordInput
-	}
+	fun isPasswordInput() =
+		passwordInput
 }

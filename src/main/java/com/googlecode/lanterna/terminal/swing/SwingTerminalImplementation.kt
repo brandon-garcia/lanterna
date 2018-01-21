@@ -97,9 +97,8 @@ internal class SwingTerminalImplementation
 		}
 	}
 
-	override fun getFontForCharacter(character: TextCharacter): Font {
-		return fontConfiguration.getFontForCharacter(character)
-	}
+	override fun getFontForCharacter(character: TextCharacter) =
+		fontConfiguration.getFontForCharacter(character)
 
 	override fun repaint() {
 		if (SwingUtilities.isEventDispatchThread()) {

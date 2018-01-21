@@ -177,14 +177,12 @@ abstract class StreamBasedTerminal(private val terminalInput: InputStream, priva
 	}
 
 	@Throws(IOException::class)
-	override fun pollInput(): KeyStroke {
-		return readInput(false, true)
-	}
+	override fun pollInput() =
+		readInput(false, true)
 
 	@Throws(IOException::class)
-	override fun readInput(): KeyStroke {
-		return readInput(true, true)
-	}
+	override fun readInput() =
+		readInput(true, true)
 
 	@Throws(IOException::class)
 	private fun readInput(blocking: Boolean, useKeyQueue: Boolean): KeyStroke? {
@@ -231,44 +229,42 @@ abstract class StreamBasedTerminal(private val terminalInput: InputStream, priva
 		// they won't be too happy if we closed the streams
 	}
 
-	protected fun translateCharacter(input: Char): ByteArray {
+	protected fun translateCharacter(input: Char) =
 		if (UTF8_REFERENCE != null && UTF8_REFERENCE === charset) {
-			return convertToCharset(input)
+			convertToCharset(input)
+		} else {
+			//Convert ACS to ordinary terminal codes
+			when (input) {
+				Symbols.ARROW_DOWN -> convertToVT100('v')
+				Symbols.ARROW_LEFT -> convertToVT100('<')
+				Symbols.ARROW_RIGHT -> convertToVT100('>')
+				Symbols.ARROW_UP -> convertToVT100('^')
+				Symbols.BLOCK_DENSE, Symbols.BLOCK_MIDDLE, Symbols.BLOCK_SOLID, Symbols.BLOCK_SPARSE -> convertToVT100(97.toChar())
+				Symbols.HEART, Symbols.CLUB, Symbols.SPADES -> convertToVT100('?')
+				Symbols.FACE_BLACK, Symbols.FACE_WHITE, Symbols.DIAMOND -> convertToVT100(96.toChar())
+				Symbols.BULLET -> convertToVT100(102.toChar())
+				Symbols.DOUBLE_LINE_CROSS, Symbols.SINGLE_LINE_CROSS -> convertToVT100(110.toChar())
+				Symbols.DOUBLE_LINE_HORIZONTAL, Symbols.SINGLE_LINE_HORIZONTAL -> convertToVT100(113.toChar())
+				Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER, Symbols.SINGLE_LINE_BOTTOM_LEFT_CORNER -> convertToVT100(109.toChar())
+				Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER, Symbols.SINGLE_LINE_BOTTOM_RIGHT_CORNER -> convertToVT100(106.toChar())
+				Symbols.DOUBLE_LINE_T_DOWN, Symbols.SINGLE_LINE_T_DOWN, Symbols.DOUBLE_LINE_T_SINGLE_DOWN, Symbols.SINGLE_LINE_T_DOUBLE_DOWN -> convertToVT100(119.toChar())
+				Symbols.DOUBLE_LINE_T_LEFT, Symbols.SINGLE_LINE_T_LEFT, Symbols.DOUBLE_LINE_T_SINGLE_LEFT, Symbols.SINGLE_LINE_T_DOUBLE_LEFT -> convertToVT100(117.toChar())
+				Symbols.DOUBLE_LINE_T_RIGHT, Symbols.SINGLE_LINE_T_RIGHT, Symbols.DOUBLE_LINE_T_SINGLE_RIGHT, Symbols.SINGLE_LINE_T_DOUBLE_RIGHT -> convertToVT100(116.toChar())
+				Symbols.DOUBLE_LINE_T_UP, Symbols.SINGLE_LINE_T_UP, Symbols.DOUBLE_LINE_T_SINGLE_UP, Symbols.SINGLE_LINE_T_DOUBLE_UP -> convertToVT100(118.toChar())
+				Symbols.DOUBLE_LINE_TOP_LEFT_CORNER, Symbols.SINGLE_LINE_TOP_LEFT_CORNER -> convertToVT100(108.toChar())
+				Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER, Symbols.SINGLE_LINE_TOP_RIGHT_CORNER -> convertToVT100(107.toChar())
+				Symbols.DOUBLE_LINE_VERTICAL, Symbols.SINGLE_LINE_VERTICAL -> convertToVT100(120.toChar())
+				else -> convertToCharset(input)
+			}
 		}
-		//Convert ACS to ordinary terminal codes
-		when (input) {
-			Symbols.ARROW_DOWN -> return convertToVT100('v')
-			Symbols.ARROW_LEFT -> return convertToVT100('<')
-			Symbols.ARROW_RIGHT -> return convertToVT100('>')
-			Symbols.ARROW_UP -> return convertToVT100('^')
-			Symbols.BLOCK_DENSE, Symbols.BLOCK_MIDDLE, Symbols.BLOCK_SOLID, Symbols.BLOCK_SPARSE -> return convertToVT100(97.toChar())
-			Symbols.HEART, Symbols.CLUB, Symbols.SPADES -> return convertToVT100('?')
-			Symbols.FACE_BLACK, Symbols.FACE_WHITE, Symbols.DIAMOND -> return convertToVT100(96.toChar())
-			Symbols.BULLET -> return convertToVT100(102.toChar())
-			Symbols.DOUBLE_LINE_CROSS, Symbols.SINGLE_LINE_CROSS -> return convertToVT100(110.toChar())
-			Symbols.DOUBLE_LINE_HORIZONTAL, Symbols.SINGLE_LINE_HORIZONTAL -> return convertToVT100(113.toChar())
-			Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER, Symbols.SINGLE_LINE_BOTTOM_LEFT_CORNER -> return convertToVT100(109.toChar())
-			Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER, Symbols.SINGLE_LINE_BOTTOM_RIGHT_CORNER -> return convertToVT100(106.toChar())
-			Symbols.DOUBLE_LINE_T_DOWN, Symbols.SINGLE_LINE_T_DOWN, Symbols.DOUBLE_LINE_T_SINGLE_DOWN, Symbols.SINGLE_LINE_T_DOUBLE_DOWN -> return convertToVT100(119.toChar())
-			Symbols.DOUBLE_LINE_T_LEFT, Symbols.SINGLE_LINE_T_LEFT, Symbols.DOUBLE_LINE_T_SINGLE_LEFT, Symbols.SINGLE_LINE_T_DOUBLE_LEFT -> return convertToVT100(117.toChar())
-			Symbols.DOUBLE_LINE_T_RIGHT, Symbols.SINGLE_LINE_T_RIGHT, Symbols.DOUBLE_LINE_T_SINGLE_RIGHT, Symbols.SINGLE_LINE_T_DOUBLE_RIGHT -> return convertToVT100(116.toChar())
-			Symbols.DOUBLE_LINE_T_UP, Symbols.SINGLE_LINE_T_UP, Symbols.DOUBLE_LINE_T_SINGLE_UP, Symbols.SINGLE_LINE_T_DOUBLE_UP -> return convertToVT100(118.toChar())
-			Symbols.DOUBLE_LINE_TOP_LEFT_CORNER, Symbols.SINGLE_LINE_TOP_LEFT_CORNER -> return convertToVT100(108.toChar())
-			Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER, Symbols.SINGLE_LINE_TOP_RIGHT_CORNER -> return convertToVT100(107.toChar())
-			Symbols.DOUBLE_LINE_VERTICAL, Symbols.SINGLE_LINE_VERTICAL -> return convertToVT100(120.toChar())
-			else -> return convertToCharset(input)
-		}
-	}
 
-	private fun convertToVT100(code: Char): ByteArray {
+	private fun convertToVT100(code: Char) =
 		//Warning! This might be terminal type specific!!!!
 		//So far it's worked everywhere I've tried it (xterm, gnome-terminal, putty)
-		return byteArrayOf(27, 40, 48, code.toByte(), 27, 40, 66)
-	}
+		byteArrayOf(27, 40, 48, code.toByte(), 27, 40, 66)
 
-	private fun convertToCharset(input: Char): ByteArray {
-		return charset.encode(Character.toString(input)).array()
-	}
+	private fun convertToCharset(input: Char) =
+		charset.encode(Character.toString(input)).array()
 
 	companion object {
 

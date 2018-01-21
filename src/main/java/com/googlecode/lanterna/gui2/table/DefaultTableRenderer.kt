@@ -245,9 +245,8 @@ class DefaultTableRenderer<V> : TableRenderer<V> {
 		return cachedSize
 	}
 
-	override fun getCursorLocation(component: Table<V>): TerminalPosition {
-		return null
-	}
+	override fun getCursorLocation(component: Table<V>) =
+		null
 
 	override fun drawComponent(graphics: TextGUIGraphics, table: Table<V>) {
 		//Get the size
@@ -446,24 +445,22 @@ class DefaultTableRenderer<V> : TableRenderer<V> {
 		}
 	}
 
-	private fun getHorizontalCharacter(style: TableCellBorderStyle?): Char {
+	private fun getHorizontalCharacter(style: TableCellBorderStyle?) =
 		when (style) {
-			TableCellBorderStyle.SingleLine -> return Symbols.SINGLE_LINE_HORIZONTAL
-			TableCellBorderStyle.DoubleLine -> return Symbols.DOUBLE_LINE_HORIZONTAL
-			else -> return ' '
+			TableCellBorderStyle.SingleLine -> Symbols.SINGLE_LINE_HORIZONTAL
+			TableCellBorderStyle.DoubleLine -> Symbols.DOUBLE_LINE_HORIZONTAL
+			else -> ' '
 		}
-	}
 
-	private fun getVerticalCharacter(style: TableCellBorderStyle?): Char {
+	private fun getVerticalCharacter(style: TableCellBorderStyle?) =
 		when (style) {
-			TableCellBorderStyle.SingleLine -> return Symbols.SINGLE_LINE_VERTICAL
-			TableCellBorderStyle.DoubleLine -> return Symbols.DOUBLE_LINE_VERTICAL
-			else -> return ' '
+			TableCellBorderStyle.SingleLine -> Symbols.SINGLE_LINE_VERTICAL
+			TableCellBorderStyle.DoubleLine -> Symbols.DOUBLE_LINE_VERTICAL
+			else -> ' '
 		}
-	}
 
-	private fun getJunctionCharacter(mainStyle: TableCellBorderStyle?, styleAbove: TableCellBorderStyle?, styleBelow: TableCellBorderStyle?): Char {
-		return if (mainStyle == TableCellBorderStyle.SingleLine) {
+	private fun getJunctionCharacter(mainStyle: TableCellBorderStyle?, styleAbove: TableCellBorderStyle?, styleBelow: TableCellBorderStyle?) =
+		if (mainStyle == TableCellBorderStyle.SingleLine) {
 			if (styleAbove == TableCellBorderStyle.SingleLine) {
 				if (styleBelow == TableCellBorderStyle.SingleLine) {
 					Symbols.SINGLE_LINE_CROSS
@@ -522,5 +519,4 @@ class DefaultTableRenderer<V> : TableRenderer<V> {
 		} else {
 			' '
 		}
-	}
 }

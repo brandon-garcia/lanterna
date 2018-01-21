@@ -92,9 +92,8 @@ internal class AWTTerminalImplementation
 		}
 	}
 
-	override fun getFontForCharacter(character: TextCharacter): Font {
-		return fontConfiguration.getFontForCharacter(character)
-	}
+	override fun getFontForCharacter(character: TextCharacter) =
+		fontConfiguration.getFontForCharacter(character)
 
 	override fun repaint() {
 		if (EventQueue.isDispatchThread()) {

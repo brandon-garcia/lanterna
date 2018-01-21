@@ -36,11 +36,10 @@ class TerminalEmulatorColorConfiguration private constructor(private val colorPa
 	 * @param inBoldContext Is the color intended to be used for on a character this is bold
 	 * @return The AWT color that represents this text color
 	 */
-	fun toAWTColor(color: TextColor, isForeground: Boolean, inBoldContext: Boolean): Color? {
-		return if (color is TextColor.ANSI) {
+	fun toAWTColor(color: TextColor, isForeground: Boolean, inBoldContext: Boolean) =
+		if (color is TextColor.ANSI) {
 			colorPalette.get(color, isForeground, inBoldContext && useBrightColorsOnBold)
 		} else color.toColor()
-	}
 
 	companion object {
 
@@ -57,8 +56,7 @@ class TerminalEmulatorColorConfiguration private constructor(private val colorPa
 		 * @param colorPalette Palette to use for this color configuration
 		 * @return The resulting color configuration
 		 */
-		fun newInstance(colorPalette: TerminalEmulatorPalette): TerminalEmulatorColorConfiguration {
-			return TerminalEmulatorColorConfiguration(colorPalette, true)
-		}
+		fun newInstance(colorPalette: TerminalEmulatorPalette) =
+			TerminalEmulatorColorConfiguration(colorPalette, true)
 	}
 }

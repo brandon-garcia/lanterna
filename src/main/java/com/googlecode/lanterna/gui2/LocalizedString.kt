@@ -30,9 +30,8 @@ import java.util.Locale
  */
 class LocalizedString private constructor(private val bundleKey: String) {
 
-	override fun toString(): String? {
-		return LocalizedUIBundle[Locale.getDefault(), bundleKey]
-	}
+	override fun toString() =
+		LocalizedUIBundle[Locale.getDefault(), bundleKey] ?: ""
 
 	companion object {
 

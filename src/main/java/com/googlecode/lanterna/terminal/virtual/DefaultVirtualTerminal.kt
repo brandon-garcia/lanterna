@@ -190,9 +190,8 @@ class DefaultVirtualTerminal
 		this.activeBackgroundColor = color
 	}
 
-	@Synchronized override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return javaClass.getName().toByteArray()
-	}
+	@Synchronized override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		javaClass.getName().toByteArray()
 
 	@Synchronized override fun bell() {
 		for (listener in listeners) {
@@ -212,9 +211,8 @@ class DefaultVirtualTerminal
 		}
 	}
 
-	@Synchronized override fun pollInput(): KeyStroke {
-		return inputQueue.poll()
-	}
+	@Synchronized override fun pollInput() =
+		inputQueue.poll()
 
 	@Synchronized override fun readInput(): KeyStroke {
 		try {
@@ -225,9 +223,8 @@ class DefaultVirtualTerminal
 
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return VirtualTerminalTextGraphics(this)
-	}
+	override fun newTextGraphics(): TextGraphics =
+		VirtualTerminalTextGraphics(this)
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// VirtualTerminal specific methods
@@ -251,9 +248,8 @@ class DefaultVirtualTerminal
 		inputQueue.add(keyStroke)
 	}
 
-	@Synchronized override fun getCharacter(position: TerminalPosition): TextCharacter {
-		return getCharacter(position.column, position.row)
-	}
+	@Synchronized override fun getCharacter(position: TerminalPosition) =
+		getCharacter(position.column, position.row)
 
 	@Synchronized override fun getCharacter(column: Int, row: Int): TextCharacter {
 		var row = row
@@ -263,13 +259,11 @@ class DefaultVirtualTerminal
 		return getBufferCharacter(column, row)
 	}
 
-	override fun getBufferCharacter(column: Int, row: Int): TextCharacter {
-		return currentTextBuffer!!.getCharacter(row, column)
-	}
+	override fun getBufferCharacter(column: Int, row: Int) =
+		currentTextBuffer!!.getCharacter(row, column)
 
-	override fun getBufferCharacter(position: TerminalPosition): TextCharacter {
-		return getBufferCharacter(position.column, position.row)
-	}
+	override fun getBufferCharacter(position: TerminalPosition) =
+		getBufferCharacter(position.column, position.row)
 
 	@Synchronized override fun forEachLine(startRow: Int, endRow: Int, bufferWalker: VirtualTerminal.BufferWalker) {
 		val emptyLine: VirtualTerminal.BufferLine = VirtualTerminal.BufferLine { TextCharacter.DEFAULT_CHARACTER }

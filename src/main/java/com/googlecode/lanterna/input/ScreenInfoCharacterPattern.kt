@@ -32,16 +32,14 @@ class ScreenInfoCharacterPattern : EscapeSequenceCharacterPattern() {
 		useEscEsc = false // stdMap and finMap don't matter here.
 	}
 
-	override fun getKeyStrokeRaw(first: Char, num1: Int, num2: Int, last: Char, bEsc: Boolean): KeyStroke? {
+	override fun getKeyStrokeRaw(first: Char, num1: Int, num2: Int, last: Char, bEsc: Boolean) =
 		if (first != '[' || last != 'R' || num1 == 0 || num2 == 0 || bEsc) {
-			return null // nope
+			null // nope
+		} else if (num1 == 1 && num2 <= 8) {
+			null // nope: much more likely it's an F3 with modifiers
+		} else {
+			ScreenInfoAction(TerminalPosition(num2, num1)) // yep
 		}
-		if (num1 == 1 && num2 <= 8) {
-			return null // nope: much more likely it's an F3 with modifiers
-		}
-		val pos = TerminalPosition(num2, num1)
-		return ScreenInfoAction(pos) // yep
-	}
 
 	companion object {
 

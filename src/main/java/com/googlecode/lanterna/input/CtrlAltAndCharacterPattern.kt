@@ -26,31 +26,27 @@ package com.googlecode.lanterna.input
 class CtrlAltAndCharacterPattern : CharacterPattern {
 
 	override fun match(seq: List<Char>): CharacterPattern.Matching? {
-		val size = seq.size
-		if (size > 2 || seq[0] != KeyDecodingProfile.ESC_CODE) {
+		if (seq.size > 2 || seq[0] != KeyDecodingProfile.ESC_CODE) {
 			return null // nope
 		}
-		if (size == 1) {
+		if (seq.size == 1) {
 			return CharacterPattern.Matching.NOT_YET // maybe later
 		}
-		val ch = seq[1]
-		if (ch.toInt() < 32 && ch.toInt() != 0x08) {
+		if (seq[1].toInt() < 32 && seq[1].toInt() != 0x08) {
 			// Control-chars: exclude Esc(^[), but still include ^\, ^], ^^ and ^_
 			val ctrlCode: Char
-			when (ch) {
+			when (seq[1]) {
 				KeyDecodingProfile.ESC_CODE -> return null // nope
 				0  /* ^@ */ -> ctrlCode = ' '
 				28 /* ^\ */ -> ctrlCode = '\\'
 				29 /* ^] */ -> ctrlCode = ']'
 				30 /* ^^ */ -> ctrlCode = '^'
 				31 /* ^_ */ -> ctrlCode = '_'
-				else -> ctrlCode = ('a' - 1 + ch.toInt()).toChar()
+				else -> ctrlCode = ('a' - 1 + seq[1].toInt()).toChar()
 			}
-			val ks = KeyStroke(ctrlCode, true, true)
-			return CharacterPattern.Matching(ks) // yep
-		} else if (ch.toInt() == 0x7f || ch.toInt() == 0x08) {
-			val ks = KeyStroke(KeyType.Backspace, false, true)
-			return CharacterPattern.Matching(ks) // yep
+			return CharacterPattern.Matching(KeyStroke(ctrlCode, true, true)) // yep
+		} else if (seq[1].toInt() == 0x7f || seq[1].toInt() == 0x08) {
+			return CharacterPattern.Matching(KeyStroke(KeyType.Backspace, false, true)) // yep
 		} else {
 			return null // nope
 		}

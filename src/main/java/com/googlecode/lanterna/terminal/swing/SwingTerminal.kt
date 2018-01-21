@@ -149,9 +149,8 @@ class SwingTerminal
 	 * pixels)
 	 * @return The terminal's preferred size in pixels
 	 */
-	@Synchronized override fun getPreferredSize(): Dimension {
-		return terminalImplementation.preferredSize
-	}
+	@Synchronized override fun getPreferredSize() =
+		terminalImplementation.preferredSize
 
 	/**
 	 * Overridden method from Swing's `JComponent` class that is called by OS window system when the component
@@ -218,9 +217,8 @@ class SwingTerminal
 		terminalImplementation.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return terminalImplementation.enquireTerminal(timeout, timeoutUnit)
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		terminalImplementation.enquireTerminal(timeout, timeoutUnit)
 
 	override fun bell() {
 		terminalImplementation.bell()
@@ -234,17 +232,14 @@ class SwingTerminal
 		terminalImplementation.close()
 	}
 
-	override fun pollInput(): KeyStroke {
-		return terminalImplementation.pollInput()
-	}
+	override fun pollInput() =
+		terminalImplementation.pollInput()
 
-	override fun readInput(): KeyStroke {
-		return terminalImplementation.readInput()
-	}
+	override fun readInput() =
+		terminalImplementation.readInput()
 
-	override fun newTextGraphics(): TextGraphics {
-		return terminalImplementation.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		terminalImplementation.newTextGraphics()
 
 	override fun addResizeListener(listener: TerminalResizeListener) {
 		terminalImplementation.addResizeListener(listener)

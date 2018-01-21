@@ -79,19 +79,18 @@ class InteractableLookupMap internal constructor(size: TerminalSize) {
 	 * @return The `Interactable` component at the specified location or `null` if there's nothing there
 	 */
 	@Synchronized
-	fun getInteractableAt(position: TerminalPosition): Interactable? {
+	fun getInteractableAt(position: TerminalPosition) =
 		if (position.row < 0 || position.column < 0) {
-			return null
-		}
-		if (position.row >= lookupMap.size) {
-			return null
+			null
+		} else if (position.row >= lookupMap.size) {
+			null
 		} else if (position.column >= lookupMap[0].size) {
-			return null
+			null
 		} else if (lookupMap[position.row][position.column] == -1) {
-			return null
+			null
+		} else {
+			interactables[lookupMap[position.row][position.column]]
 		}
-		return interactables[lookupMap[position.row][position.column]]
-	}
 
 	/**
 	 * Starting from a particular `Interactable` and going up, which is the next interactable?
@@ -100,9 +99,8 @@ class InteractableLookupMap internal constructor(size: TerminalSize) {
 	 * `Interactable`:s above it
 	 */
 	@Synchronized
-	fun findNextUp(interactable: Interactable): Interactable? {
-		return findNextUpOrDown(interactable, false)
-	}
+	fun findNextUp(interactable: Interactable) =
+		findNextUpOrDown(interactable, false)
 
 	/**
 	 * Starting from a particular `Interactable` and going down, which is the next interactable?
@@ -111,9 +109,8 @@ class InteractableLookupMap internal constructor(size: TerminalSize) {
 	 * `Interactable`:s below it
 	 */
 	@Synchronized
-	fun findNextDown(interactable: Interactable): Interactable? {
-		return findNextUpOrDown(interactable, true)
-	}
+	fun findNextDown(interactable: Interactable) =
+		findNextUpOrDown(interactable, true)
 
 	//Avoid code duplication in above two methods
 	private fun findNextUpOrDown(interactable: Interactable, isDown: Boolean): Interactable? {
@@ -179,9 +176,8 @@ class InteractableLookupMap internal constructor(size: TerminalSize) {
 	 * `Interactable`:s left of it
 	 */
 	@Synchronized
-	fun findNextLeft(interactable: Interactable): Interactable? {
-		return findNextLeftOrRight(interactable, false)
-	}
+	fun findNextLeft(interactable: Interactable) =
+		findNextLeftOrRight(interactable, false)
 
 	/**
 	 * Starting from a particular `Interactable` and going right, which is the next interactable?
@@ -190,9 +186,8 @@ class InteractableLookupMap internal constructor(size: TerminalSize) {
 	 * `Interactable`:s right of it
 	 */
 	@Synchronized
-	fun findNextRight(interactable: Interactable): Interactable? {
-		return findNextLeftOrRight(interactable, true)
-	}
+	fun findNextRight(interactable: Interactable) =
+		findNextLeftOrRight(interactable, true)
 
 	//Avoid code duplication in above two methods
 	private fun findNextLeftOrRight(interactable: Interactable, isRight: Boolean): Interactable? {

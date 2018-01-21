@@ -80,8 +80,8 @@ class TerminalEmulatorPalette
 	 * @param useBrightTones If true, we should return the bright version of the color
 	 * @return AWT color extracted from this palette for the input parameters
 	 */
-	operator fun get(color: TextColor.ANSI, isForeground: Boolean, useBrightTones: Boolean): Color? {
-		return if (useBrightTones) {
+	operator fun get(color: TextColor.ANSI, isForeground: Boolean, useBrightTones: Boolean) =
+		if (useBrightTones) {
 			when (color) {
 				TextColor.ANSI.BLACK -> brightBlack
 				TextColor.ANSI.BLUE -> brightBlue
@@ -104,10 +104,9 @@ class TerminalEmulatorPalette
 				TextColor.ANSI.RED -> normalRed
 				TextColor.ANSI.WHITE -> normalWhite
 				TextColor.ANSI.YELLOW -> normalYellow
+				else -> throw IllegalArgumentException("Unknown text color " + color)
 			}
 		}
-		throw IllegalArgumentException("Unknown text color " + color)
-	}
 
 	override fun equals(obj: Any?): Boolean {
 		if (obj == null) {
@@ -197,8 +196,8 @@ class TerminalEmulatorPalette
 		return hash
 	}
 
-	override fun toString(): String {
-		return "SwingTerminalPalette{" +
+	override fun toString() =
+		"SwingTerminalPalette{" +
 			"defaultColor=" + defaultColor +
 			", defaultBrightColor=" + defaultBrightColor +
 			", defaultBackgroundColor=" + defaultBackgroundColor +
@@ -218,7 +217,6 @@ class TerminalEmulatorPalette
 			", brightCyan=" + brightCyan +
 			", normalWhite=" + normalWhite +
 			", brightWhite=" + brightWhite + '}'
-	}
 
 	companion object {
 		/**

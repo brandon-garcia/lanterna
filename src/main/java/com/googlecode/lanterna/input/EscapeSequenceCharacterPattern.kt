@@ -265,11 +265,12 @@ open class EscapeSequenceCharacterPattern : CharacterPattern {
 				-> return null // nope
 			}
 		}
-		if (state == State.DONE) {
-			val ks = getKeyStrokeRaw(first, num1, num2, last, bEsc)
-			return if (ks != null) CharacterPattern.Matching(ks) else null // depends
+		return if (state == State.DONE) {
+			getKeyStrokeRaw(first, num1, num2, last, bEsc).let {
+				if (it != null) CharacterPattern.Matching(it) else null // depends
+			}
 		} else {
-			return CharacterPattern.Matching.NOT_YET // maybe later
+			CharacterPattern.Matching.NOT_YET // maybe later
 		}
 	}
 

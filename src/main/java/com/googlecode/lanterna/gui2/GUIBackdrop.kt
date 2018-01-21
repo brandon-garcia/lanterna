@@ -26,12 +26,11 @@ import com.googlecode.lanterna.graphics.ThemeDefinition
  * else. Themes can control how this backdrop is drawn, the normal is one solid color.
  */
 open class GUIBackdrop : EmptySpace() {
-	override fun createDefaultRenderer(): ComponentRenderer<EmptySpace> {
-		return object : ComponentRenderer<EmptySpace> {
+	override fun createDefaultRenderer() =
+		object : ComponentRenderer<EmptySpace> {
 
-			override fun getPreferredSize(component: EmptySpace): TerminalSize {
-				return TerminalSize.ONE
-			}
+			override fun getPreferredSize(component: EmptySpace) =
+				TerminalSize.ONE
 
 			override fun drawComponent(graphics: TextGUIGraphics, component: EmptySpace) {
 				val themeDefinition = component.theme.getDefinition(GUIBackdrop::class.java!!)
@@ -39,5 +38,4 @@ open class GUIBackdrop : EmptySpace() {
 				graphics.fill(themeDefinition.getCharacter("BACKGROUND", ' '))
 			}
 		}
-	}
 }

@@ -49,9 +49,8 @@ class Separator
 		}
 	}
 
-	override fun createDefaultRenderer(): DefaultSeparatorRenderer {
-		return DefaultSeparatorRenderer()
-	}
+	override fun createDefaultRenderer() =
+		DefaultSeparatorRenderer()
 
 	/**
 	 * Helper interface that doesn't add any new methods but makes coding new button renderers a little bit more clear
@@ -64,9 +63,8 @@ class Separator
 	 * horizontal or vertical lines, depending on the direction of the `Separator`
 	 */
 	class DefaultSeparatorRenderer : SeparatorRenderer() {
-		override fun getPreferredSize(component: Separator): TerminalSize {
-			return TerminalSize.ONE
-		}
+		override fun getPreferredSize(component: Separator) =
+			TerminalSize.ONE
 
 		override fun drawComponent(graphics: TextGUIGraphics, component: Separator) {
 			val themeDefinition = component.themeDefinition

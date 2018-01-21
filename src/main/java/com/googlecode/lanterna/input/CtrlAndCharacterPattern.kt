@@ -25,25 +25,22 @@ package com.googlecode.lanterna.input
  */
 class CtrlAndCharacterPattern : CharacterPattern {
 	override fun match(seq: List<Char>): CharacterPattern.Matching? {
-		val size = seq.size
-		val ch = seq[0]
-		if (size != 1) {
+		if (seq.size != 1) {
 			return null // nope
 		}
-		if (ch.toInt() < 32) {
+		if (seq[0].toInt() < 32) {
 			// Control-chars: exclude lf,cr,Tab,Esc(^[), but still include ^\, ^], ^^ and ^_
 			val ctrlCode: Char
-			when (ch) {
+			when (seq[0]) {
 				'\n', '\r', '\t', 0x08, KeyDecodingProfile.ESC_CODE -> return null // nope
 				0  /* ^@ */ -> ctrlCode = ' '
 				28 /* ^\ */ -> ctrlCode = '\\'
 				29 /* ^] */ -> ctrlCode = ']'
 				30 /* ^^ */ -> ctrlCode = '^'
 				31 /* ^_ */ -> ctrlCode = '_'
-				else -> ctrlCode = ('a' - 1 + ch.toInt()).toChar()
+				else -> ctrlCode = ('a' - 1 + seq[0].toInt()).toChar()
 			}
-			val ks = KeyStroke(ctrlCode, true, false)
-			return CharacterPattern.Matching(ks) // yep
+			return CharacterPattern.Matching(KeyStroke(ctrlCode, true, false)) // yep
 		} else {
 			return null // nope
 		}

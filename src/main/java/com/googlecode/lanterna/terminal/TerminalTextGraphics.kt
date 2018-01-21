@@ -58,9 +58,8 @@ constructor(private val terminal: Terminal) : AbstractTextGraphics() {
 		this.lastPosition = null
 	}
 
-	override fun setCharacter(columnIndex: Int, rowIndex: Int, textCharacter: TextCharacter): TextGraphics {
-		return setCharacter(TerminalPosition(columnIndex, rowIndex), textCharacter)
-	}
+	override fun setCharacter(columnIndex: Int, rowIndex: Int, textCharacter: TextCharacter) =
+		setCharacter(TerminalPosition(columnIndex, rowIndex), textCharacter)
 
 	@Synchronized override fun setCharacter(position: TerminalPosition, textCharacter: TextCharacter): TextGraphics {
 		try {
@@ -89,13 +88,11 @@ constructor(private val terminal: Terminal) : AbstractTextGraphics() {
 		return this
 	}
 
-	override fun getCharacter(column: Int, row: Int): TextCharacter {
-		return getCharacter(TerminalPosition(column, row))
-	}
+	override fun getCharacter(column: Int, row: Int) =
+		getCharacter(TerminalPosition(column, row))
 
-	@Synchronized override fun getCharacter(position: TerminalPosition): TextCharacter {
-		return writeHistory[position]
-	}
+	@Synchronized override fun getCharacter(position: TerminalPosition) =
+		writeHistory[position]
 
 	@Throws(IOException::class)
 	private fun applyGraphicState(textCharacter: TextCharacter) {
@@ -107,9 +104,8 @@ constructor(private val terminal: Terminal) : AbstractTextGraphics() {
 		}
 	}
 
-	override fun getSize(): TerminalSize {
-		return terminalSize
-	}
+	override fun getSize() =
+		terminalSize
 
 	@Synchronized override fun drawLine(fromPoint: TerminalPosition, toPoint: TerminalPosition, character: Char): TextGraphics {
 		try {

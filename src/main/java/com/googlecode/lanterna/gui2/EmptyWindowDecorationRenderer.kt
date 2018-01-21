@@ -26,15 +26,12 @@ import com.googlecode.lanterna.TerminalSize
  * @author Martin
  */
 class EmptyWindowDecorationRenderer : WindowDecorationRenderer {
-	override fun draw(textGUI: WindowBasedTextGUI, graphics: TextGUIGraphics, window: Window): TextGUIGraphics {
-		return graphics
-	}
+	override fun draw(textGUI: WindowBasedTextGUI, graphics: TextGUIGraphics, window: Window): TextGUIGraphics =
+		graphics
 
-	override fun getDecoratedSize(window: Window, contentAreaSize: TerminalSize): TerminalSize {
-		return contentAreaSize
-	}
+	override fun getDecoratedSize(window: Window, contentAreaSize: TerminalSize) =
+		contentAreaSize
 
-	override fun getOffset(window: Window): TerminalPosition {
-		return TerminalPosition.TOP_LEFT_CORNER
-	}
+	override fun getOffset(window: Window) =
+		TerminalPosition.TOP_LEFT_CORNER
 }

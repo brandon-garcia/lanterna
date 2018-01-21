@@ -52,12 +52,11 @@ open class EmptySpace
 	 */
 	constructor(size: TerminalSize) : this(null, size) {}
 
-	override fun createDefaultRenderer(): ComponentRenderer<EmptySpace> {
-		return object : ComponentRenderer<EmptySpace> {
+	override fun createDefaultRenderer(): ComponentRenderer<EmptySpace> =
+		object : ComponentRenderer<EmptySpace> {
 
-			override fun getPreferredSize(component: EmptySpace): TerminalSize {
-				return size
-			}
+			override fun getPreferredSize(component: EmptySpace) =
+				size
 
 			override fun drawComponent(graphics: TextGUIGraphics, component: EmptySpace) {
 				graphics.applyThemeStyle(component.themeDefinition.normal)
@@ -67,7 +66,6 @@ open class EmptySpace
 				graphics.fill(' ')
 			}
 		}
-	}
 }
 /**
  * Creates an EmptySpace with size 1x1 and a default color chosen from the theme

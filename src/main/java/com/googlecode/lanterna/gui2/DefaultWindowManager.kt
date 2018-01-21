@@ -63,15 +63,14 @@ open class DefaultWindowManager
 		}
 	}
 
-	override fun getWindowDecorationRenderer(window: Window): WindowDecorationRenderer {
-		return if (window.hints.contains(Window.Hint.NO_DECORATIONS)) {
+	override fun getWindowDecorationRenderer(window: Window): WindowDecorationRenderer =
+		if (window.hints.contains(Window.Hint.NO_DECORATIONS)) {
 			EmptyWindowDecorationRenderer()
 		} else windowDecorationRendererOverride ?: if (window.theme != null && window.theme.windowDecorationRenderer != null) {
 			window.theme.windowDecorationRenderer
 		} else {
 			DefaultWindowDecorationRenderer()
 		}
-	}
 
 	override fun onAdded(textGUI: WindowBasedTextGUI, window: Window, allWindows: List<Window>) {
 		val decorationRenderer = getWindowDecorationRenderer(window)

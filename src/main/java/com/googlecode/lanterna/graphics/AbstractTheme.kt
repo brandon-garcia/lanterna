@@ -20,6 +20,13 @@ package com.googlecode.lanterna.graphics
 
 import com.googlecode.lanterna.SGR
 import com.googlecode.lanterna.TextColor
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_ACTIVE
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_FORMAT
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_INSENSITIVE
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_NORMAL
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_PRELIGHT
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.STYLE_SELECTED
+import com.googlecode.lanterna.graphics.AbstractTheme.DefinitionImpl.Companion.instanceByClassName
 import com.googlecode.lanterna.gui2.Component
 import com.googlecode.lanterna.gui2.ComponentRenderer
 import com.googlecode.lanterna.gui2.WindowDecorationRenderer
@@ -187,9 +194,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 				}
 			}
 
-		override fun getCustom(name: String): ThemeStyle {
-			return StyleImpl(node, name)
-		}
+		override fun getCustom(name: String): ThemeStyle =
+			StyleImpl(node, name)
 
 		override fun getCustom(name: String, defaultValue: ThemeStyle): ThemeStyle {
 			var customStyle: ThemeStyle? = getCustom(name)
@@ -328,9 +334,8 @@ abstract class AbstractTheme protected constructor(override val windowPostRender
 			}
 		}
 
-		private fun parseValue(value: String): TextColor? {
-			return TextColor.Factory.fromString(value)
-		}
+		private fun parseValue(value: String) =
+			TextColor.Factory.fromString(value)
 
 		private fun parseSGR(value: String): EnumSet<SGR> {
 			var value = value

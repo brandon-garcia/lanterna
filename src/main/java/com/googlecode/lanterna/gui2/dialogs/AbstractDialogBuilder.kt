@@ -61,9 +61,8 @@ abstract class AbstractDialogBuilder<B, T : DialogWindow>
 	 * Returns the title that the built dialog will have
 	 * @return Title that the built dialog will have
 	 */
-	fun getTitle(): String {
-		return title
-	}
+	fun getTitle() =
+		title
 
 	/**
 	 * Changes the description of the dialog
@@ -79,9 +78,8 @@ abstract class AbstractDialogBuilder<B, T : DialogWindow>
 	 * Returns the description that the built dialog will have
 	 * @return Description that the built dialog will have
 	 */
-	fun getDescription(): String? {
-		return description
-	}
+	fun getDescription() =
+		description
 
 	/**
 	 * Assigns a set of extra window hints that you want the built dialog to have
@@ -97,9 +95,8 @@ abstract class AbstractDialogBuilder<B, T : DialogWindow>
 	 * Returns the list of extra window hints that will be assigned to the window when built
 	 * @return List of extra window hints that will be assigned to the window when built
 	 */
-	fun getExtraWindowHints(): Set<Window.Hint> {
-		return extraWindowHints
-	}
+	fun getExtraWindowHints(): Set<Window.Hint> =
+		extraWindowHints
 
 	/**
 	 * Helper method for casting this to `type` parameter `B`

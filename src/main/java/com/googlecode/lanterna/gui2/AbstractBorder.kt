@@ -57,15 +57,12 @@ abstract class AbstractBorder : AbstractComposite<Border>(), Border {
 		return this
 	}
 
-	override fun toBasePane(position: TerminalPosition): TerminalPosition? {
-		return super.toBasePane(position)!!.withRelative(wrappedComponentTopLeftOffset)
-	}
+	override fun toBasePane(position: TerminalPosition) =
+		super.toBasePane(position)!!.withRelative(wrappedComponentTopLeftOffset)
 
-	override fun toGlobal(position: TerminalPosition): TerminalPosition? {
-		return super.toGlobal(position)!!.withRelative(wrappedComponentTopLeftOffset)
-	}
+	override fun toGlobal(position: TerminalPosition) =
+		super.toGlobal(position)!!.withRelative(wrappedComponentTopLeftOffset)
 
-	private fun getWrappedComponentSize(borderSize: TerminalSize): TerminalSize {
-		return renderer.getWrappedComponentSize(borderSize)
-	}
+	private fun getWrappedComponentSize(borderSize: TerminalSize) =
+		renderer.getWrappedComponentSize(borderSize)
 }

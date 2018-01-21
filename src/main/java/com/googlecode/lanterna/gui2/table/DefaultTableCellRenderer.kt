@@ -60,13 +60,10 @@ class DefaultTableCellRenderer<V> : TableCellRenderer<V> {
 		}
 	}
 
-	private fun getContent(cell: V?): Array<String> {
-		val lines: Array<String>
+	private fun getContent(cell: V?) =
 		if (cell == null) {
-			lines = arrayOf("")
+			arrayOf("")
 		} else {
-			lines = cell.toString().split("\r?\n".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+			cell.toString().split("\r?\n".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
 		}
-		return lines
-	}
 }

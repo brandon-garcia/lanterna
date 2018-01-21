@@ -108,9 +108,8 @@ class GridLayout
 	 * Returns the horizontal spacing, i.e. the number of empty columns between each cell
 	 * @return Horizontal spacing
 	 */
-	fun getHorizontalSpacing(): Int {
-		return horizontalSpacing
-	}
+	fun getHorizontalSpacing() =
+		horizontalSpacing
 
 	/**
 	 * Sets the horizontal spacing, i.e. the number of empty columns between each cell
@@ -130,9 +129,8 @@ class GridLayout
 	 * Returns the vertical spacing, i.e. the number of empty columns between each row
 	 * @return Vertical spacing
 	 */
-	fun getVerticalSpacing(): Int {
-		return verticalSpacing
-	}
+	fun getVerticalSpacing() =
+		verticalSpacing
 
 	/**
 	 * Sets the vertical spacing, i.e. the number of empty columns between each row
@@ -152,9 +150,8 @@ class GridLayout
 	 * Returns the top margin, i.e. number of empty rows above the first row in the grid
 	 * @return Top margin, in number of rows
 	 */
-	fun getTopMarginSize(): Int {
-		return topMarginSize
-	}
+	fun getTopMarginSize() =
+		topMarginSize
 
 	/**
 	 * Sets the top margin, i.e. number of empty rows above the first row in the grid
@@ -174,9 +171,8 @@ class GridLayout
 	 * Returns the bottom margin, i.e. number of empty rows below the last row in the grid
 	 * @return Bottom margin, in number of rows
 	 */
-	fun getBottomMarginSize(): Int {
-		return bottomMarginSize
-	}
+	fun getBottomMarginSize() =
+		bottomMarginSize
 
 	/**
 	 * Sets the bottom margin, i.e. number of empty rows below the last row in the grid
@@ -196,9 +192,8 @@ class GridLayout
 	 * Returns the left margin, i.e. number of empty columns left of the first column in the grid
 	 * @return Left margin, in number of columns
 	 */
-	fun getLeftMarginSize(): Int {
-		return leftMarginSize
-	}
+	fun getLeftMarginSize() =
+		leftMarginSize
 
 	/**
 	 * Sets the left margin, i.e. number of empty columns left of the first column in the grid
@@ -218,9 +213,8 @@ class GridLayout
 	 * Returns the right margin, i.e. number of empty columns right of the last column in the grid
 	 * @return Right margin, in number of columns
 	 */
-	fun getRightMarginSize(): Int {
-		return rightMarginSize
-	}
+	fun getRightMarginSize() =
+		rightMarginSize
 
 	/**
 	 * Sets the right margin, i.e. number of empty columns right of the last column in the grid
@@ -236,9 +230,8 @@ class GridLayout
 		return this
 	}
 
-	override fun hasChanged(): Boolean {
-		return this.changed
-	}
+	override fun hasChanged() =
+		this.changed
 
 	override fun getPreferredSize(components: List<Component>): TerminalSize {
 		var preferredSize = TerminalSize.ZERO

@@ -172,13 +172,11 @@ class ScrollingSwingTerminal
 	///////////
 	// Delegate all Terminal interface implementations to SwingTerminal
 	///////////
-	override fun pollInput(): KeyStroke {
-		return swingTerminal.pollInput()
-	}
+	override fun pollInput() =
+		swingTerminal.pollInput()
 
-	override fun readInput(): KeyStroke {
-		return swingTerminal.readInput()
-	}
+	override fun readInput() =
+		swingTerminal.readInput()
 
 	override fun enterPrivateMode() {
 		swingTerminal.enterPrivateMode()
@@ -204,9 +202,8 @@ class ScrollingSwingTerminal
 		swingTerminal.putCharacter(c)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return swingTerminal.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		swingTerminal.newTextGraphics()
 
 	override fun enableSGR(sgr: SGR) {
 		swingTerminal.enableSGR(sgr)
@@ -228,9 +225,8 @@ class ScrollingSwingTerminal
 		swingTerminal.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return swingTerminal.enquireTerminal(timeout, timeoutUnit)
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		swingTerminal.enquireTerminal(timeout, timeoutUnit)
 
 	override fun bell() {
 		swingTerminal.bell()

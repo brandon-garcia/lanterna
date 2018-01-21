@@ -52,9 +52,8 @@ class ActionListBox
 	 * @param object Runnable to execute when the action was selected and fired in the list
 	 * @return Itself
 	 */
-	override fun addItem(`object`: Runnable?): ActionListBox {
-		return super.addItem(`object`)
-	}
+	override fun addItem(`object`: Runnable?): ActionListBox =
+		super.addItem(`object`)
 
 	/**
 	 * Adds a new item to the list, which is displayed in the list using a supplied label.
@@ -62,8 +61,8 @@ class ActionListBox
 	 * @param action Runnable to invoke when this action is selected and then triggered
 	 * @return Itself
 	 */
-	fun addItem(label: String, action: Runnable): ActionListBox {
-		return addItem(object : Runnable {
+	fun addItem(label: String, action: Runnable) =
+		addItem(object : Runnable {
 			override fun run() {
 				action.run()
 			}
@@ -72,7 +71,6 @@ class ActionListBox
 				return label
 			}
 		})
-	}
 
 	override fun handleKeyStroke(keyStroke: KeyStroke): Interactable.Result {
 		val selectedItem = selectedItem

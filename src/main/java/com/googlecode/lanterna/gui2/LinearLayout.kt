@@ -82,17 +82,15 @@ class LinearLayout
 	 * (by default 1) and for vertical layouts this is number of rows (by default 0).
 	 * @return Spacing between components, either in number of columns or rows depending on the direction
 	 */
-	fun getSpacing(): Int {
-		return spacing
-	}
+	fun getSpacing() =
+		spacing
 
-	override fun getPreferredSize(components: List<Component>): TerminalSize {
-		return if (direction == Direction.VERTICAL) {
+	override fun getPreferredSize(components: List<Component>) =
+		if (direction == Direction.VERTICAL) {
 			getPreferredSizeVertically(components)
 		} else {
 			getPreferredSizeHorizontally(components)
 		}
-	}
 
 	private fun getPreferredSizeVertically(components: List<Component>): TerminalSize {
 		var maxWidth = 0
@@ -122,9 +120,8 @@ class LinearLayout
 		return TerminalSize(Math.max(0, width), maxHeight)
 	}
 
-	override fun hasChanged(): Boolean {
-		return changed
-	}
+	override fun hasChanged() =
+		changed
 
 	override fun doLayout(area: TerminalSize, components: List<Component>) {
 		if (direction == Direction.VERTICAL) {
@@ -221,9 +218,8 @@ class LinearLayout
 		 * @return `LayoutData` object created for `LinearLayout`s with the specified alignment
 		 * @see Alignment
 		 */
-		fun createLayoutData(alignment: Alignment): LayoutData {
-			return LinearLayoutData(alignment)
-		}
+		fun createLayoutData(alignment: Alignment): LayoutData =
+			LinearLayoutData(alignment)
 	}
 }
 /**

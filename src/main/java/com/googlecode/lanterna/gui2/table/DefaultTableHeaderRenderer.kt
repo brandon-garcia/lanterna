@@ -28,11 +28,10 @@ import com.googlecode.lanterna.gui2.TextGUIGraphics
  * @author Martin
  */
 class DefaultTableHeaderRenderer<V> : TableHeaderRenderer<V> {
-	override fun getPreferredSize(table: Table<V>, label: String?, columnIndex: Int): TerminalSize {
-		return if (label == null) {
+	override fun getPreferredSize(table: Table<V>, label: String?, columnIndex: Int) =
+		if (label == null) {
 			TerminalSize.ZERO
 		} else TerminalSize(TerminalTextUtils.getColumnWidth(label), 1)
-	}
 
 	override fun drawHeader(table: Table<V>, label: String, index: Int, textGUIGraphics: TextGUIGraphics) {
 		val themeDefinition = table.themeDefinition

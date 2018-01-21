@@ -171,13 +171,11 @@ class ScrollingAWTTerminal
 	///////////
 	// Delegate all Terminal interface implementations to SwingTerminal
 	///////////
-	override fun pollInput(): KeyStroke {
-		return awtTerminal.pollInput()
-	}
+	override fun pollInput() =
+		awtTerminal.pollInput()
 
-	override fun readInput(): KeyStroke {
-		return awtTerminal.readInput()
-	}
+	override fun readInput() =
+		awtTerminal.readInput()
 
 	override fun enterPrivateMode() {
 		awtTerminal.enterPrivateMode()
@@ -203,9 +201,8 @@ class ScrollingAWTTerminal
 		awtTerminal.putCharacter(c)
 	}
 
-	override fun newTextGraphics(): TextGraphics {
-		return awtTerminal.newTextGraphics()
-	}
+	override fun newTextGraphics() =
+		awtTerminal.newTextGraphics()
 
 	override fun enableSGR(sgr: SGR) {
 		awtTerminal.enableSGR(sgr)
@@ -227,9 +224,8 @@ class ScrollingAWTTerminal
 		awtTerminal.setBackgroundColor(color)
 	}
 
-	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit): ByteArray {
-		return awtTerminal.enquireTerminal(timeout, timeoutUnit)
-	}
+	override fun enquireTerminal(timeout: Int, timeoutUnit: TimeUnit) =
+		awtTerminal.enquireTerminal(timeout, timeoutUnit)
 
 	override fun bell() {
 		awtTerminal.bell()
