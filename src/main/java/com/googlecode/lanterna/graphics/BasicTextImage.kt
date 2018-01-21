@@ -206,11 +206,8 @@ private constructor(override val size: TerminalSize, toCopy: Array<Array<TextCha
 				this@BasicTextImage.getCharacterAt(column, row)
 		}
 
-	private fun newBlankLine(): Array<TextCharacter> {
-		val line = arrayOfNulls<TextCharacter>(size.columns)
-		Arrays.fill(line, TextCharacter.DEFAULT_CHARACTER)
-		return line
-	}
+	private fun newBlankLine() =
+		Array(size.columns) { TextCharacter.DEFAULT_CHARACTER }
 
 	override fun scrollLines(firstLine: Int, lastLine: Int, distance: Int) {
 		var firstLine = firstLine
