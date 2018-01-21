@@ -53,56 +53,56 @@ class TextCharacter
 	 * @return Background color of this TextCharacter
 	 */
 	val backgroundColor: TextColor?
-	private val modifiers: EnumSet<SGR>?  //This isn't immutable, but we should treat it as such and not expose it!
+	private val modifiers: EnumSet<SGR>  //This isn't immutable, but we should treat it as such and not expose it!
 
 	/**
 	 * Returns true if this TextCharacter has the bold modifier active
 	 * @return `true` if this TextCharacter has the bold modifier active
 	 */
 	val isBold: Boolean
-		get() = modifiers!!.contains(SGR.BOLD)
+		get() = modifiers.contains(SGR.BOLD)
 
 	/**
 	 * Returns true if this TextCharacter has the reverse modifier active
 	 * @return `true` if this TextCharacter has the reverse modifier active
 	 */
 	val isReversed: Boolean
-		get() = modifiers!!.contains(SGR.REVERSE)
+		get() = modifiers.contains(SGR.REVERSE)
 
 	/**
 	 * Returns true if this TextCharacter has the underline modifier active
 	 * @return `true` if this TextCharacter has the underline modifier active
 	 */
 	val isUnderlined: Boolean
-		get() = modifiers!!.contains(SGR.UNDERLINE)
+		get() = modifiers.contains(SGR.UNDERLINE)
 
 	/**
 	 * Returns true if this TextCharacter has the blink modifier active
 	 * @return `true` if this TextCharacter has the blink modifier active
 	 */
 	val isBlinking: Boolean
-		get() = modifiers!!.contains(SGR.BLINK)
+		get() = modifiers.contains(SGR.BLINK)
 
 	/**
 	 * Returns true if this TextCharacter has the bordered modifier active
 	 * @return `true` if this TextCharacter has the bordered modifier active
 	 */
 	val isBordered: Boolean
-		get() = modifiers!!.contains(SGR.BORDERED)
+		get() = modifiers.contains(SGR.BORDERED)
 
 	/**
 	 * Returns true if this TextCharacter has the crossed-out modifier active
 	 * @return `true` if this TextCharacter has the crossed-out modifier active
 	 */
 	val isCrossedOut: Boolean
-		get() = modifiers!!.contains(SGR.CROSSED_OUT)
+		get() = modifiers.contains(SGR.CROSSED_OUT)
 
 	/**
 	 * Returns true if this TextCharacter has the italic modifier active
 	 * @return `true` if this TextCharacter has the italic modifier active
 	 */
 	val isItalic: Boolean
-		get() = modifiers!!.contains(SGR.ITALIC)
+		get() = modifiers.contains(SGR.ITALIC)
 
 	val isDoubleWidth: Boolean
 		get() = TerminalTextUtils.isCharDoubleWidth(character)
@@ -167,7 +167,7 @@ class TextCharacter
 	 * @return Set of active SGR codes
 	 */
 	fun getModifiers() =
-		EnumSet.copyOf(modifiers!!)
+		EnumSet.copyOf(modifiers)
 
 	/**
 	 * Returns a new TextCharacter with the same colors and modifiers but a different underlying character
@@ -219,7 +219,7 @@ class TextCharacter
 	 * @return Copy of the TextCharacter with a new SGR modifier
 	 */
 	fun withModifier(modifier: SGR): TextCharacter {
-		if (modifiers!!.contains(modifier)) {
+		if (modifiers.contains(modifier)) {
 			return this
 		}
 		val newSet = EnumSet.copyOf(this.modifiers)
@@ -235,7 +235,7 @@ class TextCharacter
 	 * @return Copy of the TextCharacter without the SGR modifier
 	 */
 	fun withoutModifier(modifier: SGR): TextCharacter {
-		if (!modifiers!!.contains(modifier)) {
+		if (!modifiers.contains(modifier)) {
 			return this
 		}
 		val newSet = EnumSet.copyOf(this.modifiers)
@@ -259,7 +259,7 @@ class TextCharacter
 		}
 		return if (this.backgroundColor !== other.backgroundColor && (this.backgroundColor == null || this.backgroundColor != other.backgroundColor)) {
 			false
-		} else !(this.modifiers !== other.modifiers && (this.modifiers == null || this.modifiers != other.modifiers))
+		} else !(this.modifiers !== other.modifiers && (this.modifiers != other.modifiers))
 	}
 
 	override fun hashCode(): Int {
@@ -267,7 +267,7 @@ class TextCharacter
 		hash = 37 * hash + this.character.toInt()
 		hash = 37 * hash + if (this.foregroundColor != null) this.foregroundColor.hashCode() else 0
 		hash = 37 * hash + if (this.backgroundColor != null) this.backgroundColor.hashCode() else 0
-		hash = 37 * hash + if (this.modifiers != null) this.modifiers.hashCode() else 0
+		hash = 37 * hash + this.modifiers.hashCode()
 		return hash
 	}
 
@@ -276,7 +276,7 @@ class TextCharacter
 
 	companion object {
 		private fun toEnumSet(vararg modifiers: SGR) =
-			if (modifiers.size == 0) {
+			if (modifiers.isEmpty()) {
 				EnumSet.noneOf(SGR::class.java)
 			} else {
 				EnumSet.copyOf(Arrays.asList(*modifiers))
