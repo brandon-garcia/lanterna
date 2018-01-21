@@ -42,7 +42,9 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 internal class TerminalTextGraphics @Throws(IOException::class)
 constructor(private val terminal: Terminal) : AbstractTextGraphics() {
-	private val terminalSize: TerminalSize
+
+	override val size: TerminalSize
+		get() = terminal.terminalSize
 
 	private val writeHistory: MutableMap<TerminalPosition, TextCharacter>
 
@@ -51,7 +53,6 @@ constructor(private val terminal: Terminal) : AbstractTextGraphics() {
 	private var lastPosition: TerminalPosition? = null
 
 	init {
-		this.terminalSize = terminal.terminalSize
 		this.manageCallStackSize = AtomicInteger(0)
 		this.writeHistory = HashMap()
 		this.lastCharacter = null
@@ -103,9 +104,6 @@ constructor(private val terminal: Terminal) : AbstractTextGraphics() {
 			terminal.enableSGR(sgr)
 		}
 	}
-
-	override fun getSize() =
-		terminalSize
 
 	@Synchronized override fun drawLine(fromPoint: TerminalPosition, toPoint: TerminalPosition, character: Char): TextGraphics {
 		try {

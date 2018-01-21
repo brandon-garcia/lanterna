@@ -21,6 +21,7 @@ package com.googlecode.lanterna
 
 import java.awt.*
 import java.util.regex.Pattern
+import kotlin.experimental.and
 
 /**
  * This is an abstract base class for terminal color definitions. Since there are different ways of specifying terminal
@@ -128,9 +129,11 @@ interface TextColor {
 				throw IllegalArgumentException("Cannot create a Color.Indexed with a color index of " + colorIndex +
 					", must be in the range of 0-255")
 			}
-			this.awtColor = Color(COLOR_TABLE[colorIndex][0] and 0x000000ff,
-				COLOR_TABLE[colorIndex][1] and 0x000000ff,
-				COLOR_TABLE[colorIndex][2] and 0x000000ff)
+			this.awtColor = Color(
+				COLOR_TABLE[colorIndex][0].and(0x000000ff.toByte()).toInt(),
+				COLOR_TABLE[colorIndex][1].and(0x000000ff.toByte()).toInt(),
+				COLOR_TABLE[colorIndex][2].and(0x000000ff.toByte()).toInt()
+			)
 		}
 
 		override fun toColor(): Color {

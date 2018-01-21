@@ -434,7 +434,7 @@ interface TextGraphics : StyleSet<TextGraphics> {
 	 * @param position Position to return the character for
 	 * @return The text character at the specified position or `null` if not available
 	 */
-	fun getCharacter(position: TerminalPosition): TextCharacter
+	fun getCharacter(position: TerminalPosition): TextCharacter?
 
 	/**
 	 * Returns the character at the specific position in the terminal. May return `null` if the TextGraphics
@@ -443,5 +443,5 @@ interface TextGraphics : StyleSet<TextGraphics> {
 	 * @param row Row to return the character for
 	 * @return The text character at the specified position or `null` if not available
 	 */
-	fun getCharacter(column: Int, row: Int): TextCharacter
+	fun getCharacter(column: Int, row: Int): TextCharacter?
 }

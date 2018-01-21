@@ -47,12 +47,12 @@ class TextCharacter
 	 * Foreground color specified for this TextCharacter
 	 * @return Foreground color of this TextCharacter
 	 */
-	val foregroundColor: TextColor?
+	val foregroundColor: TextColor
 	/**
 	 * Background color specified for this TextCharacter
 	 * @return Background color of this TextCharacter
 	 */
-	val backgroundColor: TextColor?
+	val backgroundColor: TextColor
 	private val modifiers: EnumSet<SGR>  //This isn't immutable, but we should treat it as such and not expose it!
 
 	/**
