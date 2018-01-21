@@ -39,7 +39,7 @@ interface TextImage : Scrollable {
 	 * @param position Coordinates of the character
 	 * @return TextCharacter stored at the specified position
 	 */
-	fun getCharacterAt(position: TerminalPosition): TextCharacter
+	fun getCharacterAt(position: TerminalPosition): TextCharacter?
 
 	/**
 	 * Returns the character stored at a particular position in this image
@@ -47,7 +47,7 @@ interface TextImage : Scrollable {
 	 * @param row Row coordinate of the character
 	 * @return TextCharacter stored at the specified position
 	 */
-	fun getCharacterAt(column: Int, row: Int): TextCharacter
+	fun getCharacterAt(column: Int, row: Int): TextCharacter?
 
 	/**
 	 * Sets the character at a specific position in the image to a particular TextCharacter. If the position is outside

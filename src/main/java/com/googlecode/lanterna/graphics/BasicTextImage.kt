@@ -39,7 +39,7 @@ class BasicTextImage
  * @param toCopy Array to copy initial data from
  * @param initialContent Filler character to use if the source array is smaller than the requested size
  */
-private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCharacter>>?, initialContent: TextCharacter?) : TextImage {
+private constructor(override val size: TerminalSize, toCopy: Array<Array<TextCharacter>>, initialContent: TextCharacter) : TextImage {
 	private val buffer: Array<Array<TextCharacter>>
 
 	/**
@@ -58,10 +58,6 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 	@JvmOverloads constructor(size: TerminalSize, initialContent: TextCharacter = TextCharacter(' ', TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT)) : this(size, arrayOfNulls<Array<TextCharacter>>(0), initialContent) {}
 
 	init {
-		if (size == null || toCopy == null || initialContent == null) {
-			throw IllegalArgumentException("Cannot create BasicTextImage with null " + if (size == null) "size" else if (toCopy == null) "toCopy" else "filler")
-		}
-
 		val rows = size.rows
 		val columns = size.columns
 		buffer = arrayOfNulls(rows)
@@ -77,35 +73,22 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 		}
 	}
 
-	override fun setAll(character: TextCharacter?) {
-		if (character == null) {
-			throw IllegalArgumentException("Cannot call BasicTextImage.setAll(..) with null character")
-		}
+	override fun setAll(character: TextCharacter) {
 		for (line in buffer) {
 			Arrays.fill(line, character)
 		}
 	}
 
-	override fun resize(newSize: TerminalSize?, filler: TextCharacter?): BasicTextImage {
-		if (newSize == null || filler == null) {
-			throw IllegalArgumentException("Cannot resize BasicTextImage with null " + if (newSize == null) "newSize" else "filler")
-		}
-		return if (newSize.rows == buffer.size && (buffer.size == 0 || newSize.columns == buffer[0].size)) {
+	override fun resize(newSize: TerminalSize, filler: TextCharacter) =
+		if (newSize.rows == buffer.size && (buffer.size == 0 || newSize.columns == buffer[0].size)) {
 			this
 		} else BasicTextImage(newSize, buffer, filler)
-	}
 
-	override fun setCharacterAt(position: TerminalPosition?, character: TextCharacter) {
-		if (position == null) {
-			throw IllegalArgumentException("Cannot call BasicTextImage.setCharacterAt(..) with null position")
-		}
+	override fun setCharacterAt(position: TerminalPosition, character: TextCharacter) {
 		setCharacterAt(position.column, position.row, character)
 	}
 
-	override fun setCharacterAt(column: Int, row: Int, character: TextCharacter?) {
-		if (character == null) {
-			throw IllegalArgumentException("Cannot call BasicTextImage.setCharacterAt(..) with null character")
-		}
+	override fun setCharacterAt(column: Int, row: Int, character: TextCharacter) {
 		if (column < 0 || row < 0 || row >= buffer.size || column >= buffer[0].size) {
 			return
 		}
@@ -124,12 +107,8 @@ private constructor(override val size: TerminalSize?, toCopy: Array<Array<TextCh
 		}
 	}
 
-	override fun getCharacterAt(position: TerminalPosition?): TextCharacter? {
-		if (position == null) {
-			throw IllegalArgumentException("Cannot call BasicTextImage.getCharacterAt(..) with null position")
-		}
-		return getCharacterAt(position.column, position.row)
-	}
+	override fun getCharacterAt(position: TerminalPosition) =
+		getCharacterAt(position.column, position.row)
 
 	override fun getCharacterAt(column: Int, row: Int) =
 		if (column < 0 || row < 0 || row >= buffer.size || column >= buffer[0].size) {

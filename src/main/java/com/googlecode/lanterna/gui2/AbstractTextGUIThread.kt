@@ -55,10 +55,7 @@ abstract class AbstractTextGUIThread
 		customTasks.add(runnable)
 	}
 
-	override fun setExceptionHandler(exceptionHandler: TextGUIThread.ExceptionHandler?) {
-		if (exceptionHandler == null) {
-			throw IllegalArgumentException("Cannot call setExceptionHandler(null)")
-		}
+	override fun setExceptionHandler(exceptionHandler: TextGUIThread.ExceptionHandler) {
 		this.exceptionHandler = exceptionHandler
 	}
 
