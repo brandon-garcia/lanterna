@@ -20,11 +20,7 @@ package com.googlecode.lanterna.terminal
 
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.screen.TerminalScreen
-import com.googlecode.lanterna.terminal.ansi.CygwinTerminal
-import com.googlecode.lanterna.terminal.ansi.TelnetTerminal
-import com.googlecode.lanterna.terminal.ansi.TelnetTerminalServer
-import com.googlecode.lanterna.terminal.ansi.UnixLikeTTYTerminal
-import com.googlecode.lanterna.terminal.ansi.UnixTerminal
+import com.googlecode.lanterna.terminal.ansi.*
 import com.googlecode.lanterna.terminal.swing.*
 
 import java.awt.*
@@ -173,9 +169,7 @@ open class DefaultTerminalFactory
 
 			System.err.println("Ok, got it!")
 
-			if (mouseCaptureMode != null) {
-				rawTerminal.setMouseCaptureMode(mouseCaptureMode)
-			}
+			mouseCaptureMode?.let { rawTerminal.setMouseCaptureMode(it) }
 			if (inputTimeout >= 0) {
 				rawTerminal.inputDecoder.setTimeoutUnits(inputTimeout)
 			}
@@ -389,8 +383,8 @@ open class DefaultTerminalFactory
 	private fun createWindowsTerminal(): Terminal {
 		try {
 			val nativeImplementation = Class.forName("com.googlecode.lanterna.terminal.WindowsTerminal")
-			val constructor = nativeImplementation.getConstructor(InputStream::class.java, OutputStream::class.java, Charset::class.java, UnixLikeTTYTerminal.CtrlCBehaviour::class.java)
-			return constructor.newInstance(inputStream, outputStream, charset, UnixLikeTTYTerminal.CtrlCBehaviour.CTRL_C_KILLS_APPLICATION) as Terminal
+			val constructor = nativeImplementation.getConstructor(InputStream::class.java, OutputStream::class.java, Charset::class.java, UnixLikeTerminal.CtrlCBehaviour::class.java)
+			return constructor.newInstance(inputStream, outputStream, charset, UnixLikeTerminal.CtrlCBehaviour.CTRL_C_KILLS_APPLICATION) as Terminal
 		} catch (ignore: Exception) {
 			try {
 				return createCygwinTerminal(outputStream, inputStream, charset)
@@ -417,15 +411,13 @@ open class DefaultTerminalFactory
 		var unixTerminal: UnixTerminal
 		try {
 			val nativeImplementation = Class.forName("com.googlecode.lanterna.terminal.NativeGNULinuxTerminal")
-			val constructor = nativeImplementation.getConstructor(InputStream::class.java, OutputStream::class.java, Charset::class.java, UnixLikeTTYTerminal.CtrlCBehaviour::class.java)
-			unixTerminal = constructor.newInstance(inputStream, outputStream, charset, UnixLikeTTYTerminal.CtrlCBehaviour.CTRL_C_KILLS_APPLICATION) as UnixTerminal
+			val constructor = nativeImplementation.getConstructor(InputStream::class.java, OutputStream::class.java, Charset::class.java, UnixLikeTerminal.CtrlCBehaviour::class.java)
+			unixTerminal = constructor.newInstance(inputStream, outputStream, charset, UnixLikeTerminal.CtrlCBehaviour.CTRL_C_KILLS_APPLICATION) as UnixTerminal
 		} catch (ignore: Exception) {
 			unixTerminal = UnixTerminal(inputStream, outputStream, charset)
 		}
 
-		if (mouseCaptureMode != null) {
-			unixTerminal.setMouseCaptureMode(mouseCaptureMode)
-		}
+		mouseCaptureMode?.let { unixTerminal.setMouseCaptureMode(it) }
 		if (inputTimeout >= 0) {
 			unixTerminal.inputDecoder.setTimeoutUnits(inputTimeout)
 		}

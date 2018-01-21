@@ -113,9 +113,7 @@ protected constructor(
 
 	@Throws(IOException::class)
 	override fun restoreTerminalSettings() {
-		if (sttyStatusToRestore != null) {
-			exec(sttyCommand, sttyStatusToRestore)
-		}
+		sttyStatusToRestore?.let { exec(sttyCommand, it) }
 	}
 
 	@Throws(IOException::class)
@@ -175,7 +173,11 @@ protected constructor(
 		val reader = BufferedReader(InputStreamReader(stdoutBufferInputStream))
 		val builder = StringBuilder()
 		var line: String
-		while ((line = reader.readLine()) != null) {
+		while (true) {
+			line = reader.readLine()
+			if (line == null) {
+				break
+			}
 			builder.append(line)
 		}
 		reader.close()
