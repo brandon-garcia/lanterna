@@ -30,6 +30,9 @@ import com.googlecode.lanterna.graphics.TextGraphics
  */
 internal class VirtualTerminalTextGraphics(private val virtualTerminal: DefaultVirtualTerminal) : AbstractTextGraphics() {
 
+	override val size: TerminalSize
+		get() = virtualTerminal.terminalSize
+
 	override fun setCharacter(columnIndex: Int, rowIndex: Int, textCharacter: TextCharacter): TextGraphics {
 		val size = size
 		if (columnIndex < 0 || columnIndex >= size.columns ||
@@ -48,7 +51,4 @@ internal class VirtualTerminalTextGraphics(private val virtualTerminal: DefaultV
 
 	override fun getCharacter(column: Int, row: Int) =
 		getCharacter(TerminalPosition(column, row))
-
-	override fun getSize() =
-		virtualTerminal.terminalSize
 }
